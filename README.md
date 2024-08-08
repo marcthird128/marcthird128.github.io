@@ -1,3 +1,3 @@
 ## marcthird128
 
-[this is my Github Pages site](https://marcthird128.github.io)
+<a target="_blank" href="https://marcthird128.github.io">this is my Github Pages site</a>
