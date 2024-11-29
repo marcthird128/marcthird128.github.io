@@ -67,8 +67,10 @@
             <input spellcheck="false" id="adj" placeholder="Type a adjective"/> <button onclick="addAdj()">Add</button><br/><br/>
             <div id="adjl"></div><br/>
             <b>Generate Sentence</b><br/><br/>
-            <button onclick="nvn()">Noun-Verb-Noun</button>
-            <button onclick="nva()">Noun-Verb-Adjective</button>
+            <button onclick="nvn()">Noun-Verb-Noun</button><br/><br/>
+            <button onclick="nva()">Noun-Verb-Adjective</button><br/><br/>
+            <b>Save</b><br/><br/>
+            <button onclick="save()">Save</button> <button onclick="load()">Load</button>
         </div>
         <img id="knife" src="knife.png" draggable="false"/>
         <script>
@@ -149,6 +151,27 @@
                 return l[Math.floor(Math.random() * l.length)];
             }
 
+            function save() {
+                localStorage['RSG-SAVED-LISTS'] = JSON.stringify([nouns, verbs, adjs]);
+            }
+
+            function load() {
+                if (localStorage['RSG-SAVED-LISTS'] == undefined) {alert('Nothing saved!'); return}
+
+                nounl.innerHTML = '';
+                verbl.innerHTML = '';
+                adjl.innerHTML = '';
+
+                o = JSON.parse(localStorage['RSG-SAVED-LISTS']);
+
+                nouns = o[0];
+                verbs = o[1];
+                adjs = o[2];
+
+                nouns.forEach(n => listEl(nounl, n, deleteNoun));
+                verbs.forEach(n => listEl(verbl, n, deleteVerb));
+                adjs.forEach(n => listEl(adjl, n, deleteAdj));
+            }
 
             function nvn() {
                 main.innerText = rl(nouns) + ' ' + rl(verbs) + ' ' + rl(nouns);
