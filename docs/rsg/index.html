@@ -26,7 +26,7 @@
             }
             @media (min-device-width:320px) and (max-device-width:768px) {
                 html {
-                    zoom:150%;
+                    zoom:200%;
                 }
                 #float {
                     position:static;
@@ -40,6 +40,16 @@
                 top:0px;
                 width:100px;
             }
+            .le {
+                position:relative; background:white; border:1px #aaa solid; margin-bottom:5px;
+            }
+            .del {
+                position:absolute; right:0px; top:0px; border:0px; background:red; color:white; height:100%;
+                user-select:none;
+            }
+            .del:hover {
+                background:#a21b21;
+            }
         </style>
     </head>
     <body>
@@ -48,13 +58,13 @@
         </div>
         <div id="float">
             <b>Nouns</b><br/><br/>
-            <input id="noun" placeholder="Type a noun"/><button onclick="addNoun()">Add</button><br/><br/>
+            <input spellcheck="false" id="noun" placeholder="Type a noun"/> <button onclick="addNoun()">Add</button><br/><br/>
             <div id="nounl"></div><br/>
             <b>Verbs</b><br/><br/>
-            <input id="verb" placeholder="Type a verb"/><button onclick="addVerb()">Add</button><br/><br/>
+            <input spellcheck="false" id="verb" placeholder="Type a verb"/> <button onclick="addVerb()">Add</button><br/><br/>
             <div id="verbl"></div><br/>
             <b>Adjectives</b><br/><br/>
-            <input id="adj" placeholder="Type a adjective"/><button onclick="addAdj()">Add</button><br/><br/>
+            <input spellcheck="false" id="adj" placeholder="Type a adjective"/> <button onclick="addAdj()">Add</button><br/><br/>
             <div id="adjl"></div><br/>
             <b>Generate Sentence</b><br/><br/>
             <button onclick="nvn()">Noun-Verb-Noun</button>
@@ -77,16 +87,19 @@
             adj.onkeydown = e => {if (e.keyCode == 13) addAdj()};
 
             function addNoun() {
+                if (nouns.includes(noun.value) || noun.value == '') {rfas(noun); return}
                 nouns.push(noun.value);
                 listEl(nounl, noun.value, deleteNoun)
                 noun.value = '';
             }
             function addVerb() {
+                if (verbs.includes(verb.value) || verb.value == '') {rfas(verb); return}
                 verbs.push(verb.value);
                 listEl(verbl, verb.value, deleteVerb)
                 verb.value = '';
             }
             function addAdj() {
+                if (adjs.includes(adj.value) || adj.value == '') {rfas(adj); return}
                 adjs.push(adj.value);
                 listEl(adjl, adj.value, deleteAdj)
                 adj.value = '';
@@ -108,15 +121,20 @@
                 adjs = nl;
             }
 
+            function rfas(el) {
+                el.style = 'color:red;';
+                setTimeout(() => el.style = '', 1000);
+            }
+
             function listEl(le, v, df) {
                 let sp = document.createElement('span');
                 sp.innerText = v;
                 let c = document.createElement('div');
-                c.style = 'position:relative;'
+                c.className = 'le';
                 c.appendChild(sp);
                 let del = document.createElement('button');
                 del.innerText = 'x';
-                del.style = 'position:absolute; right:0px; top:0px;';
+                del.className = 'del';
                 del.onclick = () => { c.remove(); df(v)};
                 c.appendChild(del);
                 le.appendChild(c);
