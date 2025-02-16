@@ -15,11 +15,11 @@
 
       let chance = Math.random();
 
-      if (aprilFools ? chance < 0.5 || chance < 0.01) {
+      if (aprilFools ? chance < 0.5 : chance < 0.01) {
         document.location.pathname = '/rr'; // send to rickroll
       }
       
-      if (document.location.hostname == 'maza64.xyz' : document.location.hostname == 'www.maza64.xyz') {
+      if (document.location.hostname == 'maza64.xyz' || document.location.hostname == 'www.maza64.xyz') {
         document.location.pathname = '/mazarca'; // send to Mazarca website
       } else {
         document.location.pathname = '/github'; // send to github website
