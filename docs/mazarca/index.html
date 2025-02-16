@@ -5,33 +5,116 @@
     <title>Mazarca SMP</title>
 
     <link rel="icon" type="image/x-icon" href="icon.png"/>
+
+    <style>
+        html, body {
+            margin:0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        a {
+            text-decoration: none;
+        }
+        code {
+            background:#ddd;
+            padding:2px 6px;
+            border-radius: 3px;
+            box-shadow:1px 1px 2px 1px #00000030;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Consolas', 'Courier New', monospace;
+        }
+
+        .header {
+            background:#eee;
+            box-shadow: 1px 1px 10px 5px #00000030;
+            display:flex;
+            align-items: center;
+        }
+        .header > div {
+            margin:10px;
+        }
+        .logo {
+            width:50px;
+            height: 50px;
+            border-radius:5px;
+        }
+        .title-text {
+            font-size:25px;
+            font-weight:bold;
+            font-family:'Consolas', 'Courier New', monospace;
+            color:#333;
+        }
+        .wrapper {
+            width:50vw;
+            min-width:600px;
+            margin:0px auto;
+        }
+        code.ip {
+            cursor:pointer;
+        }
+    </style>
 </head>
 <body>
     <header class="header">
-        
+        <div>
+            <a href="https://maza64.xyz">
+                <img class="logo" src="icon.png"/>
+            </a>
+        </div>
+        <div>
+            <a href="https://maza64.xyz"><span class="title-text">Mazarca SMP</span></a>
+        </div>
     </header>
-    <h3>IPs:</h3>
-    <ul>
-        <li><p><strong><i>wss://eagler.maza64.xyz</i></strong> (recommended)</p></li>
-        <li><p><strong><i>ws://24.ip.gl.ply.gg:5547</i></strong> (if first one doesn't work)</p></li>
-        <li><p><strong><i>24.ip.gl.ply.gg:33082</i></strong> (for Java 1.8.8)</p></li>
-        <li><p><strong><i>147.185.221.24:33082</i></strong> (for Java 1.8.8)</p></li>
-    </ul>
+    <div class="wrapper">
+        <p>
+            Mazarca is a cracked minecraft 1.8.8 server that supports <a href="https://client.eaglercraft.dev/1.8/" target="_blank">EaglercraftX</a>
+        </p>
+        <h3>IP addresses</h3>
+        <ul>
+            <li><p><code class="ip" onclick="select(this)">wss://eagler.maza64.xyz</code> (recommended)</p></li>
+            <li><p><code class="ip" onclick="select(this)">ws://24.ip.gl.ply.gg:5547</code> (if first one doesn't work)</p></li>
+            <li><p><code class="ip" onclick="select(this)">24.ip.gl.ply.gg:33082</code> (for Java 1.8.8)</p></li>
+            <li><p><code class="ip" onclick="select(this)">147.185.221.24:33082</code> (for Java 1.8.8)</p></li>
+        </ul>
 
-    <p>
-        Subreddit: <a href="https://www.reddit.com/r/MazarcaSMP">r/MazarcaSMP</a>
-        <br />Discord: <a href="https://discord.com/invite/R6nMUHe9DK">Mazarca SMP</a>
-    </p>
-    <p>Currently we have:</p>
-    <ul>
-        <li>
-            <p>
-                Semi-vanilla survival with cool new items (using <a href="https://github.com/Slimefun/Slimefun4/wiki">Slimefun</a>)
-                <br />and other essential plugins!
-            </p>
-        </li>
-        <li><p>Creative server with land claims (no one will ruin your work!)</p></li>
-        <li><p>Another survival server with random drops - test your luck!</p></li>
-    </ul>
+        <h3>Game modes</h3>
+        <ul>
+            <li>
+                <p>
+                    Semi-vanilla survival with cool new items (using <a href="https://github.com/Slimefun/Slimefun4/wiki">Slimefun</a>)
+                    <br />and other essential plugins!
+                </p>
+            </li>
+            <li><p>Creative server with land claims (no one will ruin your work!)</p></li>
+            <li><p>Another survival server with random drops - test your luck!</p></li>
+        </ul>
+
+        <h3>External Links</h3>
+        <ul>
+            <li><p>Subreddit: <a href="https://www.reddit.com/r/MazarcaSMP">r/MazarcaSMP</a></p></li>
+            <li><p>Discord: <a href="https://discord.com/invite/R6nMUHe9DK">Mazarca SMP</a></p></li>
+        </ul>
+    </div>
+
+    <script>
+        function select(el) {
+            selectText(el.childNodes[0])
+        }
+        function selectText(node) {
+            if (document.body.createTextRange) {
+                const range = document.body.createTextRange();
+                range.moveToElementText(node);
+                range.select();
+            } else if (window.getSelection) {
+                const selection = window.getSelection();
+                const range = document.createRange();
+                range.selectNodeContents(node);
+                selection.removeAllRanges();
+                selection.addRange(range);
+            } else {
+                console.warn("Could not select text in node: Unsupported browser.");
+            }
+        }
+    </script>
 </body>
 </html>
