@@ -13,18 +13,16 @@
 
       if (date.getMonth() == 3 && date.getDate() == 1) isAprilFools = true;
 
-      let chance = Math.random(); // supposedly random number
+      let chance = Math.random();
 
-      if (isAprilFools ? chance < 0.5 : chance < 0.5) {
-        console.log('rr') // document.location.pathname = '/rr'; // send to rickroll
-      } else {
-      
+      if (isAprilFools ? chance < 0.5 : chance < 0.05) {
+        document.location.pathname = '/rr'; // send to rickroll
+      } else {      
         if (document.location.hostname == 'maza64.xyz' || document.location.hostname == 'www.maza64.xyz') {
-          console.log('mazarca') // document.location.pathname = '/mazarca'; // send to Mazarca website
+          document.location.pathname = '/mazarca'; // send to Mazarca website
         } else {
-          console.log('github') // document.location.pathname = '/github'; // send to github website
+          document.location.pathname = '/github'; // send to github website
         }
-
       }
     </script>
   </body>
