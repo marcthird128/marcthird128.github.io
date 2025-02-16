@@ -16,13 +16,13 @@
       let chance = Math.random();
 
       if (isAprilFools ? chance < 0.5 : chance < 0.5) {
-        document.location.pathname = '/rr'; // send to rickroll
+        console.log('rr') // document.location.pathname = '/rr'; // send to rickroll
       } else {
       
         if (document.location.hostname == 'maza64.xyz' || document.location.hostname == 'www.maza64.xyz') {
-          document.location.pathname = '/mazarca'; // send to Mazarca website
+          console.log('mazarca') // document.location.pathname = '/mazarca'; // send to Mazarca website
         } else {
-          document.location.pathname = '/github'; // send to github website
+          console.log('github') // document.location.pathname = '/github'; // send to github website
         }
 
       }
