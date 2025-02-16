@@ -15,7 +15,7 @@
 
       let chance = Math.random();
 
-      if (aprilFools ? chance < 0.5 : chance < 0.01) {
+      if (isAprilFools ? chance < 0.5 : chance < 0.01) {
         document.location.pathname = '/rr'; // send to rickroll
       }
       
