@@ -22,6 +22,9 @@
             .header {
                 zoom:150%;
             }
+            .msg {
+                zoom:200%;
+            }
         }   
         a {
             color:orange
@@ -38,7 +41,7 @@
 
         .header {
             background:#252525;
-            box-shadow: 1px 1px 10px 5px #00000080;
+            box-shadow: 1px 1px 10px 5px #00000040;
             display:flex;
             align-items: center;
         }
@@ -69,11 +72,22 @@
             padding:20px;
             background:#252525;
             margin-top:80px;
-            box-shadow: 1px 1px 10px 5px #00000080;
+            box-shadow: 1px 1px 10px 5px #00000040;
             border-radius:10px;
         }
         code.ip {
             cursor:pointer;
+        }
+        .msg {
+            background:#252525;
+            box-shadow: 1px 1px 10px 5px #00000040;
+            position:absolute;
+            left:10px;
+            bottom:10px;
+            width:300px;
+            max-width:calc(100vw - 20px);
+            padding:20px;
+            border-radius: 10px;
         }
     </style>
 </head>
@@ -122,6 +136,13 @@
     <script>
         function select(el) {
             selectText(el.childNodes[0])
+            let res = false;
+            try {
+                res = document.execCommand('copy');
+            } catch (e) {};
+
+            message(res ? 'Copied!' : 'Could not copy!');
+
         }
         function selectText(node) {
             if (document.body.createTextRange) {
@@ -137,6 +158,18 @@
             } else {
                 console.warn("Could not select text in node: Unsupported browser.");
             }
+        }
+        function message(msg) {
+            let els = document.getElementsByClassName('msg');
+            for (let i=0; i<els.length; i++) {
+                els[i].remove();
+            }
+            let el = document.createElement('div');
+            el.className = 'msg';
+            el.innerHTML = msg;
+            el.onclick = () => el.remove();
+            document.body.appendChild(el);
+            setTimeout(() => el.remove(), 1000);
         }
     </script>
 </body>
