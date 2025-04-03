@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Bounce</title>
+    <title>Bouncing Balls Game</title>
     <style>
         body {
             margin: 0;
@@ -139,8 +139,8 @@
 </head>
 <body>
     <div class="container">
-        <h1>Bounce Game</h1>
-        <h2>Knock your opponent's balls off the screen</h2>
+        <h1>Bouncing Balls Game</h1>
+        <h2>Knock your opponent's balls off the screen!</h2>
         <canvas id="gameCanvas" width="500" height="500"></canvas>
         <div id="message"></div>
         <button id="startButton">Start Game</button>
@@ -317,14 +317,10 @@
                 let player2BallsLeft = this.balls.filter(ball => ball.player === 1 && ball.active).length;
 
                 if (player1BallsLeft === 0) {
-                    this.gameRunning = false;
-                    cancelAnimationFrame(this.animationFrameId);
                     this.messageElement.textContent = 'Player 2 wins!';
                     this.startButton.textContent = 'Restart Game';
                     return true;
                 } else if (player2BallsLeft === 0) {
-                    this.gameRunning = false;
-                    cancelAnimationFrame(this.animationFrameId);
                     this.messageElement.textContent = 'Player 1 wins!';
                     this.startButton.textContent = 'Restart Game';
                     return true;
@@ -441,6 +437,8 @@
             }
 
             startGame() {
+                this.gameRunning = false;
+                cancelAnimationFrame(this.animationFrameId);
                 this.startButton.textContent = 'Start Game';
                 this.createBalls();
                 this.gameRunning = true;
