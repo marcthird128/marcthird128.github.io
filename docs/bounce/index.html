@@ -175,6 +175,7 @@
                 this.speedY = 0;
                 this.active = true;
                 this.originalColor = color;
+                this.gameLoopId = null;
             }
 
             draw() {
@@ -218,7 +219,6 @@
                 this.balls = [];
                 this.playerTurn = 0;
                 this.gameRunning = false;
-                this.animationFrameId = null;
                 this.dragging = false;
                 this.draggedBall = null;
                 this.dragStartX = 0;
@@ -431,16 +431,18 @@
                 this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
                 this.updateBalls();
                 this.drawBalls();
-                if (!this.checkGameOver()) {
-                    this.animationFrameId = requestAnimationFrame(this.gameLoop.bind(this));
-                }
+                if (this.checkGameOver())
+                    this.gameRunning = false;
+                this.gameLoopId = requestAnimationFrame(this.gameLoop.bind(this));
             }
 
             startGame() {
-                this.gameRunning = false;
-                cancelAnimationFrame(this.animationFrameId);
                 this.startButton.textContent = 'Start Game';
                 this.createBalls();
+
+                // make sure to cancel game loop
+                cancelAnimationFrame(this.gameLoopId)
+
                 this.gameRunning = true;
                 this.playerTurn = 0;
                 this.updateMessage();
