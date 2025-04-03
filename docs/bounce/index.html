@@ -317,11 +317,11 @@
                 let player2BallsLeft = this.balls.filter(ball => ball.player === 1 && ball.active).length;
 
                 if (player1BallsLeft === 0) {
-                    this.messageElement.textContent = 'Player 2 wins!';
+                    this.messageElement.textContent = 'Red wins!';
                     this.startButton.textContent = 'Restart Game';
                     return true;
                 } else if (player2BallsLeft === 0) {
-                    this.messageElement.textContent = 'Player 1 wins!';
+                    this.messageElement.textContent = 'Blue wins!';
                     this.startButton.textContent = 'Restart Game';
                     return true;
                 }
