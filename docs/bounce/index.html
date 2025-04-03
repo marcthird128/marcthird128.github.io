@@ -523,7 +523,7 @@
             }
 
             updateMessage() {
-                let color = this.playerTurn === 0 ? 'blue' : 'red';
+                let color = this.playerTurn === 0 ? 'dodgerblue' : 'tomato';
                 if (this.gameRunning) {
                     this.messageElement.innerHTML = `<span style="color:${color}">${this.playerTurn === 0 ? 'Blue' : 'Red'}'s turn</span>`;
                 } else {
