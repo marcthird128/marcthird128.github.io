@@ -160,7 +160,7 @@
 
         const friction = 0.98;
         const maxSpeed = 15;
-        const aiDeviation = 10; // Maximum angle deviation for AI in degrees, changed to 10
+        const aiDeviation = 5; // Maximum angle deviation for AI in degrees, changed to 10
 
         let gameMode = 'player';  // Default mode is Player vs Player
 
@@ -287,8 +287,9 @@
                         const dx = this.balls[j].x - this.balls[i].x;
                         const dy = this.balls[j].y - this.balls[i].y;
                         const distance = Math.sqrt(dx * dx + dy * dy);
+                        const perfect = this.balls[i].radius + this.balls[j].radius
 
-                        if (distance < this.balls[i].radius + this.balls[j].radius) {
+                        if (distance < perfect) {
                             // Collision detected!
                             const collisionAngle = Math.atan2(dy, dx);
 
@@ -307,6 +308,16 @@
                             this.balls[i].speedY = newSpeedY1;
                             this.balls[j].speedX = newSpeedX2;
                             this.balls[j].speedY = newSpeedY2;
+
+                            let nx = dx / distance
+                            let ny = dy / distance
+                            
+                            let overlap = (distance - perfect) * 0.5;
+
+                            this.balls[i].x += overlap*nx;
+                            this.balls[i].y += overlap*ny;
+                            this.balls[j].x -= overlap*nx;
+                            this.balls[j].y -= overlap*ny;
                         }
                     }
                 }
