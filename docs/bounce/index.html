@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bouncing Balls Game</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #e8f0fa;
+            font-family: sans-serif;
+            overflow: hidden;
+        }
+
+        canvas {
+            border: 2px solid #b0c4de;
+            background-color: #f0f8ff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 5px 15px rgba(0, 0, 0, 0.1);
+            cursor: grab;
+        }
+
+        canvas:active {
+            cursor: grabbing;
+        }
+
+        .container {
+            text-align: center;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background: linear-gradient(to bottom, #6ab7ff, #3c8ce7);
+            border: none;
+            border-radius: 5px;
+            color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            margin-top: 10px;
+            font-family: sans-serif;
+        }
+
+        button:hover {
+            background: linear-gradient(to bottom, #4a97e8, #286ac7);
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        button:active {
+            background: linear-gradient(to bottom, #3c8ce7, #286ac7);
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+            transform: translateY(1px);
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-family: sans-serif;
+            margin-bottom: 0.5em;
+            font-size: 1.8em;
+        }
+
+        h2 {
+            color: #34495e;
+            font-family: sans-serif;
+            font-size: 1.2em;
+            margin-bottom: 0.8em;
+            font-weight: normal;
+        }
+
+        p {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 1.2em;
+        }
+
+        #gameCanvas {
+            display: block;
+            margin: 0 auto;
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+            background-color: #ffffff;
+        }
+
+        #message {
+            margin-top: 10px;
+            font-size: 1.1em;
+            color: #555;
+            font-family: sans-serif;
+            font-weight: bold;
+        }
+
+        .mode-selector {
+            margin-top: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .mode-selector label {
+            margin-right: 10px;
+            font-size: 1em;
+            color: #555;
+            font-family: sans-serif;
+        }
+
+        .mode-selector button {
+            padding: 8px 15px;
+            font-size: 14px;
+            cursor: pointer;
+            background: linear-gradient(to bottom, #ffffff, #f0f0f0);
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            color: #555;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            font-family: sans-serif;
+            margin: 0 5px;
+        }
+
+        .mode-selector button:hover {
+            background: linear-gradient(to bottom, #f8f8f8, #e0e0e0);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .mode-selector button.active {
+            background: linear-gradient(to bottom, #6ab7ff, #3c8ce7);
+            color: white;
+            border-color: #3c8ce7;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Bouncing Balls Game</h1>
+        <h2>Knock your opponent's balls off the screen!</h2>
+        <canvas id="gameCanvas" width="500" height="500"></canvas>
+        <div id="message"></div>
+        <button id="startButton">Start Game</button>
+        <div class="mode-selector">
+            <label>Select Mode:</label>
+            <button data-mode="player" class="mode-button active">Player vs Player</button>
+            <button data-mode="ai" class="mode-button">Player vs AI</button>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        const startButton = document.getElementById('startButton');
+        const messageElement = document.getElementById('message');
+        const modeButtons = document.querySelectorAll('.mode-button');
+
+        const friction = 0.98;
+        const maxSpeed = 15;
+        const aiDeviation = 10; // Maximum angle deviation for AI in degrees, changed to 10
+
+        let gameMode = 'player';  // Default mode is Player vs Player
+
+        class Ball {
+            constructor(x, y, radius, color, player) {
+                this.x = x;
+                this.y = y;
+                this.radius = radius;
+                this.color = color;
+                this.player = player;
+                this.speedX = 0;
+                this.speedY = 0;
+                this.active = true;
+                this.originalColor = color;
+            }
+
+            draw() {
+                if (!this.active) return;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+                ctx.closePath();
+            }
+
+            update() {
+                if (!this.active) return;
+
+                this.x += this.speedX;
+                this.y += this.speedY;
+                this.speedX *= friction;
+                this.speedY *= friction;
+
+                // Clamp the speed
+                if (this.speedX > maxSpeed) this.speedX = maxSpeed;
+                if (this.speedX < -maxSpeed) this.speedX = -maxSpeed;
+                if (this.speedY > maxSpeed) this.speedY = maxSpeed;
+                if (this.speedY < -maxSpeed) this.speedY = -maxSpeed;
+
+                // Wall collision
+                if (this.x + this.radius > canvas.width || this.x - this.radius < 0 || this.y + this.radius > canvas.height || this.y - this.radius < 0) {
+                    this.active = false;
+                    this.speedX = 0;
+                    this.speedY = 0;
+                }
+            }
+        }
+
+        class Game {
+            constructor(canvas, ctx, startButton, messageElement) {
+                this.canvas = canvas;
+                this.ctx = ctx;
+                this.startButton = startButton;
+                this.messageElement = messageElement;
+                this.balls = [];
+                this.playerTurn = 0;
+                this.gameRunning = false;
+                this.animationFrameId = null;
+                this.dragging = false;
+                this.draggedBall = null;
+                this.dragStartX = 0;
+                this.dragStartY = 0;
+                this.gameMode = 'player'; // Default mode
+
+                this.canvas.addEventListener('mousedown', this.handleMouseDown.bind(this));
+                window.addEventListener('mouseup', this.handleMouseUp.bind(this));
+                window.addEventListener('mousemove', this.handleMouseMove.bind(this));
+                this.startButton.addEventListener('click', this.startGame.bind(this));
+                modeButtons.forEach(button => {
+                    button.addEventListener('click', this.handleModeSelect.bind(this));
+                });
+            }
+
+            randomColor() {
+                const r = Math.floor(Math.random() * 256);
+                const g = Math.floor(Math.random() * 256);
+                const b = Math.floor(Math.random() * 256);
+                return `rgb(${r},${g},${b})`;
+            }
+
+            createBalls() {
+                this.balls = [];
+                const ballCount = 5;
+                const radius = 15;
+                const player1Color = 'dodgerblue';
+                const player2Color = 'tomato';
+                const canvasWidth = this.canvas.width;
+                const canvasHeight = this.canvas.height;
+
+                // Calculate the starting X positions for the balls so they are centered
+                const startX = (canvasWidth / 2) - ((ballCount - 1) * 60) / 2;
+
+                // Player 1's balls (now at the bottom)
+                for (let i = 0; i < ballCount; i++) {
+                    const x = startX + i * 60;
+                    const y = canvasHeight - 50;
+                    this.balls.push(new Ball(x, y, radius, player1Color, 0));
+                }
+
+                // Player 2's balls
+                for (let i = 0; i < ballCount; i++) {
+                    const x = startX + i * 60;
+                    const y = 50;
+                    this.balls.push(new Ball(x, y, radius, player2Color, 1));
+                }
+                this.playerTurn = 0;
+                this.updateMessage();
+            }
+
+            drawBalls() {
+                this.balls.forEach(ball => ball.draw());
+            }
+
+            updateBalls() {
+                this.balls.forEach(ball => ball.update());
+                this.checkCollision();
+            }
+
+            checkCollision() {
+                for (let i = 0; i < this.balls.length; i++) {
+                    if (!this.balls[i].active) continue;
+                    for (let j = i + 1; j < this.balls.length; j++) {
+                        if (!this.balls[j].active) continue;
+                        const dx = this.balls[j].x - this.balls[i].x;
+                        const dy = this.balls[j].y - this.balls[i].y;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+
+                        if (distance < this.balls[i].radius + this.balls[j].radius) {
+                            // Collision detected!
+                            const collisionAngle = Math.atan2(dy, dx);
+
+                            const v1 = Math.sqrt(this.balls[i].speedX * this.balls[i].speedX + this.balls[i].speedY * this.balls[i].speedY);
+                            const v2 = Math.sqrt(this.balls[j].speedX * this.balls[j].speedX + this.balls[j].speedY * this.balls[j].speedY);
+
+                            const angle1 = Math.atan2(this.balls[i].speedY, this.balls[i].speedX);
+                            const angle2 = Math.atan2(this.balls[j].speedY, this.balls[j].speedX);
+
+                            const newSpeedX1 = v2 * Math.cos(angle2 - collisionAngle) * Math.cos(collisionAngle) + v1 * Math.sin(angle1 - collisionAngle) * Math.cos(collisionAngle + Math.PI / 2);
+                            const newSpeedY1 = v2 * Math.cos(angle2 - collisionAngle) * Math.sin(collisionAngle) + v1 * Math.sin(angle1 - collisionAngle) * Math.sin(collisionAngle + Math.PI / 2);
+                            const newSpeedX2 = v1 * Math.cos(angle1 - collisionAngle) * Math.cos(collisionAngle) + v2 * Math.sin(angle2 - collisionAngle) * Math.cos(collisionAngle + Math.PI / 2);
+                            const newSpeedY2 = v1 * Math.cos(angle1 - collisionAngle) * Math.sin(collisionAngle) + v2 * Math.sin(angle2 - collisionAngle) * Math.sin(collisionAngle + Math.PI / 2);
+
+                            this.balls[i].speedX = newSpeedX1;
+                            this.balls[i].speedY = newSpeedY1;
+                            this.balls[j].speedX = newSpeedX2;
+                            this.balls[j].speedY = newSpeedY2;
+                        }
+                    }
+                }
+            }
+
+            checkGameOver() {
+                let player1BallsLeft = this.balls.filter(ball => ball.player === 0 && ball.active).length;
+                let player2BallsLeft = this.balls.filter(ball => ball.player === 1 && ball.active).length;
+
+                if (player1BallsLeft === 0) {
+                    this.gameRunning = false;
+                    cancelAnimationFrame(this.animationFrameId);
+                    this.messageElement.textContent = 'Player 2 wins!';
+                    this.startButton.textContent = 'Restart Game';
+                    return true;
+                } else if (player2BallsLeft === 0) {
+                    this.gameRunning = false;
+                    cancelAnimationFrame(this.animationFrameId);
+                    this.messageElement.textContent = 'Player 1 wins!';
+                    this.startButton.textContent = 'Restart Game';
+                    return true;
+                }
+                return false;
+            }
+
+            shootBall(player) {
+                if (!this.gameRunning) return;
+
+                let shootingPlayerBalls = this.balls.filter(ball => ball.player === player && ball.active);
+                if (shootingPlayerBalls.length === 0) return;
+
+                const randomIndex = Math.floor(Math.random() * shootingPlayerBalls.length);
+                const shootingBall = shootingPlayerBalls[randomIndex];
+
+                shootingBall.speedX = (player === 0) ? 5 : -5;
+                shootingBall.speedY = -2;
+                shootingBall.active = true;
+                this.playerTurn = 1 - player;
+                this.updateMessage();
+
+                if (this.gameMode === 'ai' && this.playerTurn === 1) {
+                    setTimeout(() => {
+                        this.aiShoot();
+                    }, 1000);
+                }
+            }
+
+            aiShoot() {
+                if (!this.gameRunning) return;
+
+                // Get the AI's balls
+                const aiBalls = this.balls.filter(ball => ball.player === 1 && ball.active);
+                if (aiBalls.length === 0) return;
+
+                // Get the opponent's balls
+                const opponentBalls = this.balls.filter(ball => ball.player === 0 && ball.active);
+                if (opponentBalls.length === 0) {
+                    // If there are no opponent balls left, just shoot randomly
+                    const randomIndex = Math.floor(Math.random() * aiBalls.length);
+                    const shootingBall = aiBalls[randomIndex];
+                    shootingBall.speedX = -5;
+                    shootingBall.speedY = -2;
+                    shootingBall.active = true;
+                    this.playerTurn = 0;
+                    this.updateMessage();
+                    return;
+                }
+
+                // Find the closest opponent ball
+                let closestOpponentBall = opponentBalls[0];
+                let minDistance = Infinity;
+                for (const opponentBall of opponentBalls) {
+                    for (const aiBall of aiBalls) {
+                        const dx = opponentBall.x - aiBall.x;
+                        const dy = opponentBall.y - aiBall.y;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+                        if (distance < minDistance) {
+                            minDistance = distance;
+                            closestOpponentBall = opponentBall;
+                        }
+                    }
+                }
+
+                // Find the closest AI ball to the closest opponent ball
+                let closestAiBall = aiBalls[0];
+                minDistance = Infinity;
+                for (const aiBall of aiBalls) {
+                    const dx = closestOpponentBall.x - aiBall.x;
+                    const dy = closestOpponentBall.y - aiBall.y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    if (distance < minDistance) {
+                        minDistance = distance;
+                        closestAiBall = aiBall;
+                    }
+                }
+
+                // Calculate the angle to shoot at the closest opponent ball
+                const angle = Math.atan2(closestOpponentBall.y - closestAiBall.y, closestOpponentBall.x - closestAiBall.x);
+                // Add a random deviation to the angle
+                const deviation = (Math.random() - 0.5) * 2 * aiDeviation * Math.PI / 180; // Convert to radians
+                const adjustedAngle = angle + deviation;
+
+                // Calculate the distance between the shooting ball and the target ball
+                const dx = closestOpponentBall.x - closestAiBall.x;
+                const dy = closestOpponentBall.y - closestAiBall.y;
+                const targetDistance = Math.sqrt(dx * dx + dy * dy);
+
+                // Adjust the velocity based on the distance.  Closer = slower.
+                let velocity = maxSpeed-5;
+                if (targetDistance < 100) { // Arbitrary threshold, adjust as needed
+                    velocity = maxSpeed * (targetDistance / 100); // Further reduce velocity
+                    if (velocity < maxSpeed/4)
+                      velocity = maxSpeed/4;
+                }
+                
+                closestAiBall.speedX = Math.cos(adjustedAngle) * velocity;
+                closestAiBall.speedY = Math.sin(adjustedAngle) * velocity;
+                closestAiBall.active = true;
+                this.playerTurn = 0;
+                this.updateMessage();
+            }
+
+            gameLoop() {
+                if (!this.gameRunning) return;
+
+                this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+                this.updateBalls();
+                this.drawBalls();
+                if (!this.checkGameOver()) {
+                    this.animationFrameId = requestAnimationFrame(this.gameLoop.bind(this));
+                }
+            }
+
+            startGame() {
+                this.startButton.textContent = 'Start Game';
+                this.createBalls();
+                this.gameRunning = true;
+                this.playerTurn = 0;
+                this.updateMessage();
+                this.gameLoop();
+            }
+
+            handleMouseDown(event) {
+                if (!this.gameRunning || (this.gameMode === 'ai' && this.playerTurn === 1)) return;
+
+                const rect = this.canvas.getBoundingClientRect();
+                const x = event.clientX - rect.left;
+                const y = event.clientY - rect.top;
+
+                for (let i = 0; i < this.balls.length; i++) {
+                    if (this.balls[i].active && this.balls[i].player === this.playerTurn && Math.sqrt((x - this.balls[i].x) * (x - this.balls[i].x) + (y - this.balls[i].y) * (y - this.balls[i].y)) < this.balls[i].radius) {
+                        this.dragging = true;
+                        this.draggedBall = this.balls[i];
+                        this.dragStartX = x;
+                        this.dragStartY = y;
+                        this.canvas.style.cursor = 'grabbing';
+                        this.draggedBall.color = 'gray'; // Change color
+                        break;
+                    }
+                }
+                // Prevent default dragging behavior
+                event.preventDefault();
+            }
+
+            handleMouseUp(event) {
+                if (!this.gameRunning || !this.dragging || !this.draggedBall) return;
+
+                const rect = this.canvas.getBoundingClientRect();
+                const x = event.clientX - rect.left;
+                const y = event.clientY - rect.top;
+
+                const releaseX = x;
+                const releaseY = y;
+
+                const deltaX = releaseX - this.dragStartX;
+                const deltaY = releaseY - this.dragStartY;
+
+                // Calculate the angle and velocity
+                const angle = Math.atan2(deltaY, deltaX);
+                let velocity = Math.sqrt(deltaX * deltaX + deltaY * deltaY) * 0.15;
+
+                // Cap the velocity
+                if (velocity > maxSpeed) {
+                    velocity = maxSpeed;
+                }
+
+                this.draggedBall.speedX = -Math.cos(angle) * velocity;
+                this.draggedBall.speedY = -Math.sin(angle) * velocity;
+                this.draggedBall.active = true;
+
+                this.dragging = false;
+                this.draggedBall.color = this.draggedBall.originalColor; // Revert to original color
+                this.draggedBall = null;
+                this.dragStartX = 0;
+                this.dragStartY = 0;
+                this.canvas.style.cursor = 'grab';
+                this.playerTurn = 1 - this.playerTurn;
+                this.updateMessage();
+
+                if (this.gameMode === 'ai' && this.playerTurn === 1) {
+                    setTimeout(() => {
+                        this.aiShoot();
+                    }, 1000);
+                }
+
+                // Prevent default behavior
+                event.preventDefault();
+            }
+
+            handleMouseMove(event) {
+                if (!this.gameRunning || !this.dragging || !this.draggedBall) return;
+                // Prevent default behavior
+                event.preventDefault();
+            }
+
+            updateMessage() {
+                if (this.gameRunning) {
+                    this.messageElement.textContent = `Player ${this.playerTurn + 1}'s turn (${this.playerTurn === 0 ? 'Blue' : 'Red'})`;
+                } else {
+                    this.messageElement.textContent = '';
+                }
+            }
+
+            handleModeSelect(event) {
+                const selectedMode = event.target.dataset.mode;
+                if (selectedMode === 'player') {
+                    this.gameMode = 'player';
+                } else if (selectedMode === 'ai') {
+                    this.gameMode = 'ai';
+                }
+
+                modeButtons.forEach(button => {
+                    button.classList.remove('active');
+                });
+                event.target.classList.add('active');
+                this.startGame(); // Restart the game when the mode is switched
+            }
+        }
+
+        const game = new Game(canvas, ctx, startButton, messageElement);
+        game.startGame();
+    </script>
+</body>
+</html>
