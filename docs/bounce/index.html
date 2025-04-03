@@ -523,10 +523,11 @@
             }
 
             updateMessage() {
+                let color = this.playerTurn === 0 ? 'blue' : 'red';
                 if (this.gameRunning) {
-                    this.messageElement.textContent = `Player ${this.playerTurn + 1}'s turn (${this.playerTurn === 0 ? 'Blue' : 'Red'})`;
+                    this.messageElement.innerHTML = `<span style="color:${color}">${this.playerTurn === 0 ? 'Blue' : 'Red'}'s turn</span>`;
                 } else {
-                    this.messageElement.textContent = '';
+                    this.messageElement.innerHTML = '';
                 }
             }
 
