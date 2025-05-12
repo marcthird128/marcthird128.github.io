@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Particle Simulator</title>
+	</head>
+	<body style="display:flex">
+		<canvas id="c" width="700" height="700" style="border: 1px #ccc solid;"></canvas>
+		<div id="controls">
+			<h2>Particles</h2>
+			<button onclick="if (selected) alert('Particle has charge ' + selected.charge)">View Charge</button>
+			<button onclick="update()">Edit Charge</button>
+			<button onclick="remove()">Remove Particle</button>
+			<h2>Add Patricle</h2>
+			Charge <input value="-1" type="number" step="0.1" id="charge"> Columbs <br>
+			X <input value="350" type="number" step="1" min="0" max="700" id="x"> Meters <br>
+			Y <input value="350" type="number" step="1" min="0" max="700" id="y"> Meters <br>
+			<button onclick="add()">Add Particle</button>
+			<h2>Simulate</h2>
+			Multiplier (how fast the simulation goes) <input id="mul" value="0.0001" step="0.0001" type="number">
+			<button onclick="simulate()">Simulate</button>
+		</div>
+		<script>
+			const c = document.getElementById("c");
+			const charge = document.getElementById("charge");
+			const x = document.getElementById("x");
+			const y = document.getElementById("y");
+			const mul = document.getElementById("mul");
+			const ctx = c.getContext('2d');
+
+			const Ke = 8.99e9
+			const w = c.width;
+			const h = c.height;
+			const i = 15; // grid increment
+			const xi = w/i; // grids per X
+			const yi = h/i; // grids per Y
+
+			class Particle {
+				constructor(x, y, charge) {
+					this.x = x;
+					this.y = y;
+					this.charge = charge;
+				}
+				forceBetween(p) {
+					let dx = p.x - this.x;
+					let dy = p.y - this.y;
+					let r = Math.sqrt(dx*dx + dy*dy);
+					let scalar = Ke * this.charge * p.charge / (r*r);
+					return [scalar * dx / r, scalar * dy / r];
+				}
+				fieldAt(vec) {
+					let dx = vec[0] - this.x;
+					let dy = vec[1] - this.y;
+					let r = Math.sqrt(dx*dx + dy*dy)
+					let scalar = Ke * this.charge / (r*r)
+					return [scalar * dx / r, scalar * dy / r];
+				}
+			}
+
+			let particles = [new Particle(50, 50, 1)];
+			let selected = null;
+			let down = false;
+
+			function simulate() {
+				let nets = [];
+				particles.forEach((p, i) => {
+					let net = [0, 0];
+					particles.forEach(d => {
+						if (d == p) return;
+						let force = d.forceBetween(p);
+						net = [1 * net[0] + force[0], 1 * net[1] + force[1]];
+					});
+					nets[i] = net;
+				});
+				particles.forEach((p,i) => {
+					let net = nets[i];
+					p.x += 1 * net[0] * (parseFloat(mul.value));
+					p.y += 1 * net[1] * (parseFloat(mul.value));
+					if (p.x < 0 || isNaN(p.x)) {
+						p.x = 0;
+					}
+					if (p.x > w) {
+						p.x = w;
+					}
+					if (p.y < 0 || isNaN(p.y)) {
+						p.y = 0;
+					}
+					if (p.y > h) {
+						p.y = h;
+					}
+				});
+				draw();
+			}
+
+			function add() {
+				let p = new Particle(parseFloat(x.value) || 350, parseFloat(y.value) || 350, parseFloat(charge.value) || 1);
+				particles.push(p);
+				draw();
+			}
+
+			function update() {
+				if (!selected) return;
+
+				selected.charge = parseFloat(prompt("Enter new charge")) || selected.charge;
+
+				draw();
+			}
+
+			function remove() {
+				if (!selected) return;
+
+				let index = particles.indexOf(selected);
+				if (index == -1) return;
+
+				particles.splice(index, 1);
+
+				draw();
+			}
+
+			function draw() {
+				// draw grid
+				ctx.clearRect(0, 0, w, h);
+				ctx.strokeStyle = '#ddd';
+				ctx.beginPath();
+				for (let x=0; x<xi; x++) {
+					ctx.moveTo(x*i, 0);
+					ctx.lineTo(x*i, h);
+				}
+				for (let y=0; y<yi; y++) {
+					ctx.moveTo(0, y*i);
+					ctx.lineTo(w, y*i);
+				}
+				ctx.stroke();
+				ctx.closePath();
+
+				// draw particles
+				particles.forEach(p => {
+					ctx.beginPath();
+					ctx.arc(p.x, p.y, Math.max(5, Math.min(Math.abs(p.charge) + 4, 12)), 0, 2 * Math.PI);
+					ctx.fillStyle = p != selected ? p.charge > 0 ? '#ff000080' : '#0088ff80' : p.charge > 0 ? '#88000080' : '#00008880';
+					ctx.fill();
+					ctx.closePath();
+				});
+
+				// draw fields
+				for (let x=0; x<xi; x++) {
+					for (let y=0; y<yi; y++) {
+						let total = [0, 0];
+
+						particles.forEach(p => {
+							let force = p.fieldAt([x * i, y * i]);
+							total = [total[0]+force[0], total[1]+force[1]];
+						});
+
+						// nomralize
+						let r = Math.sqrt(total[0]*total[0] + total[1]*total[1]);
+						total = [total[0] / r, total[1] / r];
+
+						// get vector end
+						let vx = x * i + total[0] * i * 0.5;
+						let vy = y * i + total[1] * i * 0.5;
+
+						// draw arrow
+						ctx.beginPath();
+						ctx.strokeStyle = 'black';
+						ctx.moveTo(x * i, y * i);
+						ctx.lineTo(vx, vy);
+						ctx.stroke();
+						ctx.arc(vx, vy, 2, 0, 2 * Math.PI);
+						ctx.fillStyle = 'black';
+						ctx.fill();
+						ctx.closePath();
+					}
+				}
+			}
+
+			c.onmousedown = function(e) {
+				let ox = e.offsetX;
+				let oy = e.offsetY;
+
+				let p = null;
+				
+				particles.forEach(d => {
+					if (ox > d.x - 12 && ox < d.x + 12 && oy > d.y - 12 && oy < d.y + 12) {
+						p = d;
+					}
+				});
+
+				selected = p;
+				down = true;
+
+				draw();
+			}
+
+			c.onmousemove = function(e) {
+				if (!down || !selected) return
+
+				let ox = e.offsetX;
+				let oy = e.offsetY;
+
+				selected.x = ox;
+				selected.y = oy;
+
+				draw();
+			}
+
+			window.onmouseup = function() {
+				down = false;
+			}
+			
+			draw();
+		</script>
+	</body>
+</head>
