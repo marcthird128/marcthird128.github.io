@@ -7,6 +7,7 @@
 		<canvas id="c" width="700" height="700" style="border: 1px #ccc solid;"></canvas>
 		<div id="controls">
 			<h2>Particles</h2>
+			<input type="checkbox" oninput="updateStatic()" id="setstatic"><label for="setstatic">Static (can't move)?</label>
 			<button onclick="if (selected) alert('Particle has charge ' + selected.charge)">View Charge</button>
 			<button onclick="update()">Edit Charge</button>
 			<button onclick="remove()">Remove Particle</button>
@@ -14,54 +15,68 @@
 			Charge <input value="-1" type="number" step="0.1" id="charge"> Columbs <br>
 			X <input value="350" type="number" step="1" min="0" max="700" id="x"> Meters <br>
 			Y <input value="350" type="number" step="1" min="0" max="700" id="y"> Meters <br>
+			<input type="checkbox" id="static"> <label for="static">Static? (cant move in simulation)</label> <br>
 			<button onclick="add()">Add Particle</button>
 			<h2>Simulate</h2>
-			Multiplier (how fast the simulation goes) <input id="mul" value="0.0001" step="0.0001" type="number">
-			<button onclick="simulate()">Simulate</button>
+			Multiplier (how fast the simulation goes) <input id="mul" value="1" step="0.1" type="number"><br>
+			<button onclick="simulate()">Step</button>
+			<button onclick="if (simu == false) {simu = true; loop()}">Start</button>
+			<button onclick="simu = false;">Stop</button>
 		</div>
 		<script>
 			const c = document.getElementById("c");
 			const charge = document.getElementById("charge");
+			const setstatic = document.getElementById("setstatic");
+			const s = document.getElementById("static");
 			const x = document.getElementById("x");
 			const y = document.getElementById("y");
 			const mul = document.getElementById("mul");
 			const ctx = c.getContext('2d');
 
-			const Ke = 8.99e9
+			const Ke = 8.99e9; // Coulomb's constant
 			const w = c.width;
 			const h = c.height;
 			const i = 15; // grid increment
 			const xi = w/i; // grids per X
 			const yi = h/i; // grids per Y
+			let simu = false; // if the simulation is running
 
 			class Particle {
-				constructor(x, y, charge) {
+				constructor(x, y, charge, s) {
 					this.x = x;
 					this.y = y;
 					this.charge = charge;
+					this.static = s;
 				}
 				forceBetween(p) {
 					let dx = p.x - this.x;
 					let dy = p.y - this.y;
 					let r = Math.sqrt(dx*dx + dy*dy);
-					let scalar = Ke * this.charge * p.charge / (r*r);
+					if (r < 20) r = 20; // if they are extermely close, ignore
+					let scalar = clamp(Ke * this.charge * p.charge / (r*r), -1000000, 1000000); // clamp scalar to some large values
 					return [scalar * dx / r, scalar * dy / r];
 				}
 				fieldAt(vec) {
 					let dx = vec[0] - this.x;
 					let dy = vec[1] - this.y;
 					let r = Math.sqrt(dx*dx + dy*dy)
+					if (r < 1) return 0;
 					let scalar = Ke * this.charge / (r*r)
 					return [scalar * dx / r, scalar * dy / r];
 				}
 			}
 
-			let particles = [new Particle(50, 50, 1)];
+			let particles = [new Particle(50, 50, 1, false)];
 			let selected = null;
 			let down = false;
 
+			function clamp(num, min, max) {
+				return Math.min(Math.max(num, min), max);
+			}
+
 			function simulate() {
 				let nets = [];
+				let mulv = parseFloat(mul.value) * 0.00001;
 				particles.forEach((p, i) => {
 					let net = [0, 0];
 					particles.forEach(d => {
@@ -72,9 +87,10 @@
 					nets[i] = net;
 				});
 				particles.forEach((p,i) => {
+					if (p.static) return;
 					let net = nets[i];
-					p.x += 1 * net[0] * (parseFloat(mul.value));
-					p.y += 1 * net[1] * (parseFloat(mul.value));
+					p.x += clamp(net[0] * mulv, -20, 20);
+					p.y += clamp(net[1] * mulv, -20, 20);
 					if (p.x < 0 || isNaN(p.x)) {
 						p.x = 0;
 					}
@@ -91,8 +107,14 @@
 				draw();
 			}
 
+			function loop() {
+				if (!simu) return;
+				setTimeout(loop, 10);
+				simulate();
+			}
+
 			function add() {
-				let p = new Particle(parseFloat(x.value) || 350, parseFloat(y.value) || 350, parseFloat(charge.value) || 1);
+				let p = new Particle(parseFloat(x.value) || 350, parseFloat(y.value) || 350, parseFloat(charge.value) || 1, s.checked);
 				particles.push(p);
 				draw();
 			}
@@ -101,6 +123,14 @@
 				if (!selected) return;
 
 				selected.charge = parseFloat(prompt("Enter new charge")) || selected.charge;
+
+				draw();
+			}
+
+			function updateStatic() {
+				if (!selected) return;
+
+				selected.static = setstatic.checked;
 
 				draw();
 			}
@@ -181,11 +211,13 @@
 				
 				particles.forEach(d => {
 					if (ox > d.x - 12 && ox < d.x + 12 && oy > d.y - 12 && oy < d.y + 12) {
+						if (p && d.static) return;
 						p = d;
 					}
 				});
 
 				selected = p;
+				if (selected) setstatic.checked = selected.static;
 				down = true;
 
 				draw();
