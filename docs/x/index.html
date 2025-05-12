@@ -3,8 +3,116 @@
     <head>
         <title>Canvas - Assignments</title>
         <link rel="icon" type="image/x-icon" href="icon.ico"/>
+        <style>
+            html, body {
+                overflow:hidden;
+            }
+            .fill {
+                position:absolute;
+                left:0px;
+                top:0px;
+                width:100vw;
+                height:100vh;
+            }
+            .hidden {
+                display:none;
+            }
+            .sbtn {
+                position:absolute;
+                width:10px;
+                height:10px;
+                bottom:0px;
+                right:0px;
+            }
+        </style>
     </head>
     <body style="overflow: hidden;">
-        <iframe style="display:block; border:0; position:absolute; left:0px; top:0px; width:100vw; height:100vh" src="https://bloxd.io"></iframe>
+        <div class="fill" id="game">
+            <iframe class="fill" id="gamei"></iframe>
+        </div>
+        <div class="fill" id="school">
+            <iframe class="fill" id="schooli"></iframe>
+            <div class="sbtn" onclick="show(els.settings)"></div>
+        </div>
+        <div class="fill" id="settings">
+            settings<br/>
+            <button onlick="hide(els.settings)">hide</button>
+        </div>
+
+        <script>
+            let els = {} // dom elements
+            els.game = document.getElementById('game');
+            els.gamei = document.getElementById('gamei');
+            els.school = document.getElementById('school');
+            els.schooli = document.getElementById('schooli');            
+            els.settings = document.getElementById('settings');
+
+            let storage; // settings stored here
+
+            function set() { // save settings
+                localStorage.x = JSON.stringify(storage);
+            }
+
+            function get() { // fetch settings
+                if (localStorage.x == undefined) storage = undefined
+                else storage = JSON.parse(localStorage.x);
+            }
+
+            function hide(el) { // helper: hide element
+                el.classList.add('hidden');
+            }
+
+            function show(el) { // helper: show element
+                el.classList.remove('hidden');
+            }
+
+            function swap(el) { // swap element state
+                if (el.classList.contains('hidden')) hide(el)
+                else show(el);
+            }
+
+            function swapSchool() { // swap school and settings
+                swap(els.school);
+
+                if (els.school.classList.contains('hidden')) {
+                    hide(els.settings);
+                } else {
+                    show(els.settings);
+                }
+            }
+
+            function init() { // init app
+                get();
+                if (storage === undefined) {
+                    storage = { // default settings
+                        game: 'https://bloxd.io', // bloxd game website
+                        school: 'https://canvas.instructure.com', // canvas school website
+                        key: 192, // ` key by defauly
+                        schoolOpenOnLoad: true // have school automatically open?
+                    }
+                    set();
+                }
+
+                // set iframe srcs
+                els.gamei.src = storage.game;
+                els.schooli.src = storage.school;
+
+                // show/hide school element
+                if (!storage.schoolOpenOnLoad) hide(els.school);
+
+                // hide settings
+                hide(els.settings);
+
+                // create event listener for catch key
+                document.body.addEventListener('keydown', e => {
+                    if (e.keyCode == storage.key) {
+                        swapSchool();
+                        console.log('asdf')
+                    }
+                })
+            };
+
+            window.onload = init;
+        </script>
     </body>
 </html>
