@@ -9,7 +9,7 @@
 			<kbd>←</kbd> select before <kbd>←</kbd> select after <kbd>↑/E</kbd> increment charge <kbd>↓/W</kbd> decrement charge<br>
 			<kbd>A</kbd> duplicate <kbd>Space</kbd> toggle simulation <kbd>D</kbd> delete <kbd>S</kbd> toggle static <kbd>f</kbd> edit charge <kbd>g</kbd> move to cursor
 		</div>
-		<div id="controls">
+		<div id="controls" style="margin-left:10px;">
 			<h2>Particle</h2>
 			<input type="checkbox" oninput="updateStatic()" id="setstatic"><label for="setstatic">Static (can't move)?</label><br>
 			<button onclick="duplicate(); draw()">Duplicate Particle</button>
@@ -24,8 +24,9 @@
 			<input type="checkbox" id="static"> <label for="static">Static? (cant move in simulation)</label> <br>
 			<button onclick="add()">Add Particle</button>
 			<h2>Simulate</h2>
-			Multiplier (how fast the simulation goes) <input oninput="mul = parseFloat(this.value) || mul" id="mul" value="1" step="0.1" type="number"><br>
-			Radius Clamp (set lower for low multiplier) <input oninput="rClamp = parseFloat(this.value) || rClamp" id="clamp" value="20" step="1" type="number"><br>
+			<em>Note: this simulation is not very accurate for large charges</em><br><br>
+			Multiplier (how fast the simulation goes) <input oninput="mul = parseFloat(this.value) || mul" value="1" step="0.1" type="number"><br>
+			Radius Clamp (set lower for low multiplier) <input oninput="rClamp = parseFloat(this.value) || rClamp" value="20" step="1" type="number"><br>
 			<button onclick="simulate()">Step</button>
 			<button onclick="if (simu == false) {simu = true; loop()}">Start</button>
 			<button onclick="simu = false;">Stop</button>
