@@ -6,7 +6,7 @@
 	<body style="display:flex">
 		<canvas id="c" width="700" height="700" style="border: 1px #ccc solid;"></canvas>
 		<div id="controls">
-			<h2>Particles</h2>
+			<h2>Particle</h2>
 			<input type="checkbox" oninput="updateStatic()" id="setstatic"><label for="setstatic">Static (can't move)?</label>
 			<button onclick="if (selected) alert('Particle has charge ' + selected.charge)">View Charge</button>
 			<button onclick="update()">Edit Charge</button>
@@ -18,10 +18,20 @@
 			<input type="checkbox" id="static"> <label for="static">Static? (cant move in simulation)</label> <br>
 			<button onclick="add()">Add Particle</button>
 			<h2>Simulate</h2>
-			Multiplier (how fast the simulation goes) <input id="mul" value="1" step="0.1" type="number"><br>
+			Multiplier (how fast the simulation goes) <input oninput="mul = parseFloat(this.value) || mul" id="mul" value="1" step="0.1" type="number"><br>
+			Radius Clamp (set lower for low multiplier) <input oninput="rClamp = parseFloat(this.value) || rClamp" id="clamp" value="20" step="1" type="number"><br>
 			<button onclick="simulate()">Step</button>
 			<button onclick="if (simu == false) {simu = true; loop()}">Start</button>
 			<button onclick="simu = false;">Stop</button>
+			<h2>Help</h2>
+			<p>Click on a particle to select it. Click and drag to move it. In the <b>Particle</b> section you can edit the current particle's properties.</p>
+			<p>In the <b>Add Particle</b> section you can tweak initial particle paramters and add particles.</p>
+			<p>The electic field is shown as arrows showing which direction a positive charge would move at that point.</p>
+			<p>The <b>Simulate</b> section allows you to simulate the particles moving. It isn't perfectly accurate, but it is a stable simulation. Click the <b>Step</b> button to run one small
+			   simulation increment. Click the <b>Start</b> and <b>Stop</b> buttons to start and stop the simulation. The <b>Multiplier</b> field lets you choose how fast the
+			   simulation is run. A slower value is generally more accurate but will run slower. The <b>Radius Clamp</b> field allows you to choose how stable the simulation
+			   is. If Radius Clamp is higher, the simulation will be stabler. If it's lower, the simulation will be more accurate but less stable. At lower Multipliers, you can
+			   set Radius Clamp to lower to get a more accurate simulation.</p>
 		</div>
 		<script>
 			const c = document.getElementById("c");
@@ -30,10 +40,11 @@
 			const s = document.getElementById("static");
 			const x = document.getElementById("x");
 			const y = document.getElementById("y");
-			const mul = document.getElementById("mul");
 			const ctx = c.getContext('2d');
 
 			const Ke = 1; // 8.99e9; // Coulomb's constant, now unused
+			let rClamp = 20; // radius clamp
+			let mul = 1; // multiplier
 			const w = c.width;
 			const h = c.height;
 			const i = 15; // grid increment
@@ -58,7 +69,6 @@
 					// gets too large. this value must also be tested.
 					// in my experience 20 has the least
 					// ugly effects and looks the best
-					let rClamp = 20;
 					if (r < rClamp) r = rClamp;
 
 					// caclulate scalar part of the force using
@@ -92,7 +102,7 @@
 
 			function simulate() {
 				let nets = [];
-				let mulv = parseFloat(mul.value) * 100000;
+				let mulv = mul * 100000;
 				particles.forEach((p, i) => {
 					let net = [0, 0];
 					particles.forEach(d => {
