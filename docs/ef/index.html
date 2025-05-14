@@ -7,10 +7,12 @@
 		<canvas id="c" width="700" height="700" style="border: 1px #ccc solid;"></canvas>
 		<div id="controls">
 			<h2>Particle</h2>
-			<input type="checkbox" oninput="updateStatic()" id="setstatic"><label for="setstatic">Static (can't move)?</label>
+			<input type="checkbox" oninput="updateStatic()" id="setstatic"><label for="setstatic">Static (can't move)?</label><br>
+			<button onclick="duplicate(); draw()">Duplicate Particle</button>
 			<button onclick="if (selected) alert('Particle has charge ' + selected.charge)">View Charge</button>
 			<button onclick="update()">Edit Charge</button>
 			<button onclick="remove()">Remove Particle</button>
+			<button onclick="particles=[]; draw()">Delete All Particles</button>
 			<h2>Add Patricle</h2>
 			Charge <input value="-1" type="number" step="0.1" id="charge"> Hypothetical charge <br> <!-- Removed Coulombs since its relative anyways -->
 			X <input value="350" type="number" step="1" min="0" max="700" id="x"> Pixels <br>
@@ -98,6 +100,16 @@
 
 			function clamp(num, min, max) {
 				return Math.min(Math.max(num, min), max);
+			}
+
+			function duplicate() {
+				if (!selected) return;
+
+				// new particle at offset
+				let p = new Particle(selected.x + 10, selected.y + 10, selected.charge, selected.static);
+				particles.push(p);
+				selected = p;
+				draw();
 			}
 
 			function simulate() {
