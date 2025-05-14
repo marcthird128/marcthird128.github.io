@@ -12,9 +12,9 @@
 			<button onclick="update()">Edit Charge</button>
 			<button onclick="remove()">Remove Particle</button>
 			<h2>Add Patricle</h2>
-			Charge <input value="-1" type="number" step="0.1" id="charge"> Columbs <br>
-			X <input value="350" type="number" step="1" min="0" max="700" id="x"> Meters <br>
-			Y <input value="350" type="number" step="1" min="0" max="700" id="y"> Meters <br>
+			Charge <input value="-1" type="number" step="0.1" id="charge"> Hypothetical charge <br> <!-- Removed Coulombs since its relative anyways -->
+			X <input value="350" type="number" step="1" min="0" max="700" id="x"> Pixels <br>
+			Y <input value="350" type="number" step="1" min="0" max="700" id="y"> Pixels <br>
 			<input type="checkbox" id="static"> <label for="static">Static? (cant move in simulation)</label> <br>
 			<button onclick="add()">Add Particle</button>
 			<h2>Simulate</h2>
@@ -33,7 +33,7 @@
 			const mul = document.getElementById("mul");
 			const ctx = c.getContext('2d');
 
-			const Ke = 8.99e9; // Coulomb's constant
+			const Ke = 1; // 8.99e9; // Coulomb's constant, now unused
 			const w = c.width;
 			const h = c.height;
 			const i = 15; // grid increment
@@ -52,9 +52,24 @@
 					let dx = p.x - this.x;
 					let dy = p.y - this.y;
 					let r = Math.sqrt(dx*dx + dy*dy);
-					if (r < 20) r = 20; // if they are extermely close, ignore
+
+					// this is important:
+					// define a minimum radius so the force never
+					// gets too large. this value must also be tested.
+					// in my experience 20 has the least
+					// ugly effects and looks the best
+					let rClamp = 20;
+					if (r < rClamp) r = rClamp;
+
+					// caclulate scalar part of the force using
+					// Coulumb's law
 					let scalar = Ke * this.charge * p.charge / (r*r);
-					scalar = clamp(scalar, -1000000, 1000000); // clamp scalar to some large values
+
+					// clamp to some special value that makes the simulation
+					// stable while still being somewhat accurate
+					// this value must be tested. in my experience powers of 10 work best
+					let scalarClamp = 0.0001
+					scalar = clamp(scalar, -scalarClamp, scalarClamp);
 					return [scalar * dx / r, scalar * dy / r];
 				}
 				fieldAt(vec) {
@@ -77,7 +92,7 @@
 
 			function simulate() {
 				let nets = [];
-				let mulv = parseFloat(mul.value) * 0.00001;
+				let mulv = parseFloat(mul.value) * 100000;
 				particles.forEach((p, i) => {
 					let net = [0, 0];
 					particles.forEach(d => {
@@ -90,8 +105,13 @@
 				particles.forEach((p,i) => {
 					if (p.static) return;
 					let net = nets[i];
-					p.x += clamp(net[0] * mulv, -20, 20);
-					p.y += clamp(net[1] * mulv, -20, 20);
+
+					// hard max force per frame
+					let maxForce = 20;
+					p.x += clamp(net[0] * mulv, -maxForce, maxForce);
+					p.y += clamp(net[1] * mulv, -maxForce, maxForce);
+
+
 					if (p.x < 0 || isNaN(p.x)) {
 						p.x = 0;
 					}
@@ -182,9 +202,9 @@
 							total = [total[0]+force[0], total[1]+force[1]];
 						});
 
-						// nomralize
+						// nomralize, making sure its defined
 						let r = Math.sqrt(total[0]*total[0] + total[1]*total[1]);
-						total = [total[0] / r, total[1] / r];
+						total = Math.abs(r) == 0 ? [0, 0] : [total[0] / r, total[1] / r];
 
 						// get vector end
 						let vx = x * i + total[0] * i * 0.5;
