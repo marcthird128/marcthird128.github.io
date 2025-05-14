@@ -6,7 +6,7 @@
 	<body style="display:flex">
 		<div>
 			<canvas id="c" width="700" height="700" style="width: 700px; height: 700px; border: 1px #ccc solid;" tabindex="0"></canvas><br>
-			<kbd>←</kbd> select before <kbd>←</kbd> select after <kbd>↑</kbd> increment charge <kbd>↓</kbd> decrement charge<br>
+			<kbd>←</kbd> select before <kbd>←</kbd> select after <kbd>↑/E</kbd> increment charge <kbd>↓/W</kbd> decrement charge<br>
 			<kbd>A</kbd> duplicate <kbd>Space</kbd> toggle simulation <kbd>D</kbd> delete <kbd>S</kbd> toggle static <kbd>f</kbd> edit charge <kbd>g</kbd> move to cursor
 		</div>
 		<div id="controls">
@@ -129,7 +129,7 @@
 					nets[i] = net;
 				});
 				particles.forEach((p,i) => {
-					if (p.static) return;
+					if (p.static || (down && selected == p)) return;
 					let net = nets[i];
 
 					// hard max force per frame
@@ -311,12 +311,12 @@
 					updateStatic();
 				}
 
-				// up/down arrow to change charge
-				if (e.keyCode == 38) {
+				// up/down or w/e arrow to change charge
+				if (e.keyCode == 38 || e.keyCode == 69) {
 					selected.charge += 0.5;
 					draw();
 				}
-				if (e.keyCode == 40) {
+				if (e.keyCode == 40 || e.keyCode == 87) {
 					selected.charge -= 0.5;
 					draw();
 				}
