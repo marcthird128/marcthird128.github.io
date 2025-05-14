@@ -4,7 +4,11 @@
 		<title>Particle Simulator</title>
 	</head>
 	<body style="display:flex">
-		<canvas id="c" width="700" height="700" style="width: 700px; height: 700px; border: 1px #ccc solid;"></canvas>
+		<div>
+			<canvas id="c" width="700" height="700" style="width: 700px; height: 700px; border: 1px #ccc solid;" tabindex="0"></canvas><br>
+			<kbd>←</kbd> select before <kbd>←</kbd> select after <kbd>↑</kbd> increment charge <kbd>↓</kbd> decrement charge<br>
+			<kbd>A</kbd> duplicate <kbd>Space</kbd> toggle simulation <kbd>D</kbd> delete <kbd>S</kbd> toggle static <kbd>f</kbd> edit charge <kbd>g</kbd> move to cursor
+		</div>
 		<div id="controls">
 			<h2>Particle</h2>
 			<input type="checkbox" oninput="updateStatic()" id="setstatic"><label for="setstatic">Static (can't move)?</label><br>
@@ -246,6 +250,85 @@
 				}
 			}
 
+			c.onclick = () => c.focus();
+
+			c.onkeydown = e => {
+				// PREVENT DEFAULT
+				e.preventDefault();
+
+				// space to start/stop simulation
+				if (e.keyCode == 32) {
+					simu = !simu;
+					if (simu) loop();
+				}
+
+				// left/right to select next/previous particle
+				if (e.keyCode == 37) {
+					let index = particles.indexOf(selected);
+					if (index == -1) index = 1;
+					if (index == 0) {
+						selected = particles[particles.length - 1];
+					} else {
+						selected = particles[index - 1];
+					}
+					if (!selected) return;
+					setstatic.checked = selected.static;
+					draw();
+				}
+				if (e.keyCode == 39) {
+					let index = particles.indexOf(selected);
+					if (index == particles.length - 1) {
+						selected = particles[0];
+					} else {
+						selected = particles[index + 1];
+					}
+					if (!selected) return;
+					setstatic.checked = selected.static;
+					draw();
+				}
+
+				// selection-dependent keys
+				if (!selected) return;
+
+				// delete or backspace or 'd' to delete
+				if (e.keyCode == 46 || e.keyCode == 8 || e.keyCode == 68) {
+					remove();
+				}
+
+				// enter or 'a' to duplicate
+				if (e.keyCode == 13 || e.keyCode == 65) {
+					duplicate();
+				}
+
+				// tab or 'f' to edit charge
+				if (e.keyCode == 9 || e.keyCode == 70) {
+					update();
+				}
+
+				// 's' to toggle static
+				if (e.keyCode == 83) {
+					setstatic.checked = !setstatic.checked;
+					updateStatic();
+				}
+
+				// up/down arrow to change charge
+				if (e.keyCode == 38) {
+					selected.charge += 0.5;
+					draw();
+				}
+				if (e.keyCode == 40) {
+					selected.charge -= 0.5;
+					draw();
+				}
+				
+				// 'g' to move particle to current mouse pos
+				if (e.keyCode == 71) {
+					selected.x = lastMousePos[0];
+					selected.y = lastMousePos[1];
+					draw();
+				}
+			}
+
 			c.onmousedown = function(e) {
 				let ox = e.offsetX;
 				let oy = e.offsetY;
@@ -266,7 +349,11 @@
 				draw();
 			}
 
+			let lastMousePos = [100, 100];
+
 			c.onmousemove = function(e) {
+				lastMousePos = [e.offsetX, e.offsetY];
+
 				if (!down || !selected) return
 
 				let ox = e.offsetX;
