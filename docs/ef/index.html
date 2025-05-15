@@ -16,7 +16,7 @@
 			<button onclick="if (selected) alert('Particle has charge ' + selected.charge)">View Charge</button>
 			<button onclick="update()">Edit Charge</button>
 			<button onclick="remove()">Remove Particle</button>
-			<button onclick="particles=[]; draw()">Delete All Particles</button>
+			<button onclick="particles=[]; selected = null; draw()">Delete All Particles</button>
 			<h2>Add Patricle</h2>
 			Charge <input value="-1" type="number" step="0.1" id="charge"> Hypothetical charge <br> <!-- Removed Coulombs since its relative anyways -->
 			X <input value="350" type="number" step="1" min="0" max="700" id="x"> Pixels <br>
@@ -190,6 +190,8 @@
 				if (index == -1) return;
 
 				particles.splice(index, 1);
+
+				selected = null;
 
 				draw();
 			}
