@@ -332,7 +332,7 @@
 				}
 			}
 
-			c.onmousedown = function(e) {
+			c.onpointerdown = function(e) {
 				let ox = e.offsetX;
 				let oy = e.offsetY;
 
@@ -354,7 +354,7 @@
 
 			let lastMousePos = [100, 100];
 
-			c.onmousemove = function(e) {
+			c.onpointermove = function(e) {
 				lastMousePos = [e.offsetX, e.offsetY];
 
 				if (!down || !selected) return
@@ -368,7 +368,7 @@
 				draw();
 			}
 
-			window.onmouseup = function() {
+			window.onpointerup = function() {
 				down = false;
 			}
 			
