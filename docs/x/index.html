@@ -24,6 +24,9 @@
                 bottom:0px;
                 left:0px;
             }
+            #settings {
+                background:#eeeeee;
+            }
         </style>
     </head>
     <body style="overflow: hidden;">
@@ -33,11 +36,15 @@
         </div>
         <div class="fill" id="school">
             <iframe class="fill" id="schooli"></iframe>
-            <div class="sbtn" onclick="show(els.settings)"></div>
+            <div class="sbtn" onclick="showSettings()"></div>
         </div>
         <div class="fill" id="settings">
-            settings<br/>
-            <button onclick="hide(els.settings)">hide</button>
+            <h2>Settings</h2>
+            Game URL <input type="text" id="settings-game"/><br>
+            School URL <input type="text" id="settings-school"/><br>
+            Catch Key <input type="number" min="0" max="256" id="settings-key"/><br>
+            <button onclick="saveSettings()">Save</button>
+            <button onclick="hide(els.settings)">Hide</button>
         </div>
 
         <script>
@@ -46,7 +53,10 @@
             els.gamei = document.getElementById('gamei');
             els.school = document.getElementById('school');
             els.schooli = document.getElementById('schooli');            
-            els.settings = document.getElementById('settings');
+            els.settings = document.getElementById('settings');            
+            els.settingsGame = document.getElementById('settings-game');            
+            els.settingsSchool = document.getElementById('settings-school');            
+            els.settingsKey = document.getElementById('settings-key');
 
             let storage; // settings stored here
 
@@ -75,6 +85,20 @@
             function swapSchool() { // swap school and game
                 swap(els.school);
                 hide(els.settings);
+            }
+
+            function showSettings() {
+                show(els.settings);
+                els.settingsGame.value = storage.game;
+                els.settingsSchool.value = storage.school;
+                els.settingsKey.value = storage.key;
+            }
+
+            function saveSettings() {
+                storage.game = els.settingsGame.value;
+                storage.school = els.settingsSchool.value;
+                storage.key = parseInt(els.settingsKey.value);
+                set();
             }
 
             function init() { // init app
