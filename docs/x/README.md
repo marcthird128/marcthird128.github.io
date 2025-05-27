@@ -1,7 +1,7 @@
 # maza64.xyz/x
 
-This page allows you to play bloxd.io
-without it looking like bloxd.io
+This page allows you to play games
+without it looking like games
 
 ## Play
 
@@ -9,10 +9,12 @@ Click: [maza64.xyz/x](https://maza64.xyz/x)
 
 ## How to use
 
-Press the Catch key (` by default) to go to an overlay of the Canvas
-instructure website. Press the catch key again to exit.
-Click the bottom right corner to access the
-x settings. You can change the key 
+Press the Catch key (` by default) while the game is not focused
+to swap between the school and game.
+
+Click the bottom left corner in the game to switch to school,
+and click it in the school to go to settings
+x settings. You can change stuff in the settings.
 
 ## Customization
 

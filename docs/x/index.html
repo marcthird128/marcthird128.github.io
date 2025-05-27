@@ -40,6 +40,7 @@
         </div>
         <div class="fill" id="settings">
             <h2>Settings</h2>
+            <a href="https://github.com/marcthird128/marcthird128.github.io/blob/main/docs/x/README.md">Help</a><br>
             Game URL <input type="text" id="settings-game"/><br>
             School URL <input type="text" id="settings-school"/><br>
             Catch Key <input type="number" min="0" max="256" id="settings-key"/><br>
@@ -108,7 +109,6 @@
                         game: 'https://bloxd.io', // bloxd game website
                         school: 'https://canvas.instructure.com', // canvas school website
                         key: 192, // ` key by defauly
-                        schoolOpenOnLoad: true // have school automatically open?
                     }
                     set();
                 }
@@ -117,9 +117,6 @@
                 els.gamei.src = storage.game;
                 els.schooli.src = storage.school;
 
-                // show/hide school element
-                if (!storage.schoolOpenOnLoad) hide(els.school);
-
                 // hide settings
                 hide(els.settings);
 
@@ -127,7 +124,6 @@
                 document.body.addEventListener('keydown', e => {
                     if (e.keyCode == storage.key) {
                         swapSchool();
-                        console.log('asdf')
                     }
                 })
             };
