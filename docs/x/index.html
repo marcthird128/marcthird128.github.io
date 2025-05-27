@@ -68,18 +68,13 @@
             }
 
             function swap(el) { // swap element state
-                if (el.classList.contains('hidden')) hide(el)
-                else show(el);
+                if (el.classList.contains('hidden')) show(el)
+                else hide(el);
             }
 
-            function swapSchool() { // swap school and settings
+            function swapSchool() { // swap school and game
                 swap(els.school);
-
-                if (els.school.classList.contains('hidden')) {
-                    hide(els.settings);
-                } else {
-                    show(els.settings);
-                }
+                hide(els.settings);
             }
 
             function init() { // init app
