@@ -1,5 +1,9 @@
 <!-- flappy bird -->
 <!-- Minified tiny version: <canvas id=c style="border:1px #ccc solid"></canvas>\x3Cscript>const c=document.getElementById("c"),ctx=c.getContext("2d");ctx.textAlign="center",ctx.textBaseline="middle",ctx.font="15px monospace";let d,init=()=>{d={m:"s",o:[],p:75,v:0,f:0,s:0}},update=()=>{if(d.f++,"p"==d.m){d.p+=d.v,d.v+=.1;let t=!1;(d.p<10||d.p>140)&&(t=!0);let e=[];for(let $=0;$<d.o.length;$++){let o=d.o[$];o.x-=1,o.x>0?(e.push(o),o.x<50&&o.x>10&&(o.y-20>d.p||o.y+20<d.p)&&(t=!0)):d.s++}d.o=e,t?d.m="e":d.f%100==0&&d.o.push({x:300,y:40+Math.floor(80*Math.random())})}ctx.clearRect(0,0,300,150),ctx.fillStyle="red",ctx.fillRect(20,d.p-10,20,20),ctx.fillStyle="green",d.o.forEach(t=>{ctx.fillRect(t.x-10,0,20,t.y-30),ctx.fillRect(t.x-10,t.y+30,20,150)}),"s"==d.m?ctx.strokeText("Press to start",150,75):"e"==d.m&&(ctx.strokeText("Score: "+d.s,150,60),ctx.strokeText("Press to restart",150,75))};window.onkeydown=window.onpointerdown=t=>{"p"==d.m?d.v=-2:"s"==d.m?d.m="p":"e"==d.m&&init()},init(),setInterval(update,20);\x3C/script> -->
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
 <body style="margin:0; display:flex; justify-content:center; align-items:center;">
 <canvas id="c" width="300" height="150" style="border: 1px #ccc solid; image-rendering:pixelated; width:80vw; touch-action:none"></canvas>
 <script>
@@ -62,3 +66,4 @@
 	init();setInterval(update,20);
 </script>
 </body>
+</html>
