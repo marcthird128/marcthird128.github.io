@@ -140,7 +140,7 @@
 <body>
     <div class="container">
         <h1>Bounce Game</h1>
-        <h2>Click and drag balls to knock your opponent's balls off the screen</h2>
+        <h2 id="easterEgg">Click and drag balls to knock your opponent's balls off the screen</h2>
         <canvas id="gameCanvas" width="500" height="500"></canvas>
         <div id="message"></div>
         <button id="startButton">Start Game</button>
@@ -157,6 +157,10 @@
         const startButton = document.getElementById('startButton');
         const messageElement = document.getElementById('message');
         const modeButtons = document.querySelectorAll('.mode-button');
+
+        if (localStorage && localStorage.getItem('bounce_game_easter_egg')) {
+            document.getElementById('easterEgg').innerHTML = '<b><em>BRIGHTON YOU SUCK</em></b>'; // so my brother gets annoyed when playing this game
+        }
 
         const friction = 0.98;
         const maxSpeed = 15;
