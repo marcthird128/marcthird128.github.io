@@ -48,7 +48,9 @@
 			ctx.fillRect(o.x-10,0,20,o.y-30);
 			ctx.fillRect(o.x-10,o.y+30,20,150);
 		});
-		if(d.m=='s'){
+		if(d.m=='p'){
+			ctx.strokeText('Score: '+d.s,50,20);
+		}else if(d.m=='s'){
 			ctx.strokeText('Press to start',150,75);
 		}else if(d.m=='e'){
 			ctx.strokeText('Score: '+d.s,150,60);
