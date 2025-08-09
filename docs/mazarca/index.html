@@ -3,95 +3,147 @@
 <head>
     <meta charset="UTF-8">
     <title>Mazarca SMP</title>
-
-    <link rel="icon" type="image/x-icon" href="icon.png"/>
-
+    <link rel="icon" type="image/x-icon" href="assets/icon.png"/>
     <style>
         @font-face {
-            font-family: "Minecraft";
-            src: url("MinecraftRegular.otf");
+            font-family: "MC-Regular";
+            src: url("assets/font/MinecraftRegular.otf");
         }
-        html, body {
-            margin:0;
-            font-family: "Minecraft", Arial, Helvetica, sans-serif;
-            background-size:120%;
-            background-image: url("background_v3.png");
-            background-position: top center;
-            color:#ffffff;
+
+		@font-face {
+            font-family: "MC-Bold";
+            src: url("assets/font/MinecraftBold.otf");
         }
+
+		@font-face {
+            font-family: "MC-Italic";
+            src: url("assets/font/MinecraftItalic.otf");
+        }
+
+		@font-face {
+            font-family: "MC-Bold-Italic";
+            src: url("assets/font/MinecraftBoldItalic.otf");
+        }
+
         @media (min-device-width:320px) and (max-device-width:768px) {
             html, body {
-                zoom:115%;
+                zoom: 115%;
             }
             .header {
-                zoom:150%;
+                zoom: 150%;
             }
             .msg {
-                zoom:200%;
+                zoom: 200%;
             }
-        }   
+        }
+
+        html, body {
+            zoom: 110%;
+            margin: 0px;
+            font-family: MC-Regular, MC-Bold, MC-Italic, MC-Bold-Italic;
+            background-size: 120%;
+            background-image: url("assets/background.png");
+            background-position: top center;
+            color: #FFFFFF;
+        }
+
         a {
-            color:orange
+            color: orange;
+            text-decoration: none;
         }
+
+		a:hover {
+			text-shadow: 0px 0px 5px;
+		}
+
         code {
-            background:#444;
-            padding:2px 6px;
+            background: #444;
+            padding: 2px 6px;
             border-radius: 3px;
-            box-shadow:1px 1px 2px 1px #00000030;
+            box-shadow: 1px 1px 2px 1px #00000030;
         }
+
         h1, h2, h3, h4, h5, h6 {
-            font-family: 'Consolas', 'Courier New', monospace;
+            margin: 10px 0px 5px;
+            font-family: MC-Bold;
+            font-weight: normal;
+			text-shadow: 0px 0px 2px #FFFFFF60;
+        }
+
+        ul {
+            margin: 0px;
         }
 
         .header {
-            background:#252525;
+            background: #252525;
             box-shadow: 1px 1px 10px 5px #00000040;
-            display:flex;
+            display: flex;
             align-items: center;
-            
         }
+
         .header > div {
-            margin:10px;
+            margin: 10px;
         }
+
         .logo {
-            width:50px;
+            width: 50px;
             height: 50px;
-            border-radius:5px;
+            border-radius: 5px;
         }
+
         .title-text {
-            font-size:25px;
-            font-weight:bold;
-            font-family:'Consolas', 'Courier New', monospace;
-            color:#ffffff;
+            font-size: 25px;
+            font-family: MC-Regular;
+            color: #FFFFFF;
+			text-shadow: 0px 0px 4px #FFFFFF60;
         }
+
+        .discord-social, reddit-social {
+            border-radius: 5px;
+        }
+
+        .discord-social:hover {
+            box-shadow: 0px 0px 5px #5662F6;
+        }
+
+        .reddit-social:hover {
+            box-shadow: 0px 0px 5px;
+        }
+
+        .about {
+            margin: 0px 0px 0px 25px;
+        }
+
         .small-text {
-            font-size: 10px;
-            font-style: italic;
-            font-family: 'Arial', 'Helvetica', sans-serif;
+            font-size: 12px;
+            font-family: MC-Italic;
             color: #828282
         }
+
         .wrapper {
-            width:50vw;
-            min-width:600px;
-            margin:auto;
-            padding:20px;
-            background:#252525;
-            margin-top:60px;
+            width: 50vw;
+            min-width: 600px;
+            margin: auto;
+            padding: 20px;
+            background: #252525;
+            margin-top: 60px;
             box-shadow: 1px 1px 10px 5px #00000040;
-            border-radius:10px;
+            border-radius: 10px;
         }
+
         code.ip {
-            cursor:pointer;
+            cursor: pointer;
         }
+
         .msg {
-            background:#252525;
+            background: #252525;
             box-shadow: 1px 1px 10px 5px #00000040;
-            position:absolute;
-            left:10px;
-            bottom:10px;
-            width:300px;
-            max-width:calc(100vw - 20px);
-            padding:20px;
+            position: absolute;
+            left: 10px;
+            bottom: 10px;
+            width: 300px;
+            max-width: calc(100vw - 20px);
+            padding: 20px;
             border-radius: 10px;
         }
     </style>
@@ -100,53 +152,71 @@
     <header class="header">
         <div>
             <a href="https://maza64.xyz">
-                <img class="logo" src="icon.png"/>
+                <img class="logo" src="assets/icon.png"/>
             </a>
         </div>
         <div>
-            <a style="text-decoration: none;"href="https://maza64.xyz"><span class="title-text">Mazarca SMP</span></a>
+            <a href="https://maza64.xyz"><span class="title-text">Mazarca SMP</span></a>
         </div>
-        <div style="flex-grow:1;"></div>
+        <div style="flex-grow: 1;"></div>
         <div>
             <a href="https://discord.com/invite/R6nMUHe9DK" target="_blank">
-                <img style="width:30px" src="discord-social.png"/>
+                <img class="discord-social" src="assets/discord.png" width="35px"/>
             </a>
         </div>
         <div>
             <a href="https://reddit.com/r/MazarcaSMP" target="_blank">
-                <img style="height:30px" src="reddit-social.png"/>
+                <img class="reddit-social" src="reddit-social.png" height="35px"/>
             </a>
         </div>
         <div></div>
     </header>
     <div class="wrapper">
-        <p>
-            Mazarca is a cracked Minecraft 1.8.8 server that supports <a href="https://client.eaglercraft.dev/1.8/" target="_blank">EaglercraftX</a>
-        </p>
-        <h3>IP addresses<br><span class="small-text">(click to copy)</span></h3>
-        <ul>
-            <li><p><code class="ip" onclick="select(this)">wss://eagler.maza64.xyz</code><span class="small-text"> (recommended)</span></p></li>
-            <li><p><code class="ip" onclick="select(this)">ws://24.ip.gl.ply.gg:5547</code><span class="small-text"> (if first one doesn't work)</span></p></li>
-            <li><p><code class="ip" onclick="select(this)">24.ip.gl.ply.gg:33082</code><span class="small-text"> (for Java 1.8.8)</span></p></li>
-            <li><p><code class="ip" onclick="select(this)">147.185.221.24:33082</code><span class="small-text"> (for Java 1.8.8)</span></p></li>
-        </ul>
-
-        <h3>Game modes</h3>
+        <h3>About</h3>
+            <p class="about">
+                Mazarca is a cracked Minecraft 1.8.8 server that supports <a href="https://client.eaglercraft.dev/1.8/" target="_blank">EaglercraftX</a>. <br />We have a semi-vanilla survival with cool new items (using <a href="https://github.com/Slimefun/Slimefun4/wiki" target="_blank">Slimefun</a>) and other essential plugins!
+            </p>
+        <h3 style="margin-bottom: 0px">IP address</h3>
+        <span class="small-text">(click to copy)</span>
         <ul>
             <li>
-                <p>
-                    Semi-vanilla survival with cool new items (using <a href="https://github.com/Slimefun/Slimefun4/wiki">Slimefun</a>)
-                    <br />and other essential plugins!
-                </p>
-            </li>
-            <li><p>Creative server with <a href="https://www.youtube.com/watch?v=VDsjXB-BaE0">land claims</a> (no one will ruin your work!)</p></li>
-            <li><p>Another survival server with random drops - test your luck!</p></li>
+				<div style="gap: 0.5rem">
+					<p>
+						<code class="ip" onclick="select(this)">wss://eagler.maza64.xyz</code>
+						<span class="small-text">(recommended)</span>
+					</p>
+				</div>
+			</li>
+            <li>
+				<div style="gap: 0.5rem">
+					<p>
+						<code class="ip" onclick="select(this)">ws://30.ip.gl.ply.gg:50343</code>
+						<span class="small-text">(if first one doesn't work)</span>
+					</p>
+				</div>
+			</li>
+            <li>
+				<div style="gap: 0.5rem">
+					<p>
+						<code class="ip" onclick="select(this)">24.ip.gl.ply.gg:33082</code>
+						<span class="small-text"> (for Java MC)</span>
+					</p>
+				</div>
+			</li>
+            <li>
+				<div style="gap: 0.5rem">
+					<p>
+						<code class="ip" onclick="select(this)">147.185.221.24:33082</code>
+						<span class="small-text"> (for Java MC)</span>
+					</p>
+				</div>
+			</li>
         </ul>
 
         <h3>External Links</h3>
         <ul>
-            <li><p>Subreddit: <a href="https://www.reddit.com/r/MazarcaSMP">r/MazarcaSMP</a></p></li>
-            <li><p>Discord: <a href="https://discord.com/invite/R6nMUHe9DK">Mazarca SMP</a></p></li>
+            <li>Subreddit: <a href="https://www.reddit.com/r/MazarcaSMP" target="_blank">r/MazarcaSMP</a></li>
+            <li>Discord: <a href="https://discord.com/invite/R6nMUHe9DK" target="_blank">Mazarca SMP</a></li>
         </ul>
 
         <h3>Random games</h3>
