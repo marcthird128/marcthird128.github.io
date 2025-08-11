@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -53,8 +54,8 @@
         }
 
         a:hover {
-			         text-shadow: 0px 0px 5px;
-		      }
+			text-shadow: 0px 0px 5px;
+		}
 
         code {
             background: #444;
@@ -72,6 +73,16 @@
 
         ul {
             margin: 0px;
+            list-style-type: square;
+        }
+
+        table {
+            margin: 0px 0px 0px 21px;
+        }
+
+        td {
+            padding: 2px;
+            min-width: 210px;
         }
 
         .header {
@@ -89,10 +100,11 @@
             width: 50px;
             height: 50px;
             border-radius: 5px;
+            box-shadow: 0px 0px 10px #FFFFFF40;
         }
 
         .title-text {
-            font-size: 25px;
+            font-size: 35px;
             font-family: MC-Bold;
             color: #FFFFFF;
 			text-shadow: 0px 0px 4px #FFFFFF60;
@@ -131,8 +143,9 @@
             border-radius: 10px;
         }
 
-        code.ip {
+        code.ip:hover {
             cursor: pointer;
+            background: #323232;
         }
 
         .msg {
@@ -171,47 +184,31 @@
         </div>
         <div></div>
     </header>
-    <div class="wrapper">
+    <main class="wrapper">
         <h3>About</h3>
             <p class="about">
                 Mazarca is a cracked Minecraft server that supports Eaglercraft <a href="https://client.eaglercraft.dev/1.8/" target="_blank">1.8</a> and <a href="https://client.eaglercraft.dev/1.12/" target="_blank">1.12</a>. <br />We have a semi-vanilla survival with cool new items (using <a href="https://github.com/Slimefun/Slimefun4/wiki" target="_blank">Slimefun</a>) and other essential plugins!
             </p>
         <h3 style="margin-bottom: 0px">IP address</h3>
         <span class="small-text">(click to copy)</span>
-        <ul>
-            <li>
-				<div style="gap: 0.5rem">
-					<p>
-						<code class="ip" onclick="select(this)">wss://eagler.maza64.xyz</code>
-						<span class="small-text">(recommended)</span>
-					</p>
-				</div>
-			</li>
-            <li>
-				<div style="gap: 0.5rem">
-					<p>
-						<code class="ip" onclick="select(this)">ws://30.ip.gl.ply.gg:50343</code>
-						<span class="small-text">(if first one doesn't work)</span>
-					</p>
-				</div>
-			</li>
-            <li>
-				<div style="gap: 0.5rem">
-					<p>
-						<code class="ip" onclick="select(this)">24.ip.gl.ply.gg:33082</code>
-						<span class="small-text"> (for Java MC)</span>
-					</p>
-				</div>
-			</li>
-            <li>
-				<div style="gap: 0.5rem">
-					<p>
-						<code class="ip" onclick="select(this)">147.185.221.24:33082</code>
-						<span class="small-text"> (for Java MC)</span>
-					</p>
-				</div>
-			</li>
-        </ul>
+        <table>
+            <tr>
+                <td><code class="ip" onclick="select(this)">wss://eagler.maza64.xyz</code></td>
+                <td><span class="small-text">(recommended)</span></td>
+            </tr>
+            <tr>
+                <td><code class="ip" onclick="select(this)">ws://30.ip.gl.ply.gg:50343</code></td>
+                <td><span class="small-text">(if first one doesn't work)</span></td>
+            </tr>
+            <tr>
+                <td><code class="ip" onclick="select(this)">24.ip.gl.ply.gg:33082</code></td>
+                <td><span class="small-text"> (for Java MC)</span></td>
+            </tr>
+            <tr>
+                <td><code class="ip" onclick="select(this)">147.185.221.24:33082</code></td>
+                <td><span class="small-text"> (for Java MC)</span></td>
+            </tr>
+        </table>
 
         <h3>External Links</h3>
         <ul>
@@ -224,8 +221,7 @@
             <li><a href="https://maza64.xyz/bounce">Bounce game</a></li>
             <li><a href="https://maza64.xyz/flappy">Flappy game</a></li>
         </ul>
-    </div>
-
+    </main>
     <script>
         function select(el) {
             selectText(el.childNodes[0])
