@@ -4,181 +4,49 @@
     <meta charset="UTF-8">
     <title>Mazarca SMP</title>
     <link rel="icon" type="image/x-icon" href="assets/icon.png" />
-    <style>
-        @font-face {
-            font-family: "MC-Regular";
-            src: url("assets/font/MinecraftRegular.otf");
-        }
-
-        @font-face {
-            font-family: "MC-Bold";
-            src: url("assets/font/MinecraftBold.otf");
-        }
-
-        @font-face {
-            font-family: "MC-Italic";
-            src: url("assets/font/MinecraftItalic.otf");
-        }
-
-        @font-face {
-            font-family: "MC-Bold-Italic";
-            src: url("assets/font/MinecraftBoldItalic.otf");
-        }
-
-        @media (min-device-width:320px) and (max-device-width:768px) {
-            html, body {
-                zoom: 115%;
-            }
-            .header {
-                zoom: 150%;
-            }
-            .msg {
-                zoom: 200%;
-            }
-        }
-
-        html, body {
-            zoom: 110%;
-            margin: 0px;
-            font-family: MC-Regular, MC-Bold, MC-Italic, MC-Bold-Italic;
-            font-size: 1rem;
-            background-size: 120%;
-            background-image: url("assets/background.png");
-            background-position: top center;
-            color: #FFFFFF;
-        }
-
-        h1, h2, h3, h4, h5, h6 {
-            margin: 10px 0px 5px;
-            font-family: MC-Bold;
-            font-weight: normal;
-            text-shadow: 0px 0px 10px #FFFFFF60;
-        }
-
-        p {
-            margin: 0px;
-        }
-
-        a {
-            color: orange;
-            text-decoration: none;
-        }
-
-        a:hover {
-            text-shadow: 0px 0px 5px;
-        }
-
-        code {
-            background: #444;
-            padding: 2px 6px;
-            border-radius: 3px;
-            box-shadow: 1px 1px 2px 1px #00000030;
-        }
-
-        code.ip:hover {
-            cursor: pointer;
-            background: #323232;
-        }
-
-        ul {
-            margin: 0px;
-            list-style-type: square;
-        }
-
-        table {
-            margin: 0px 0px 0px 21px;
-        }
-
-        td {
-            padding: 2px;
-            min-width: 310px;
-        }
-
-        .header {
-            background: #25252540;
-            backdrop-filter: blur(10px);
-            box-shadow: 1px 1px 10px 5px #00000040;
-            display: flex;
-            align-items: center;
-        }
-
-        .header > div {
-            margin: 10px;
-        }
-
-        .logo {
-            width: 50px;
-            height: 50px;
-            border-radius: 5px;
-            box-shadow: 0px 0px 10px #FFFFFF40;
-        }
-
-        .title-text {
-            font-size: 35px;
-            font-family: MC-Bold;
-            color: #FFFFFF;
-            text-shadow: none;
-        }
-
-        .discord-social, .reddit-social {
-            border-radius: 5px;
-        }
-
-        .discord-social:hover {
-            box-shadow: 0px 0px 10px 5px #5662F640;
-        }
-
-        .reddit-social:hover {
-            box-shadow: 0px 0px 10px 5px #FF450040;
-        }
-
-        .indented {
-            margin: 0px 0px 0px 25px;
-        }
-
-        .small-text {
-            font-size: 12px;
-            font-family: MC-Italic;
-            color: #828282
-        }
-
-        .screenshots-link {
-            cursor: pointer;
-            color: #FFFFFF;
-        }
-
-        .screenshots-link:hover {
-            text-decoration: underline;
-            text-shadow: none;
-        }
-
-        .wrapper {
-            width: 50vw;
-            min-width: 600px;
-            margin: 60px auto;
-            padding: 20px;
-            background: #25252540;
-            backdrop-filter: blur(10px);
-            box-shadow: 1px 1px 10px 5px #00000040;
-            border-radius: 10px;
-        }
-
-        .msg {
-            background: #25252540;
-            backdrop-filter: blur(10px);
-            box-shadow: 1px 1px 10px 5px #00000040;
-            position: absolute;
-            left: 10px;
-            bottom: 10px;
-            width: 300px;
-            max-width: calc(100vw - 20px);
-            padding: 20px;
-            border-radius: 10px;
-        }
-    </style>
+    <link rel="stylesheet" href="assets/style.css" />
 </head>
 <body>
-    <header class="header">
+    <script>
+        function select(el) {
+            selectText(el.childNodes[0])
+            let res = false;
+            try {
+                res = document.execCommand('copy');
+            } catch (e) {};
+
+            message(res ? 'Copied!' : 'Could not copy!');
+
+        }
+        function selectText(node) {
+            if (document.body.createTextRange) {
+                const range = document.body.createTextRange();
+                range.moveToElementText(node);
+                range.select();
+            } else if (window.getSelection) {
+                const selection = window.getSelection();
+                const range = document.createRange();
+                range.selectNodeContents(node);
+                selection.removeAllRanges();
+                selection.addRange(range);
+            } else {
+                console.warn("Could not select text in node: Unsupported browser.");
+            }
+        }
+        function message(msg) {
+            let els = document.getElementsByClassName('msg');
+            for (let i=0; i<els.length; i++) {
+                els[i].remove();
+            }
+            let el = document.createElement('div');
+            el.className = 'msg';
+            el.innerHTML = msg;
+            el.onclick = () => el.remove();
+            document.body.appendChild(el);
+            setTimeout(() => el.remove(), 1000);
+        }
+    </script>
+    <header>
         <div>
             <a href="https://maza64.xyz">
                 <img class="logo" src="assets/cookie.png" />
@@ -186,6 +54,11 @@
         </div>
         <div>
             <a href="https://maza64.xyz"><span class="title-text">Mazarca SMP</span></a>
+        </div>
+        <div class="navigation">
+            <a class="page-link-active">Home</a>
+            <a class="page-link" href="screenshots.html">Gallery</a>
+            <a class="page-link" title="not done yet!">News</a>
         </div>
         <div style="flex-grow: 1;"></div>
         <div>
@@ -232,6 +105,7 @@
             <li>Discord: <a href="https://discord.com/invite/R6nMUHe9DK" target="_blank">Mazarca SMP</a></li>
         </ul>
 
+        <!--
         <h3>Screenshots</h3>
         <div class="indented" style="display: flex; flex-direction: row; gap: 5px">
             <a href="screenshots.html" class="screenshots-link">View screenshots</a>
@@ -239,6 +113,7 @@
                 <path d="M14.5 12H16v3.254A2.75 2.75 0 0 1 13.253 18H4.747A2.749 2.749 0 0 1 2 15.254V6.746A2.749 2.749 0 0 1 4.747 4H8v1.5H4.747A1.247 1.247 0 0 0 3.5 6.746v8.508A1.247 1.247 0 0 0 4.747 16.5h8.506a1.247 1.247 0 0 0 1.247-1.246V12Zm2.75-10h-4.992a.772.772 0 0 0-.75.75c0 .398.352.75.75.75h3.182l-6.97 6.97a.757.757 0 0 0-.019 1.079.757.757 0 0 0 1.079-.019l6.97-6.97v3.182c0 .398.352.75.75.75s.75-.352.75-.75V2.75a.75.75 0 0 0-.75-.75Z"></path>
             </svg>
         </div>
+        -->
 
         <h3>Random games</h3>
         <ul>
@@ -246,44 +121,5 @@
             <li><a href="https://maza64.xyz/flappy">Flappy game</a></li>
         </ul>
     </main>
-    <script>
-        function select(el) {
-            selectText(el.childNodes[0])
-            let res = false;
-            try {
-                res = document.execCommand('copy');
-            } catch (e) {};
-
-            message(res ? 'Copied!' : 'Could not copy!');
-
-        }
-        function selectText(node) {
-            if (document.body.createTextRange) {
-                const range = document.body.createTextRange();
-                range.moveToElementText(node);
-                range.select();
-            } else if (window.getSelection) {
-                const selection = window.getSelection();
-                const range = document.createRange();
-                range.selectNodeContents(node);
-                selection.removeAllRanges();
-                selection.addRange(range);
-            } else {
-                console.warn("Could not select text in node: Unsupported browser.");
-            }
-        }
-        function message(msg) {
-            let els = document.getElementsByClassName('msg');
-            for (let i=0; i<els.length; i++) {
-                els[i].remove();
-            }
-            let el = document.createElement('div');
-            el.className = 'msg';
-            el.innerHTML = msg;
-            el.onclick = () => el.remove();
-            document.body.appendChild(el);
-            setTimeout(() => el.remove(), 1000);
-        }
-    </script>
 </body>
 </html>
