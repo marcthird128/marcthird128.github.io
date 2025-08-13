@@ -51,6 +51,16 @@ p {
     margin: 0px;
 }
 
+i {
+    font-family: MC-Italic;
+    font-weight: normal;
+}
+
+b, strong, em {
+    font-family: MC-Bold;
+    font-weight: normal;
+}
+
 a {
     color: orange;
     text-decoration: none;
@@ -239,4 +249,8 @@ div.images > img {
 
 .page-link-active:hover {
     text-shadow: none;
+}
+
+.announcement > ul {
+    padding-left: 20px;
 }
