@@ -71,7 +71,7 @@ a:hover {
 }
 
 code {
-    background: #444444;
+    background: #444;
     padding: 2px 6px;
     border-radius: 3px;
     box-shadow: 1px 1px 2px 1px #00000030;
@@ -253,4 +253,10 @@ div.images > img {
 
 .announcement > ul {
     padding-left: 20px;
+}
+
+hr {
+    size: 2px;
+    width: 100%;
+    color: white;
 }
