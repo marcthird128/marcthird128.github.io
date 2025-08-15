@@ -251,6 +251,10 @@ div.images > img {
     text-shadow: none;
 }
 
+.announcement > i {
+    font-size: 0.75rem;
+}
+
 .announcement > ul {
     padding-left: 20px;
 }
