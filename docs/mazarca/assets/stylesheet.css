@@ -34,6 +34,7 @@ html, body {
     zoom: 110%;
     margin: 0px;
     font-family: MC-Regular, MC-Bold, MC-Italic, MC-Bold-Italic;
+    font-size: 1rem;
     background-size: 120%;
     background-image: url("background.png");
     background-position: top center;
