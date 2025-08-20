@@ -1,3 +1,4 @@
+
 @font-face {
     font-family: "MC-Regular";
     src: url("font/MinecraftRegular.otf");
@@ -22,7 +23,10 @@
     html, body {
         zoom: 115%;
     }
-    .header, table {
+    table {
+        zoom: 125%;
+    }
+    .header {
         zoom: 150%;
     }
     .msg {
