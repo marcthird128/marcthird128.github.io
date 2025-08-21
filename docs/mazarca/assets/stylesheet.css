@@ -1,3 +1,4 @@
+
 @font-face {
     font-family: "MC-Regular";
     src: url("font/MinecraftRegular.otf");
@@ -74,7 +75,15 @@ a:hover {
     text-shadow: 0px 0px 5px;
 }
 
+blockquote {
+    margin: 10px;
+    padding: 10px;
+    background-color: #3E3E3E;
+    border-radius: 10px;
+}
+
 code {
+    font-size: 0.85rem;
     background: #444;
     padding: 2px 6px;
     border-radius: 3px;
@@ -89,6 +98,11 @@ code.ip:hover {
 ul {
     margin: 0px;
     list-style-type: square;
+}
+
+ol {
+    margin: 0px;
+    padding-left: 44px;
 }
 
 table {
