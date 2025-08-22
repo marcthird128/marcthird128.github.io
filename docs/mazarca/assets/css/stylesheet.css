@@ -1,22 +1,21 @@
-
 @font-face {
     font-family: "MC-Regular";
-    src: url("font/MinecraftRegular.otf");
+    src: url("../font/MinecraftRegular.otf");
 }
 
 @font-face {
     font-family: "MC-Bold";
-    src: url("font/MinecraftBold.otf");
+    src: url("../font/MinecraftBold.otf");
 }
 
 @font-face {
     font-family: "MC-Italic";
-    src: url("font/MinecraftItalic.otf");
+    src: url("../font/MinecraftItalic.otf");
 }
 
 @font-face {
     font-family: "MC-Bold-Italic";
-    src: url("font/MinecraftBoldItalic.otf");
+    src: url("../font/MinecraftBoldItalic.otf");
 }
 
 @media (min-device-width:320px) and (max-device-width:768px) {
@@ -40,7 +39,7 @@ html, body {
     font-family: MC-Regular, MC-Bold, MC-Italic, MC-Bold-Italic;
     font-size: 1rem;
     background-size: 120%;
-    background-image: url("background.png");
+    background-image: url("../background.png");
     background-position: top center;
     color: #FFFFFF;
 }
@@ -90,7 +89,7 @@ code {
     box-shadow: 1px 1px 2px 1px #00000030;
 }
 
-code.ip:hover {
+code:hover {
     cursor: pointer;
     background: #323232;
 }
@@ -228,7 +227,7 @@ div.images > img {
     align-items: center;
 }
 
-.navigation {
+nav {
     margin: auto 20px;
     padding: auto;
     font-size: 1rem;
@@ -273,7 +272,12 @@ div.images > img {
     font-size: 0.75rem;
 }
 
+.announcement > p {
+    margin-left: 10px;
+}
+
 .announcement > ul {
+    margin-left: 10px;
     padding-left: 20px;
 }
 
