@@ -5,11 +5,10 @@ function select(el) {
         res = document.execCommand('copy');
     } catch (e) {};
 
-    // message(res ? 'Copied!' : 'Could not copy!');
+    message(res ? 'Copied!' : 'Could not copy!');
     // .msg element doesn't display properly at the bottom
-    // of the page when the page is scrolled up,
-    // temporary changed to use alert() instead
-    alert(res ? 'Copied!' : 'Could not copy!');
+    // of the page when the page is scrolled
+    // alert(res ? 'Copied!' : 'Could not copy!');
 }
 
 function selectText(node) {
