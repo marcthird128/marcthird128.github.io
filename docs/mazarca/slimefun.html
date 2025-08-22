@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <title>Mazarca SMP</title>
     <link rel="icon" type="image/x-icon" href="assets/icon.png" />
-    <link rel="stylesheet" href="assets/stylesheet.css" />
+    <link rel="stylesheet" href="assets/css/stylesheet.css" />
 </head>
 <body>
+    <script src="assets/js/select_and_copy.js"></script>
     <header>
         <div>
             <a href="https://maza64.xyz">
@@ -16,12 +17,12 @@
         <div>
             <a href="https://maza64.xyz"><span class="title-text">Mazarca SMP</span></a>
         </div>
-        <div class="navigation">
-            <a class="page-link" href="index.html">Home</a>
-            <a class="page-link" href="screenshots.html">Gallery</a>
-            <a class="page-link" href="announcements.html">News</a>
+        <nav>
+            <a class="page-link" href="home.html">Home</a>
+            <a class="page-link" href="gallery.html">Gallery</a>
+            <a class="page-link" href="news.html">News</a>
             <a class="page-link-active">SF Help</a>
-        </div>
+        </nav>
         <div style="flex-grow: 1;"></div>
         <div>
             <a href="https://discord.com/invite/R6nMUHe9DK" target="_blank">
@@ -36,14 +37,24 @@
         <div></div>
     </header>
     <main class="wrapper">
+        <!--
+        Slimefun Guide HTML Snippet
+        This guide explains basic Slimefun 4.1.15
+        concepts. It is meant to be embedded
+        into webpages. It only contains core
+        HTML structure.
+
+        Version 1.0
+        -->
+
         <center>
             <h2 style="margin-top: 0px">Slimefun Guide</h2>
             <p>
                 This is a quick guide that explains all you need to know to use Slimefun successfully.
             </p>
             <blockquote>
-                <b>Note</b>: This guide is written for Slimefun 4.1.15 which is for Minecraft 1.12.2. <br>
-                Newer versions of Slimefun have new concepts not explained here.
+                <b>Note</b>: This guide is written for plugin version 4.1.15 which is for Minecraft 1.12.2. <br>
+                Newer versions of Slimefun may have new concepts that are not explained here.
             </blockquote>
         </center>
 
@@ -67,8 +78,8 @@
                 The Slimefun Guide is how you use Slimefun. It's a book that
                 when right-clicked opens a GUI with sections for all the
                 items in Slimefun. You should spawn with a guide in your
-                inventory but if you don't, type <code>/sf guide</code> in the chat
-                to get one. You can also type <code>/sf open_guide</code> to open the
+                inventory but if you don't, type <code onclick="select(this)">/sf guide</code> in the chat
+                to get one. You can also type <code onclick="select(this)">/sf open_guide</code> to open the
                 guide without having a book.
             </p>
 
