@@ -5,9 +5,13 @@ function select(el) {
         res = document.execCommand('copy');
     } catch (e) {};
 
-    message(res ? 'Copied!' : 'Could not copy!');
-
+    // message(res ? 'Copied!' : 'Could not copy!');
+    // .msg element doesn't display properly at the bottom
+    // of the page when the page is scrolled up,
+    // temporary changed to use alert() instead
+    alert(res ? 'Copied!' : 'Could not copy!');
 }
+
 function selectText(node) {
     if (document.body.createTextRange) {
         const range = document.body.createTextRange();
@@ -23,6 +27,7 @@ function selectText(node) {
         console.warn("Could not select text in node: Unsupported browser.");
     }
 }
+
 function message(msg) {
     let els = document.getElementsByClassName('msg');
     for (let i=0; i<els.length; i++) {
