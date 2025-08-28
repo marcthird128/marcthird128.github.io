@@ -3,18 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <title>Mazarca SMP</title>
-    <link rel="icon" type="image/x-icon" href="assets/icon.png" />
-    <link rel="stylesheet" href="assets/css/stylesheet.css" />
+    <link rel="icon" type="image/x-icon" href="source/icon.png" />
+    <link rel="stylesheet" href="source/css/stylesheet.css" />
     <style>
         code{font-size:1rem;}
     </style>
 </head>
 <body>
-    <script src="assets/js/select_and_copy.js"></script>
+    <script src="source/js/select_and_copy.js"></script>
+    <script>
+        fetch("source/data/ips.json").then(obj => obj.text()).then(ips => display(JSON.parse(ips)));
+
+        function display(ips) {
+            const ipTable = document.createElement("table");
+            for (let i = 0; i < ips.length; i++) {
+                const ipContainer = document.createElement("tr");
+                const addressContainer = document.createElement("td");
+                const descContainer = document.createElement("td");
+                const ipAddress = document.createElement("code");
+                const ipDesc = document.createElement("small");
+                ipAddress.setAttribute("onclick", "select(this)");
+                ipAddress.innerText = Object(ips[i]).address;
+                ipDesc.innerText = Object(ips[i]).desc;
+                addressContainer.appendChild(ipAddress);
+                descContainer.appendChild(ipDesc);
+                ipContainer.appendChild(addressContainer);
+                ipContainer.appendChild(descContainer);
+                ipTable.appendChild(ipContainer);
+            }
+            document.getElementById("ips-after").after(ipTable);
+        }
+    </script>
     <header>
         <div>
             <a href="https://maza64.xyz">
-                <img class="logo" src="assets/cookie.png" />
+                <img class="logo" src="source/cookie.png" />
             </a>
         </div>
         <div>
@@ -29,41 +52,25 @@
         <div style="flex-grow: 1;"></div>
         <div>
             <a href="https://discord.com/invite/R6nMUHe9DK" target="_blank">
-                <img class="discord-social" src="assets/discord.jpg" width="35px" />
+                <img class="discord-social" src="source/discord.jpg" width="35px" />
             </a>
         </div>
         <div>
             <a href="https://reddit.com/r/MazarcaSMP" target="_blank">
-                <img class="reddit-social" src="assets/reddit.jpg" height="35px" />
+                <img class="reddit-social" src="source/reddit.jpg" height="35px" />
             </a>
         </div>
         <div></div>
     </header>
     <main class="wrapper">
-        <h3 style="margin-top: 0px">About</h3>
+        <h3>About</h3>
             <p class="indented">
                 Mazarca is a cracked Minecraft server that supports Eaglercraft <a href="https://client.eaglercraft.dev/1.8/" target="_blank">1.8</a> and <a href="https://client.eaglercraft.dev/1.12/" target="_blank">1.12</a>. <br />We have a semi-vanilla survival with cool new items using <a href="https://github.com/Slimefun/Slimefun4/wiki" target="_blank">Slimefun</a>!
             </p>
+
         <h3 style="margin-bottom: 0px">IP Address</h3>
-        <span class="small-text">(click to copy)</span>
-        <table>
-            <tr>
-                <td><code class="ip" onclick="select(this)">wss://eagler.maza64.xyz</code></td>
-                <td><span class="small-text">recommended</span></td>
-            </tr>
-            <tr>
-                <td><code class="ip" onclick="select(this)">ws://30.ip.gl.ply.gg:50343</code></td>
-                <td><span class="small-text">if first one doesn't work</span></td>
-            </tr>
-            <tr>
-                <td><code class="ip" onclick="select(this)">30.ip.gl.ply.gg:50636</code></td>
-                <td><span class="small-text">for Java MC #1</span></td>
-            </tr>
-            <tr>
-                <td><code class="ip" onclick="select(this)">147.185.221.30:50636</code></td>
-                <td><span class="small-text">for Java MC #2</span></td>
-            </tr>
-        </table>
+        <small id="ips-after">click to copy</small>
+        <!-- edit ips in source/data/ips.json -->
 
         <h3>External Links</h3>
         <ul>

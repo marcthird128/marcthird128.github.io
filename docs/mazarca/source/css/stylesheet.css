@@ -18,21 +18,6 @@
     src: url("../font/MinecraftBoldItalic.otf");
 }
 
-@media (min-device-width:320px) and (max-device-width:768px) {
-    html, body {
-        zoom: 115%;
-    }
-    table {
-        zoom: 125%;
-    }
-    .header {
-        zoom: 150%;
-    }
-    .msg {
-        zoom: 200%;
-    }
-}
-
 html, body {
     zoom: 110%;
     margin: 0px;
@@ -49,6 +34,15 @@ h1, h2, h3, h4, h5, h6 {
     font-family: MC-Bold;
     font-weight: normal;
     text-shadow: 0px 0px 10px #FFFFFF60;
+}
+
+h1:first-of-type,
+h2:first-of-type,
+h3:first-of-type,
+h4:first-of-type,
+h5:first-of-type,
+h6:first-of-type {
+    margin-top: 0px;
 }
 
 p {
@@ -119,6 +113,12 @@ label {
     color: #828282
 }
 
+small {
+    font-size: 12px;
+    font-family: MC-Italic;
+    color: #828282
+}
+
 header {
     background: #25252540;
     backdrop-filter: blur(10px);
@@ -159,12 +159,6 @@ header > div {
 
 .indented {
     margin: 0px 0px 0px 25px;
-}
-
-.small-text {
-    font-size: 12px;
-    font-family: MC-Italic;
-    color: #828282
 }
 
 .screenshots-link {
@@ -281,8 +275,27 @@ nav {
     padding-left: 20px;
 }
 
+.centered {
+    text-align: center;
+}
+
 hr {
     size: 2px;
     width: 100%;
     color: white;
+}
+
+@media (min-device-width:320px) and (max-device-width:768px) {
+    html, body {
+        zoom: 115%;
+    }
+    table {
+        zoom: 125%;
+    }
+    .header {
+        zoom: 150%;
+    }
+    .msg {
+        zoom: 200%;
+    }
 }

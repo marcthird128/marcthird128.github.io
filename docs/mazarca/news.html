@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>Mazarca SMP</title>
-    <link rel="icon" type="image/x-icon" href="assets/icon.png" />
-    <link rel="stylesheet" href="assets/css/stylesheet.css" />
+    <link rel="icon" type="image/x-icon" href="source/icon.png" />
+    <link rel="stylesheet" href="source/css/stylesheet.css" />
 </head>
 <body>
-    <script src="assets/js/select_and_copy.js"></script>
+    <script src="source/js/select_and_copy.js"></script>
     <header>
         <div>
             <a href="https://maza64.xyz">
-                <img class="logo" src="assets/cookie.png" />
+                <img class="logo" src="source/cookie.png" />
             </a>
         </div>
         <div>
@@ -26,19 +26,19 @@
         <div style="flex-grow: 1;"></div>
         <div>
             <a href="https://discord.com/invite/R6nMUHe9DK" target="_blank">
-                <img class="discord-social" src="assets/discord.jpg" width="35px" />
+                <img class="discord-social" src="source/discord.jpg" width="35px" />
             </a>
         </div>
         <div>
             <a href="https://reddit.com/r/MazarcaSMP" target="_blank">
-                <img class="reddit-social" src="assets/reddit.jpg" height="35px" />
+                <img class="reddit-social" src="source/reddit.jpg" height="35px" />
             </a>
         </div>
         <div></div>
     </header>
     <main class="wrapper">
-        <center><h3 style="margin-top: 0px">Announcements</h3></center>
-        <div style="display: flex; flex-direction: column-reverse">
+        <h3 class="centered">Announcements</h3>
+        <div id="news-container" style="display: flex; flex-direction: column-reverse">
             <div class="announcement">
                 <i>July 13, 2025</i>
                 <p>Mazarca is back up! Join now: <code class="ip" onclick="select(this)">ws://30.ip.gl.ply.gg:50343</code>.</p>
@@ -83,6 +83,7 @@
                     Also, now there's a brand-new superflat server with RandomDrops plugin - test your luck!
                 </p>
             </div>
+            
             <!--Template
             <div class="announcement">
                 <i>Date</i>
