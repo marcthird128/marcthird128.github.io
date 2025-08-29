@@ -12,27 +12,41 @@
 <body>
     <script src="source/js/select_and_copy.js"></script>
     <script>
-        fetch("source/data/ips.json").then(obj => obj.text()).then(ips => display(JSON.parse(ips)));
+        fetch("source/data/ips.json").then(obj => obj.text()).then(ips => display(ips));
 
         function display(ips) {
-            const ipTable = document.createElement("table");
-            for (let i = 0; i < ips.length; i++) {
-                const ipContainer = document.createElement("tr");
-                const addressContainer = document.createElement("td");
-                const descContainer = document.createElement("td");
-                const ipAddress = document.createElement("code");
-                const ipDesc = document.createElement("small");
-                ipAddress.setAttribute("onclick", "select(this)");
-                ipAddress.innerText = Object(ips[i]).address;
-                ipDesc.innerText = Object(ips[i]).desc;
-                addressContainer.appendChild(ipAddress);
-                descContainer.appendChild(ipDesc);
-                ipContainer.appendChild(addressContainer);
-                ipContainer.appendChild(descContainer);
-                ipTable.appendChild(ipContainer);
-            }
-            document.getElementById("ips-after").after(ipTable);
-        }
+            const ipHeading = document.getElementById("ip-heading");
+            try {
+                ips = JSON.parse(ips);
+                const ipTable = document.createElement("table");
+                for (let i = 0; i < ips.length; i++) {
+                    const ipContainer = document.createElement("tr");
+                    const addressContainer = document.createElement("td");
+                    const descContainer = document.createElement("td");
+                    const ipAddress = document.createElement("code");
+                    const ipDesc = document.createElement("small");
+                    ipAddress.setAttribute("onclick", "select(this)");
+                    ipAddress.innerText = Object(ips[i]).address;
+                    ipDesc.innerText = Object(ips[i]).desc;
+                    addressContainer.appendChild(ipAddress);
+                    descContainer.appendChild(ipDesc);
+                    ipContainer.appendChild(addressContainer);
+                    ipContainer.appendChild(descContainer);
+                    ipTable.appendChild(ipContainer);
+                }
+                ipHeading.style.marginBottom = "0px";
+                let note = document.createElement("small");
+                note.innerText = "click to copy";
+                ipHeading.after(note);
+                note.after(ipTable);
+            } catch (e) {
+                console.warn(`Cannot display IP list! ${e}`);
+                let sorry = document.createElement("p");
+                sorry.className = "indented";
+                sorry.innerText = "Sorry, IP list is unavailable :(";
+                ipHeading.after(sorry);
+            };
+        };
     </script>
     <header>
         <div>
@@ -68,8 +82,7 @@
                 Mazarca is a cracked Minecraft server that supports Eaglercraft <a href="https://client.eaglercraft.dev/1.8/" target="_blank">1.8</a> and <a href="https://client.eaglercraft.dev/1.12/" target="_blank">1.12</a>. <br />We have a semi-vanilla survival with cool new items using <a href="https://github.com/Slimefun/Slimefun4/wiki" target="_blank">Slimefun</a>!
             </p>
 
-        <h3 style="margin-bottom: 0px">IP Address</h3>
-        <small id="ips-after">click to copy</small>
+        <h3 id="ip-heading">IP Address</h3>
         <!-- edit ips in source/data/ips.json -->
 
         <h3>External Links</h3>
