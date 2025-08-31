@@ -11,42 +11,22 @@
 </head>
 <body>
     <script src="source/js/select_and_copy.js"></script>
+    <script src="source/js/fetch_ip_list.js"></script>
     <script>
-        fetch("source/data/ips.json").then(obj => obj.text()).then(ips => display(ips));
-
-        function display(ips) {
-            const ipHeading = document.getElementById("ip-heading");
-            try {
-                ips = JSON.parse(ips);
-                const ipTable = document.createElement("table");
-                for (let i = 0; i < ips.length; i++) {
-                    const ipContainer = document.createElement("tr");
-                    const addressContainer = document.createElement("td");
-                    const descContainer = document.createElement("td");
-                    const ipAddress = document.createElement("code");
-                    const ipDesc = document.createElement("small");
-                    ipAddress.setAttribute("onclick", "select(this)");
-                    ipAddress.innerText = Object(ips[i]).address;
-                    ipDesc.innerText = Object(ips[i]).desc;
-                    addressContainer.appendChild(ipAddress);
-                    descContainer.appendChild(ipDesc);
-                    ipContainer.appendChild(addressContainer);
-                    ipContainer.appendChild(descContainer);
-                    ipTable.appendChild(ipContainer);
-                }
-                ipHeading.style.marginBottom = "0px";
-                let note = document.createElement("small");
-                note.innerText = "click to copy";
-                ipHeading.after(note);
-                note.after(ipTable);
-            } catch (e) {
-                console.warn(`Cannot display IP list! ${e}`);
-                let sorry = document.createElement("p");
-                sorry.className = "indented";
-                sorry.innerText = "Sorry, IP list is unavailable :(";
-                ipHeading.after(sorry);
-            };
-        };
+        // testing server status display
+        document.addEventListener("DOMContentLoaded", () => {
+            const status = document.getElementById("status");
+            let isOnline = true;
+            if (isOnline) {
+                status.style.color = "#00AA00";
+                status.style.textShadow = "0px 0px 10px #00AA0060";
+                status.innerText = "Online";
+            } else {
+                status.style.color = "#AA0000";
+                status.style.textShadow = "0px 0px 10px #AA000060";
+                status.innerText = "Offline";
+            }
+        });
     </script>
     <header>
         <div>
@@ -85,11 +65,11 @@
         <h3 id="ip-heading">IP Address</h3>
         <!-- edit ips in source/data/ips.json -->
 
-        <h3>External Links</h3>
-        <ul>
-            <li>Subreddit: <a href="https://www.reddit.com/r/MazarcaSMP" target="_blank">r/MazarcaSMP</a></li>
-            <li>Discord: <a href="https://discord.com/invite/R6nMUHe9DK" target="_blank">Mazarca SMP</a></li>
-        </ul>
+        <div style="display: flex; gap: 5px; margin: 10px 0px 5px">
+            <h3 class="no-margin">Server Status</h3>
+            <h3 class="no-margin">-</h3>
+            <h3 class="no-margin" id="status"></h3>
+        </div>
 
         <h3>Random Games</h3>
         <ul>

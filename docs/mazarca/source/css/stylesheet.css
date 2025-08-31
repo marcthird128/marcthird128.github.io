@@ -29,6 +29,21 @@ html, body {
     color: #FFFFFF;
 }
 
+@media (min-device-width:320px) and (max-device-width:768px) {
+    html, body {
+        zoom: 115% !important;
+    }
+    table {
+        zoom: 125% !important;
+    }
+    .header {
+        zoom: 150% !important;
+    }
+    .msg {
+        zoom: 200% !important;
+    }
+}
+
 h1, h2, h3, h4, h5, h6 {
     margin: 10px 0px 5px;
     font-family: MC-Bold;
@@ -36,12 +51,12 @@ h1, h2, h3, h4, h5, h6 {
     text-shadow: 0px 0px 10px #FFFFFF60;
 }
 
-h1:first-of-type,
-h2:first-of-type,
-h3:first-of-type,
-h4:first-of-type,
-h5:first-of-type,
-h6:first-of-type {
+main.h1:first-of-type,
+main.h2:first-of-type,
+main.h3:first-of-type,
+main.h4:first-of-type,
+main.h5:first-of-type,
+main.h6:first-of-type {
     margin-top: 0px;
 }
 
@@ -129,6 +144,74 @@ header {
 
 header > div {
     margin: 10px;
+}
+
+input, textarea {
+    margin: 0px;
+    padding: 5px;
+    width: calc(100% - 10px);
+    resize: none;
+    font-family: MC-Regular;
+    font-size: 0.95rem;
+    color: #DADADA;
+    background-color: #3E3E3E;
+    outline: none;
+    border: none;
+    border-radius: 10px;
+}
+
+input:hover, textarea:hover {
+    background-color: #3F3F3F;
+    outline: none;
+}
+
+input:focus, textarea:focus {
+    background-color: #4F4F4F;
+    outline: none;
+}
+
+textarea {
+    min-height: 5rem;
+    resize: vertical;
+}
+
+form {
+    margin: 5px 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+form > div {
+    width: 100%;
+}
+
+button {
+    margin: 0px;
+    padding: 7px 8px 5px 8px;
+    border: none;
+    border-radius: 10px;
+    background-color: #3E3E3E;
+    font-family: MC-Regular;
+    font-size: 0.95rem;
+    color: #FFFFFF;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #383838;
+}
+
+button:disabled {
+    cursor: default;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: right;
+    gap: 10px;
 }
 
 .logo {
@@ -279,23 +362,12 @@ nav {
     text-align: center;
 }
 
+.no-margin {
+    margin: 0px;
+}
+
 hr {
     size: 2px;
     width: 100%;
     color: white;
-}
-
-@media (min-device-width:320px) and (max-device-width:768px) {
-    html, body {
-        zoom: 115%;
-    }
-    table {
-        zoom: 125%;
-    }
-    .header {
-        zoom: 150%;
-    }
-    .msg {
-        zoom: 200%;
-    }
 }
