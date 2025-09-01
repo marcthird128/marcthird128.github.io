@@ -6,28 +6,12 @@
     <link rel="icon" type="image/x-icon" href="source/icon.png" />
     <link rel="stylesheet" href="source/css/stylesheet.css" />
     <style>
-        code{font-size:1rem;}
+        code { font-size:1rem }
     </style>
 </head>
 <body>
     <script src="source/js/select_and_copy.js"></script>
     <script src="source/js/fetch_ip_list.js"></script>
-    <script>
-        // testing server status display
-        document.addEventListener("DOMContentLoaded", () => {
-            const status = document.getElementById("status");
-            let isOnline = true;
-            if (isOnline) {
-                status.style.color = "#00AA00";
-                status.style.textShadow = "0px 0px 10px #00AA0060";
-                status.innerText = "Online";
-            } else {
-                status.style.color = "#AA0000";
-                status.style.textShadow = "0px 0px 10px #AA000060";
-                status.innerText = "Offline";
-            }
-        });
-    </script>
     <header>
         <div>
             <a href="https://maza64.xyz">
@@ -42,6 +26,7 @@
             <a class="page-link" href="gallery.html">Gallery</a>
             <a class="page-link" href="news.html">News</a>
             <a class="page-link" href="slimefun.html">SF Help</a>
+            <a class="page-link" href="status.html">Status</a>
         </nav>
         <div style="flex-grow: 1;"></div>
         <div>
@@ -64,12 +49,6 @@
 
         <h3 id="ip-heading">IP Address</h3>
         <!-- edit ips in source/data/ips.json -->
-
-        <div style="display: flex; gap: 5px; margin: 10px 0px 5px">
-            <h3 class="no-margin">Server Status</h3>
-            <h3 class="no-margin">-</h3>
-            <h3 class="no-margin" id="status"></h3>
-        </div>
 
         <h3>Random Games</h3>
         <ul>

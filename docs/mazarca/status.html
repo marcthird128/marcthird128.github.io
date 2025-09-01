@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mazarca SMP</title>
+    <link rel="icon" type="image/x-icon" href="source/icon.png" />
+    <link rel="stylesheet" href="source/css/stylesheet.css" />
+</head>
+<body>
+    <script>
+        // testing server status display
+        document.addEventListener("DOMContentLoaded", () => {
+            // server status
+            const MazarcaStatus = document.getElementById("mazarca-status");
+            let isMazarcaOnline = true;
+            if (isMazarcaOnline) {
+                MazarcaStatus.style.color = "#00AA00";
+                MazarcaStatus.style.textShadow = "0px 0px 10px #00AA0060";
+                MazarcaStatus.style.textShadow = "none";
+                MazarcaStatus.innerText = "Online";
+            } else {
+                MazarcaStatus.style.color = "#AA0000";
+                MazarcaStatus.style.textShadow = "0px 0px 10px #AA000060";
+                MazarcaStatus.style.textShadow = "none";
+                MazarcaStatus.innerText = "Offline";
+            };
+
+            // eaglercraft.com status
+            const EaglerStatus = document.getElementById("eagler-status");
+            let isEaglerOnline = true;
+            if (isEaglerOnline) {
+                EaglerStatus.style.color = "#00AA00";
+                EaglerStatus.style.textShadow = "0px 0px 10px #00AA0060";
+                EaglerStatus.style.textShadow = "none";
+                EaglerStatus.innerText = "Online";
+            } else {
+                EaglerStatus.style.color = "#AA0000";
+                EaglerStatus.style.textShadow = "0px 0px 10px #AA000060";
+                EaglerStatus.style.textShadow = "none";
+                EaglerStatus.innerText = "Offline";
+            };
+        });
+    </script>
+    <header>
+        <div>
+            <a href="https://maza64.xyz">
+                <img class="logo" src="source/cookie.png" />
+            </a>
+        </div>
+        <div>
+            <a href="https://maza64.xyz"><span class="title-text">Mazarca SMP</span></a>
+        </div>
+        <nav>
+            <a class="page-link" href="index.html">Home</a>
+            <a class="page-link" href="gallery.html">Gallery</a>
+            <a class="page-link" href="news.html">News</a>
+            <a class="page-link" href="slimefun.html">SF Help</a>
+            <a class="page-link-active" href="status.html">Status</a>
+        </nav>
+        <div style="flex-grow: 1;"></div>
+        <div>
+            <a href="https://discord.com/invite/R6nMUHe9DK" target="_blank">
+                <img class="discord-social" src="source/discord.jpg" width="35px" />
+            </a>
+        </div>
+        <div>
+            <a href="https://reddit.com/r/MazarcaSMP" target="_blank">
+                <img class="reddit-social" src="source/reddit.jpg" height="35px" />
+            </a>
+        </div>
+        <div></div>
+    </header>
+    <main class="wrapper">
+        <div class="d-flex items-center gap-10px" style="padding: 10px 0px">
+            <p style="font-size: 2rem; white-space: nowrap" id="mazarca-status-heading">Mazarca Server</p>
+            <hr size="2px" color="gray" class="flex-grow-1">
+            <h1 class="no-margin text-right" id="mazarca-status"></h1>
+        </div>
+        <div class="d-flex items-center gap-10px" style="padding: 10px 0px">
+            <p style="font-size: 2rem" id="eagler-status-heading">Eaglercraft.com</p>
+            <hr size="2px" color="gray" class="flex-grow-1">
+            <h1 class="no-margin text-right" id="eagler-status"></h1>
+        </div>
+    </main>
+</body>
+</html>

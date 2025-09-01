@@ -77,6 +77,7 @@ b, strong, em {
 a {
     color: orange;
     text-decoration: none;
+    text-shadow: none
 }
 
 a:hover {
@@ -144,6 +145,12 @@ header {
 
 header > div {
     margin: 10px;
+}
+
+hr {
+    size: 2px;
+    width: 100%;
+    color: white;
 }
 
 input, textarea {
@@ -358,16 +365,16 @@ nav {
     padding-left: 20px;
 }
 
-.centered {
-    text-align: center;
-}
-
-.no-margin {
-    margin: 0px;
-}
-
-hr {
-    size: 2px;
-    width: 100%;
-    color: white;
-}
+.no-margin { margin: 0px }
+.no-padding { padding: 0px }
+.w-100 { width: 100% }
+.w-50 { width: 50% }
+.d-flex { display: flex }
+.text-left { text-align: left }
+.text-center { text-align: center; }
+.text-right { text-align: right }
+.items-left { align-items: left }
+.items-center { align-items: center }
+.items-right { align-items: right }
+.gap-10px { gap: 10px }
+.flex-grow-1 { flex-grow: 1 }
