@@ -15,7 +15,9 @@
         });
 
         function getPing(address, output, timer) {
-            output.innerText = "Please wait...";
+            output.style.color = "gray";
+            output.style.textShadow = "none";
+            output.innerText = "...";
             setInterval(async () => {
                 let online = await async function() {
                     let cache_preventer = btoa(Date.now() + "_" + Math.random());
@@ -26,7 +28,9 @@
                 };
                 var newDate = new Date();
                 Date.prototype.timeNow = function() {
-                    return ((this.getHours() < 10)?"0":"") + this.getHours() +":"+ ((this.getMinutes() < 10)?"0":"") + this.getMinutes() +":"+ ((this.getSeconds() < 10)?"0":"") + this.getSeconds();
+                    return ((this.getHours() < 10)?"0":"") + this.getHours() + ":"
+                           + ((this.getMinutes() < 10)?"0":"") + this.getMinutes() + ":"
+                           + ((this.getSeconds() < 10)?"0":"") + this.getSeconds();
                 };
                 currentTime = newDate.timeNow()
                 if (online) {
@@ -84,7 +88,7 @@
             <hr size="2px" color="gray" class="flex-grow-1">
             <h1 class="no-margin text-right" id="eagler-status"></h1>
         </div>
-        <p class="text-center" id="timer"></p>
+        <p class="text-center" id="timer">Fetching data... Please wait</p>
     </main>
 </body>
 </html>
