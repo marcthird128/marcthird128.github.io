@@ -298,38 +298,32 @@ div.images > img {
     box-shadow: 1px 1px 10px 5px #00000040;
     border-radius: 10px;
     font-size: 1rem;
-    width: 150px;
+    width: 175px;
     overflow: hidden;
 }
 
 .nav > a {
-    display: block;
+    display: flex;
+    align-items: center;
+    gap: 15px;
     margin: 0px;
-    width: 100%;
-    line-height: 40px;
-    text-indent: 10px;
+    padding: 0px 0px 0px 15px;
+    height: 40px;
     cursor: pointer;
+    color: #ffffff;
 }
 
-nav:hover .nav {  display: block }
-
-nav:hover { cursor: pointer }
-
-.page-link { color: #FFFFFF }
-
-.page-link:hover {
+.nav > a:hover {
     text-shadow: none;
     background: #2e2e2e;
 }
 
-.page-link-active { color: white; background: #2e2e2e }
-
-.page-link-active:hover { text-shadow: none }
+.nav > a.active { background: #2e2e2e }
+nav:hover .nav {  display: block }
+nav:hover { cursor: pointer }
 
 .announcement > i { font-size: 0.75rem }
-
 .announcement > p { margin-left: 10px }
-
 .announcement > ul {
     margin-left: 10px;
     padding-left: 20px;
