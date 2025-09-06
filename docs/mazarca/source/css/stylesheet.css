@@ -60,9 +60,7 @@ main > h6:first-of-type {
     margin-top: 0px;
 }
 
-p {
-    margin: 0px;
-}
+p { margin: 0px }
 
 i {
     font-family: MC-Italic;
@@ -80,9 +78,7 @@ a {
     text-shadow: none
 }
 
-a:hover {
-    text-shadow: 0px 0px 5px;
-}
+a:hover { text-shadow: 0px 0px 5px }
 
 blockquote {
     margin: 10px;
@@ -114,9 +110,7 @@ ol {
     padding-left: 44px;
 }
 
-table {
-    margin: 0px 0px 0px 21px;
-}
+table { margin: 0px 0px 0px 21px }
 
 td {
     padding: 2px;
@@ -136,16 +130,16 @@ small {
 }
 
 header {
+    padding: 10px 20px;
     background: #25252540;
     backdrop-filter: blur(10px);
     box-shadow: 1px 1px 10px 5px #00000040;
     display: flex;
     align-items: center;
+    gap: 20px;
 }
 
-header > div {
-    margin: 10px;
-}
+header > div { margin: 0px }
 
 hr {
     size: 2px;
@@ -190,9 +184,7 @@ form {
     gap: 10px;
 }
 
-form > div {
-    width: 100%;
-}
+form > div { width: 100% }
 
 button {
     margin: 0px;
@@ -206,13 +198,9 @@ button {
     cursor: pointer;
 }
 
-button:hover {
-    background-color: #383838;
-}
+button:hover { background-color: #383838 }
 
-button:disabled {
-    cursor: default;
-}
+button:disabled { cursor: default }
 
 .buttons {
     display: flex;
@@ -225,7 +213,7 @@ button:disabled {
     width: 50px;
     height: 50px;
     border-radius: 5px;
-    box-shadow: 0px 0px 10px #FFFFFF40;
+    box-shadow: 0px 0px 10px #00000035;
 }
 
 .title-text {
@@ -235,21 +223,13 @@ button:disabled {
     text-shadow: none;
 }
 
-.discord-social, .reddit-social {
-    border-radius: 5px;
-}
+.discord-social, .reddit-social { border-radius: 5px }
 
-.discord-social:hover {
-    box-shadow: 0px 0px 10px 5px #5662F640;
-}
+.discord-social:hover { box-shadow: 0px 0px 10px 5px #5662F640 }
 
-.reddit-social:hover {
-    box-shadow: 0px 0px 10px 5px #FF450040;
-}
+.reddit-social:hover { box-shadow: 0px 0px 10px 5px #FF450040 }
 
-.indented {
-    margin: 0px 0px 0px 25px;
-}
+.indented { margin: 0px 0px 0px 25px }
 
 .screenshots-link {
     cursor: pointer;
@@ -274,7 +254,6 @@ button:disabled {
 
 .msg {
     background: #25252540;
-    backdrop-filter: blur(10px);
     box-shadow: 1px 1px 10px 5px #00000040;
     position: absolute;
     left: 10px;
@@ -291,9 +270,7 @@ div.images > img {
     box-shadow: 2px 2px 5px #00000040;
 }
 
-.indented {
-    margin: 0px 0px 0px 25px;
-}
+.indented { margin: 0px 0px 0px 25px }
 
 .back-to-main {
     cursor: pointer;
@@ -311,54 +288,47 @@ div.images > img {
     align-items: center;
 }
 
-nav {
-    margin: auto 20px;
-    padding: auto;
+.nav {
+    display: none;
+    position: absolute;
+    top: 50px;
+    left: 20px;
+    padding: 0px;
+    background: #343434;
+    box-shadow: 1px 1px 10px 5px #00000040;
+    border-radius: 10px;
     font-size: 1rem;
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
+    width: 150px;
+    overflow: hidden;
 }
 
-.page-link {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: auto;
-    padding: auto;
-    min-width: 80px;
+.nav > a {
+    display: block;
+    margin: 0px;
+    width: 100%;
+    line-height: 40px;
+    text-indent: 10px;
     cursor: pointer;
-    color: #FFFFFF;
 }
+
+nav:hover .nav {  display: block }
+
+nav:hover { cursor: pointer }
+
+.page-link { color: #FFFFFF }
 
 .page-link:hover {
-    text-decoration: underline;
     text-shadow: none;
+    background: #2e2e2e;
 }
 
-.page-link-active {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: auto;
-    padding: auto;
-    min-width: 80px;
-    cursor: pointer;
-    text-decoration: underline;
-    color: #777777;
-}
+.page-link-active { color: white; background: #2e2e2e }
 
-.page-link-active:hover {
-    text-shadow: none;
-}
+.page-link-active:hover { text-shadow: none }
 
-.announcement > i {
-    font-size: 0.75rem;
-}
+.announcement > i { font-size: 0.75rem }
 
-.announcement > p {
-    margin-left: 10px;
-}
+.announcement > p { margin-left: 10px }
 
 .announcement > ul {
     margin-left: 10px;
@@ -379,3 +349,8 @@ nav {
 .gap-10px { gap: 10px }
 .flex-grow-1 { flex-grow: 1 }
 .no-wrap { white-space: nowrap }
+
+.font-regular { font-family: MC-Regular }
+.font-bold { font-family: MC-Bold }
+.font-italic { font-family: MC-Italic }
+.font-bold-italic { font-family: MC-Bold-Italic }

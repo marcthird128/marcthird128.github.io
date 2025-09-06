@@ -7,12 +7,56 @@
     <link rel="stylesheet" href="source/css/stylesheet.css" />
 </head>
 <body>
+    <header>
+        <nav>
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" width="30px" height="30px" viewBox="0 0 1024 1024">
+                    <path fill="white" d="M904 160H120c-4.4 0-8 3.6-8 8v64c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-64c0-4.4-3.6-8-8-8m0 624H120c-4.4 0-8 3.6-8 8v64c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-64c0-4.4-3.6-8-8-8m0-312H120c-4.4 0-8 3.6-8 8v64c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-64c0-4.4-3.6-8-8-8"/>
+                </svg>
+            </div>
+            <div class="nav">
+                <a class="page-link" href="index.html">Home</a>
+                <a class="page-link" href="gallery.html">Gallery</a>
+                <a class="page-link" href="news.html">News</a>
+                <a class="page-link-active">Status</a>
+                <a class="page-link" href="slimefun.html">Slimefun Help</a>
+            </div>
+        </nav>
+        <div>
+            <a href="https://maza64.xyz">
+                <img class="logo" src="source/cookie.png" />
+            </a>
+        </div>
+        <div>
+            <a href="https://maza64.xyz"><span class="title-text">Mazarca SMP</span></a>
+        </div>
+        <div style="flex-grow: 1;"></div>
+        <div>
+            <a href="https://discord.com/invite/R6nMUHe9DK" target="_blank">
+                <img class="discord-social" src="source/discord.jpg" width="35px" />
+            </a>
+        </div>
+        <div>
+            <a href="https://reddit.com/r/MazarcaSMP" target="_blank">
+                <img class="reddit-social" src="source/reddit.jpg" height="35px" />
+            </a>
+        </div>
+    </header>
+    <main class="wrapper">
+        <div class="d-flex items-center gap-10px no-wrap" style="padding: 10px 0px; font-size: 2rem">
+            <p>Mazarca Server</p>
+            <hr size="2px" color="gray" class="flex-grow-1">
+            <p class="no-margin font-bold" id="mazarca-status"></p>
+        </div>
+        <div class="d-flex items-center gap-10px no-wrap" style="padding: 10px 0px; font-size: 2rem">
+            <p>Eaglercraft.com</p>
+            <hr size="2px" color="gray" class="flex-grow-1">
+            <p class="no-margin font-bold" id="eagler-status"></p>
+        </div>
+        <p class="text-center" id="timer">Fetching data... Please wait</p>
+    </main>
     <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const timer = document.getElementById("timer");
-            getPing("https://eagler.maza64.xyz", document.getElementById("mazarca-status"), timer);
-            getPing("https://www.eaglercraft.com", document.getElementById("eagler-status"), timer);
-        });
+        const timer = document.getElementById("timer");
 
         function getPing(address, output, timer) {
             output.style.color = "gray";
@@ -47,48 +91,9 @@
                 timer.innerText = `Last checked at ${currentTime}`;
             }, 3000);
         };
+
+        getPing("https://eagler.maza64.xyz", document.getElementById("mazarca-status"), timer);
+        getPing("https://www.eaglercraft.com", document.getElementById("eagler-status"), timer);
     </script>
-    <header>
-        <div>
-            <a href="https://maza64.xyz">
-                <img class="logo" src="source/cookie.png" />
-            </a>
-        </div>
-        <div>
-            <a href="https://maza64.xyz"><span class="title-text">Mazarca SMP</span></a>
-        </div>
-        <nav>
-            <a class="page-link" href="index.html">Home</a>
-            <a class="page-link" href="gallery.html">Gallery</a>
-            <a class="page-link" href="news.html">News</a>
-            <a class="page-link" href="slimefun.html">SF Help</a>
-            <a class="page-link-active" href="status.html">Status</a>
-        </nav>
-        <div style="flex-grow: 1;"></div>
-        <div>
-            <a href="https://discord.com/invite/R6nMUHe9DK" target="_blank">
-                <img class="discord-social" src="source/discord.jpg" width="35px" />
-            </a>
-        </div>
-        <div>
-            <a href="https://reddit.com/r/MazarcaSMP" target="_blank">
-                <img class="reddit-social" src="source/reddit.jpg" height="35px" />
-            </a>
-        </div>
-        <div></div>
-    </header>
-    <main class="wrapper">
-        <div class="d-flex items-center gap-10px no-wrap" style="padding: 10px 0px">
-            <p style="font-size: 2rem">Mazarca Server</p>
-            <hr size="2px" color="gray" class="flex-grow-1">
-            <h1 class="no-margin text-right" id="mazarca-status"></h1>
-        </div>
-        <div class="d-flex items-center gap-10px no-wrap" style="padding: 10px 0px">
-            <p style="font-size: 2rem">Eaglercraft.com</p>
-            <hr size="2px" color="gray" class="flex-grow-1">
-            <h1 class="no-margin text-right" id="eagler-status"></h1>
-        </div>
-        <p class="text-center" id="timer">Fetching data... Please wait</p>
-    </main>
 </body>
 </html>
