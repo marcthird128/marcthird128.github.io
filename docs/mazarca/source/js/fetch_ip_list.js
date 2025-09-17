@@ -1,7 +1,7 @@
 fetch("source/data/ips.json")
 .then(obj => obj.text())
 .then(ips => display(ips))
-.catch(err => sorry(err));
+.catch(err => noDisplay(err));
 
 function display(ips) {
     const ipHeading = document.getElementById("ip-heading");
@@ -24,7 +24,7 @@ function display(ips) {
             ipTable.appendChild(ipContainer);
         };
     } catch (err) {
-        sorry(err);
+        noDisplay(err);
         return;
     };
     ipHeading.style.marginBottom = "0px";
@@ -34,11 +34,11 @@ function display(ips) {
     note.after(ipTable);
 };
 
-function sorry(err) {
+function noDisplay(err) {
     const ipHeading = document.getElementById("ip-heading");
     console.warn(`Cannot display IP list! ${err}`);
     let sorry = document.createElement("p");
     sorry.className = "indented";
-    sorry.innerText = "Sorry, IP list is unavailable :(";
+    sorry.innerText = "Failed to display IP list :(";
     ipHeading.after(sorry);
 };
