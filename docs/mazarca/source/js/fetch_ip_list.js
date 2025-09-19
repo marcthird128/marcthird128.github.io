@@ -37,8 +37,8 @@ function display(ips) {
 function noDisplay(err) {
     const ipHeading = document.getElementById("ip-heading");
     console.warn(`Cannot display IP list! ${err}`);
-    let sorry = document.createElement("p");
-    sorry.className = "indented";
-    sorry.innerText = "Failed to display IP list :(";
-    ipHeading.after(sorry);
+    let message = document.createElement("p");
+    message.className = "indented";
+    message.innerText = "Failed to display IP list :(";
+    ipHeading.after(message);
 };
