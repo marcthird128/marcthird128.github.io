@@ -17,20 +17,20 @@ function display(imgData) {
         if (numberOfImages < stop) { stop = 3*i+numberOfImages%3 };
         for (let j=3*i; j<stop; j++) {
             console.log("image", j);
-            const imageContainer = document.createElement("div");
+            let imageContainer = document.createElement("div");
             imageContainer.className = "image-container";
-            const image = document.createElement("img");
+            let image = document.createElement("img");
             image.setAttribute("src", path + imgData.images[j].name);
             image.setAttribute("alt", imgData.images[j].name);
             image.setAttribute("width", "100%");
             image.setAttribute("onclick", "openInNewTab('" + path + imgData.images[j].name + "')");
             imageContainer.appendChild(image);
-            const imageFooter = document.createElement("div");
+            let imageFooter = document.createElement("div");
             imageFooter.className = "image-footer";
-            const serverName = document.createElement("small");
+            let serverName = document.createElement("small");
             serverName.innerText = "Server: " + imgData.images[j].server;
             imageFooter.appendChild(serverName);
-            const descText = document.createElement("p");
+            let descText = document.createElement("p");
             descText.innerText = imgData.images[j].desc;
             imageFooter.appendChild(descText);
             imageContainer.appendChild(imageFooter);
@@ -43,10 +43,10 @@ function display(imgData) {
 function noDisplay(err) {
     const screenshots = document.getElementsByTagName("main")[0];
     console.warn("Cannot display images!", err);
-    const sorry = document.createElement("p");
+    let sorry = document.createElement("p");
     sorry.className = "text-center";
     sorry.innerText = "Failed to display :(";
     screenshots.appendChild(sorry);
 };
 
-function openInNewTab(filePath) { window.open("https://maza64.xyz/mazarca/" + filePath, "_blank") };
+function openInNewTab(filePath) { window.open("https://maza64.xyz/mazarca/" + filePath, "_blank") }
