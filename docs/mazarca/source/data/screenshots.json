@@ -1,0 +1,25 @@
+{
+    "path": "source/screenshots/",
+    "images": [
+        {
+            "name": "1.png",
+            "server": "SMP",
+            "desc": "Spawn"
+        },
+        {
+            "name": "2.png",
+            "server": "SMP",
+            "desc": "Castle of Maza"
+        },
+        {
+            "name": "3.png",
+            "server": "SMP",
+            "desc": "Inside of the castle"
+        },
+        {
+            "name": "4.png",
+            "server": "SMP",
+            "desc": "Spawn area"
+        }
+    ]
+}
