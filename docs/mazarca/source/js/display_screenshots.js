@@ -10,13 +10,11 @@ function display(imgData) {
     const path = imgData.path;
     const numberOfImages = imgData.images.length;
     for (let i=0; i<Math.ceil(numberOfImages/3); i++) {
-        console.log("row", i);
         let imageRow = document.createElement("div");
         imageRow.className = "image-row";
         let stop = 3*i+3;
         if (numberOfImages < stop) { stop = 3*i+numberOfImages%3 };
         for (let j=3*i; j<stop; j++) {
-            console.log("image", j);
             let imageContainer = document.createElement("div");
             imageContainer.className = "image-container";
             let image = document.createElement("img");
@@ -38,6 +36,7 @@ function display(imgData) {
         };
         screenshots.appendChild(imageRow);
     };
+    console.log("Screenshots displayed successfully!");
 };
 
 function noDisplay(err) {
@@ -49,4 +48,4 @@ function noDisplay(err) {
     screenshots.appendChild(sorry);
 };
 
-function openInNewTab(filePath) { window.open("https://maza64.xyz/mazarca/" + filePath, "_blank") }
+function openInNewTab(filePath) { window.open(document.location.origin + "/mazarca/" + filePath, "_blank") };

@@ -29,19 +29,11 @@ html, body {
     color: #FFFFFF;
 }
 
-@media (min-device-width:320px) and (max-device-width:768px) {
-    html, body {
-        zoom: 115% !important;
-    }
-    table {
-        zoom: 125% !important;
-    }
-    .header {
-        zoom: 150% !important;
-    }
-    .msg {
-        zoom: 200% !important;
-    }
+@media (max-device-width:768px) {
+    html, body { zoom: 115% !important }
+    table { zoom: 125% !important }
+    .header { zoom: 150% !important }
+    .msg { zoom: 200% !important }
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -101,13 +93,14 @@ code:hover {
 }
 
 ul {
-    margin: 0px;
+    margin: 0px 0px 0px 10px;
+    padding-left: 20px;
     list-style-type: square;
 }
 
 ol {
-    margin: 0px;
-    padding-left: 44px;
+    margin: 0px 0px 0px 10px;
+    padding-left: 20px;
 }
 
 table { margin: 0px 0px 0px 21px }
@@ -128,6 +121,9 @@ small {
     font-family: MC-Italic;
     color: #828282
 }
+
+details { font-family: MC-Italic }
+details > summary { font-family: MC-Regular; text-decoration: underline }
 
 header {
     padding: 10px 20px;
@@ -230,6 +226,7 @@ button:disabled { cursor: default }
 .reddit-social:hover { box-shadow: 0px 0px 10px 5px #FF450040 }
 
 .indented { margin: 0px 0px 0px 25px }
+.semi-indented { margin: 0px 0px 0px 10px }
 
 .screenshots-link {
     cursor: pointer;
@@ -242,8 +239,8 @@ button:disabled { cursor: default }
 }
 
 .wrapper {
-    width: 50vw;
-    min-width: 600px;
+    width: calc(100% - 80px);
+    max-width: 700px;
     margin: 60px auto;
     padding: 20px;
     background: #25252540;
@@ -352,10 +349,6 @@ nav:hover { cursor: pointer }
 
 .announcement > i { font-size: 0.75rem }
 .announcement > p { margin-left: 10px }
-.announcement > ul {
-    margin-left: 10px;
-    padding-left: 20px;
-}
 
 .no-margin { margin: 0px }
 .no-padding { padding: 0px }

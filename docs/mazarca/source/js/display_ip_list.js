@@ -32,6 +32,7 @@ function display(ips) {
     note.innerText = "click to copy";
     ipHeading.after(note);
     note.after(ipTable);
+    console.log("IP list fetched and displayed successfully!");
 };
 
 function noDisplay(err) {

@@ -7,51 +7,6 @@
     <link rel="stylesheet" href="source/css/stylesheet.css" />
 </head>
 <body>
-    <header>
-        <nav>
-            <div>
-                <svg xmlns="http://www.w3.org/2000/svg" width="30px" height="30px" viewBox="0 0 1024 1024">
-                    <path fill="white" d="M904 160H120c-4.4 0-8 3.6-8 8v64c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-64c0-4.4-3.6-8-8-8m0 624H120c-4.4 0-8 3.6-8 8v64c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-64c0-4.4-3.6-8-8-8m0-312H120c-4.4 0-8 3.6-8 8v64c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-64c0-4.4-3.6-8-8-8"/>
-                </svg>
-            </div>
-            <div class="nav">
-                <a href="index.html">
-                    <img src="source/home.png" width="20px">Home
-                </a>
-                <a href="gallery.html">
-                    <img src="source/gallery.png" width="20px">Gallery
-                </a>
-                <a href="news.html">
-                    <img src="source/news.png" width="20px">News
-                </a>
-                <a class="active">
-                    <img src="source/check.png" width="20px">Status
-                </a>
-                <a href="slimefun.html">
-                    <img src="source/help.png" width="20px">Slimefun Help
-                </a>
-            </div>
-        </nav>
-        <div>
-            <a href="https://maza64.xyz">
-                <img class="logo" src="source/cookie.png" />
-            </a>
-        </div>
-        <div>
-            <a href="https://maza64.xyz"><span class="title-text">Mazarca SMP</span></a>
-        </div>
-        <div style="flex-grow: 1;"></div>
-        <div>
-            <a href="https://discord.com/invite/R6nMUHe9DK" target="_blank">
-                <img class="discord-social" src="source/discord.jpg" width="35px" />
-            </a>
-        </div>
-        <div>
-            <a href="https://reddit.com/r/MazarcaSMP" target="_blank">
-                <img class="reddit-social" src="source/reddit.jpg" height="35px" />
-            </a>
-        </div>
-    </header>
     <main class="wrapper">
         <div class="d-flex items-center gap-10px no-wrap" style="padding: 10px 0px; font-size: 2rem">
             <p>Mazarca Server</p>
@@ -71,6 +26,7 @@
             </p>
         </noscript>
     </main>
+    <script src="source/js/header.js"></script>
     <script>
         const timer = document.getElementById("timer");
         timer.innerText = "Fetching data... Please wait";

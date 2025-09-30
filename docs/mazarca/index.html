@@ -2,64 +2,38 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Mazarca SMP</title>
+    <meta name="description" content="A Minecraft server that supports Eaglercraft 1.8 and 1.12">
     <link rel="icon" type="image/x-icon" href="source/icon.png" />
     <link rel="stylesheet" href="source/css/stylesheet.css" />
+    <title>Mazarca SMP</title>
     <style>
         code { font-size:1rem }
     </style>
 </head>
 <body>
-    <header>
-        <nav>
-            <div>
-                <svg xmlns="http://www.w3.org/2000/svg" width="30px" height="30px" viewBox="0 0 1024 1024">
-                    <path fill="white" d="M904 160H120c-4.4 0-8 3.6-8 8v64c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-64c0-4.4-3.6-8-8-8m0 624H120c-4.4 0-8 3.6-8 8v64c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-64c0-4.4-3.6-8-8-8m0-312H120c-4.4 0-8 3.6-8 8v64c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-64c0-4.4-3.6-8-8-8"/>
-                </svg>
-            </div>
-            <div class="nav">
-                <a class="active">
-                    <img src="source/home.png" width="20px">Home
-                </a>
-                <a href="gallery.html">
-                    <img src="source/gallery.png" width="20px">Gallery
-                </a>
-                <a href="news.html">
-                    <img src="source/news.png" width="20px">News
-                </a>
-                <a href="status.html">
-                    <img src="source/check.png" width="20px">Status
-                </a>
-                <a href="slimefun.html">
-                    <img src="source/help.png" width="20px">Slimefun Help
-                </a>
-            </div>
-        </nav>
-        <div>
-            <a href="https://maza64.xyz">
-                <img class="logo" src="source/cookie.png" />
-            </a>
-        </div>
-        <div>
-            <a href="https://maza64.xyz"><span class="title-text">Mazarca SMP</span></a>
-        </div>
-        <div style="flex-grow: 1;"></div>
-        <div>
-            <a href="https://discord.com/invite/R6nMUHe9DK" target="_blank">
-                <img class="discord-social" src="source/discord.jpg" width="35px" />
-            </a>
-        </div>
-        <div>
-            <a href="https://reddit.com/r/MazarcaSMP" target="_blank">
-                <img class="reddit-social" src="source/reddit.jpg" height="35px" />
-            </a>
-        </div>
-    </header>
     <main class="wrapper">
         <h3>About</h3>
-            <p class="indented">
-                Mazarca is a cracked Minecraft server that supports Eaglercraft <a href="https://client.eaglercraft.dev/1.8/" target="_blank">1.8</a> and <a href="https://client.eaglercraft.dev/1.12/" target="_blank">1.12</a>. <br />We have a semi-vanilla survival with cool new items using <a href="https://github.com/Slimefun/Slimefun4/wiki" target="_blank">Slimefun</a>!
-            </p>
+        <div class="indented">
+            <p>Mazarca is a cracked Minecraft server that supports Eaglercraft <a href="https://client.eaglercraft.dev/1.8/" target="_blank">1.8</a> and <a href="https://client.eaglercraft.dev/1.12/" target="_blank">1.12</a>.</p>
+            <p>Currently available servers:</p>
+            <details class="semi-indented">
+                <summary>SMP</summary>
+                A semi-vanilla survival with land claims and cool new items using <a href="https://github.com/Slimefun/Slimefun4/wiki">Slimefun</a>!<br>
+                Seed: <a href="https://www.chunkbase.com/apps/seed-map#seed=839629186379115867&platform=java_1_12&dimension=overworld">839629186379115867</a> <- click to open seedmap
+            </details>
+            <details class="semi-indented">
+                <summary>Anarchy</summary>
+                Complete chaos!!
+            </details>
+            <details class="semi-indented">
+                <summary>Random drops anarchy</summary>
+                Complete chaos but block drops are randomized!
+            </details>
+            <details class="semi-indented">
+                <summary>Minigames <span style="color: #828282">(beta)</span></summary>
+                Minigames for fun!
+            </details>
+        </div>
 
         <h3 id="ip-heading">IP Address</h3>
         <!-- edit ips in source/data/ips.json -->
@@ -70,13 +44,14 @@
             </p>
         </noscript>
 
-        <h3>Random Games</h3>
-        <ul>
-            <li><a href="https://maza64.xyz/bounce">Bounce game</a></li>
-            <li><a href="https://maza64.xyz/flappy">Flappy game</a></li>
-        </ul>
+        <div class="text-center" style="margin-top: 10px">
+            <a href="https://maza64.xyz/bounce" style="margin: 0px 10px; font-size: 12px; text-decoration: underline">Bounce game</a>
+            <a href="https://maza64.xyz/flappy" style="margin: 0px 10px; font-size: 12px; text-decoration: underline">Flappy game</a>
+            <a href="https://maza64.xyz/ef" style="margin: 0px 10px; font-size: 12px; text-decoration: underline">Particle simulator</a>
+        </div>
     </main>
-    <script src="source/js/select_and_copy.js"></script>
+    <script src="source/js/header.js"></script>
     <script src="source/js/display_ip_list.js"></script>
+    <script src="source/js/select_and_copy.js"></script>
 </body>
 </html>
