@@ -11,6 +11,7 @@
         <div class="d-flex items-center gap-10px no-wrap" style="padding: 10px 0px; font-size: 2rem">
             <p>Mazarca Server</p>
             <hr size="2px" color="gray" class="flex-grow-1">
+            <button type="button" style="display: none" id="report-offline" onclick="window.open('https://reddit.com/r/MazarcaSMP/submit?type=TEXT&title=Server is down right now!', '_blank')">Report</button>
             <p class="no-margin font-bold" style="color: gray" id="mazarca-status">...</p>
         </div>
         <div class="d-flex items-center gap-10px no-wrap" style="padding: 10px 0px; font-size: 2rem">
@@ -27,44 +28,7 @@
         </noscript>
     </main>
     <script src="source/js/header.js"></script>
-    <script>
-        const timer = document.getElementById("timer");
-        timer.innerText = "Fetching data... Please wait";
-
-        function getPing(address, output, timer) {
-            output.style.color = "gray";
-            setInterval(async () => {
-                let online = await async function() {
-                    let cache_preventer = btoa(Date.now() + "_" + Math.random());
-                    let url = address + "?" + cache_preventer;
-                    let resolve;
-                    fetch(url).then((v) => { resolve(true) }, (v) => { resolve(false) });
-                    return new Promise((res) => { resolve = res });
-                };
-                var newDate = new Date();
-                Date.prototype.timeNow = function() {
-                    return ((this.getHours() < 10)?"0":"") + this.getHours() + ":"
-                           + ((this.getMinutes() < 10)?"0":"") + this.getMinutes() + ":"
-                           + ((this.getSeconds() < 10)?"0":"") + this.getSeconds();
-                };
-                currentTime = newDate.timeNow()
-                if (online) {
-                    console.log(`[Status Check ${currentTime}] ${address} is up`);
-                    output.style.color = "#00AA00";
-                    output.style.textShadow = "0px 0px 10px #00AA0060";
-                    output.innerText = "Online";
-                } else {
-                    console.log(`[Status Check ${currentTime}] ${address} is down`);
-                    output.style.color = "#AA0000";
-                    output.style.textShadow = "0px 0px 10px #AA000060";
-                    output.innerText = "Offline";
-                };
-                timer.innerText = `Last checked at ${currentTime}`;
-            }, 3000);
-        };
-
-        getPing("https://eagler.maza64.xyz", document.getElementById("mazarca-status"), timer);
-        getPing("https://www.eaglercraft.com", document.getElementById("eagler-status"), timer);
-    </script>
+    <script src="source/js/navigation.js"></script>
+    <script src="source/js/status.js"></script>
 </body>
 </html>
