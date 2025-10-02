@@ -353,13 +353,13 @@ nav:hover { cursor: pointer }
 
 .splash {
     position: absolute;
-    top: 0;
-    left: calc(100% - 120px);
+    top: 35px;
+    left: 300px;
     width: 250px;
     text-align: center;
     text-shadow: 2px 2px 0px #00000090;
     color: #ffff55;
-    transform: rotate(15deg);
+    transform: rotate(-10deg);
     animation-name: grow;
     animation-duration: 1s;
     animation-iteration-count: infinite;
