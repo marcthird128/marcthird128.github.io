@@ -355,21 +355,21 @@ nav:hover { cursor: pointer }
     position: absolute;
     top: 35px;
     left: 300px;
-    width: 250px;
+    width: 260px;
     text-align: center;
-    text-shadow: 2px 2px 0px #00000090;
+    text-shadow: 1px 1px 0px #00000090;
     color: #ffff55;
     transform: rotate(-10deg);
     animation-name: grow;
-    animation-duration: 1s;
+    animation-duration: 0.75s;
     animation-iteration-count: infinite;
-    animation-timing-function: ease;
+    animation-timing-function: ease-out;
 }
 
 @keyframes grow {
-    from { font-size: 18px }
-    50% { font-size: 20px }
-    to { font-size: 18px }
+    from { font-size: 13px }
+    50% { font-size: 14px }
+    to { font-size: 13px }
 }
 
 .no-margin { margin: 0px }

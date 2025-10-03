@@ -12,8 +12,10 @@ fetch("source/data/splash.json")
 .then(res = function(res) {
     let parsed = JSON.parse(res);
     if (parsed.enabled) {
+        var newDate = new Date()
         let motdElement = document.getElementById("splash-text");
-        let index = Math.floor(Math.random() * (parsed.values.length));
+        let index = newDate.getDate() - 1;
+        // Math.floor(Math.random() * (parsed.values.length));
         console.log("Current splash text is", `'${parsed.values[index]}'`, "with index of", index);
         motdElement.innerText = parsed.values[index];
     } else { console.log("Splash texts are disabled") };
