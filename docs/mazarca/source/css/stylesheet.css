@@ -18,6 +18,19 @@
     src: url("../font/MinecraftBoldItalic.otf");
 }
 
+@media (max-device-width:768px) {
+    html, body { zoom: 115% !important }
+    table { zoom: 125% !important }
+    .header { zoom: 150% !important }
+    .msg { zoom: 200% !important }
+}
+
+@keyframes splash {
+    from { font-size: 13px }
+    50% { font-size: 14px }
+    to { font-size: 13px }
+}
+
 html, body {
     zoom: 110%;
     margin: 0px;
@@ -27,13 +40,6 @@ html, body {
     background-image: url("../background.png");
     background-position: top center;
     color: #FFFFFF;
-}
-
-@media (max-device-width:768px) {
-    html, body { zoom: 115% !important }
-    table { zoom: 125% !important }
-    .header { zoom: 150% !important }
-    .msg { zoom: 200% !important }
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -123,7 +129,7 @@ small {
 }
 
 details { font-family: MC-Italic }
-details > summary { font-family: MC-Regular; text-decoration: underline }
+details > summary { font-family: MC-Regular }
 
 header {
     padding: 10px 20px;
@@ -360,16 +366,10 @@ nav:hover { cursor: pointer }
     text-shadow: 1px 1px 0px #00000090;
     color: #ffff55;
     transform: rotate(-10deg);
-    animation-name: grow;
+    animation-name: splash;
     animation-duration: 0.75s;
     animation-iteration-count: infinite;
     animation-timing-function: ease-out;
-}
-
-@keyframes grow {
-    from { font-size: 13px }
-    50% { font-size: 14px }
-    to { font-size: 13px }
 }
 
 .no-margin { margin: 0px }
