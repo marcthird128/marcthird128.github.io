@@ -29,10 +29,11 @@
             if (passwordInput.value) {
                 if (passwordInput.value == "12345") { success = true };
                 message(success ? "Successful login!" : "Failed to login. Wrong password!");
-                setTimeout(() => document.location.pathname = "/rr", 250);
+                document.location.pathname = "/rr";
             };
         };
     </script>
     <script src="../source/js/message.js"></script>
 </body>
+
 </html>
