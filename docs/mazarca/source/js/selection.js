@@ -24,16 +24,3 @@ function selectText(node) {
         selection.addRange(range);
     } else { console.warn("Could not select text in node: Unsupported browser.") };
 }
-
-function message(msg) {
-    let els = document.getElementsByClassName('msg');
-    for (let i=0; i<els.length; i++) {
-        els[i].remove();
-    }
-    let el = document.createElement('div');
-    el.className = 'msg';
-    el.innerHTML = msg;
-    el.onclick = () => el.remove();
-    document.body.appendChild(el);
-    setTimeout(() => el.remove(), 1000);
-}

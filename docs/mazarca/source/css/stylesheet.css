@@ -128,7 +128,7 @@ small {
     color: #828282
 }
 
-details { font-family: MC-Italic }
+details { font-family: MC-Regular }
 details > summary { font-family: MC-Regular }
 
 header {
@@ -193,16 +193,19 @@ button {
     padding: 7px 8px 5px 8px;
     border: none;
     border-radius: 10px;
-    background-color: #3E3E3E;
     font-family: MC-Regular;
     font-size: 0.95rem;
     color: #FFFFFF;
     cursor: pointer;
 }
 
-button:hover { background-color: #383838 }
+.primary { background-color: #d9833e }
+.primary:hover { background-color: #734118 }
+.secondary { background-color: #3e3e3e }
+.secondary:hover { background-color: #383838 }
 
-button:disabled { cursor: default }
+button:disabled { cursor: default; background-color: #3e3e3e; color: gray }
+button:disabled:hover { background-color: #3e3e3e }
 
 .buttons {
     display: flex;
@@ -212,8 +215,6 @@ button:disabled { cursor: default }
 }
 
 .logo {
-    width: 50px;
-    height: 50px;
     border-radius: 5px;
     box-shadow: 0px 0px 10px #00000035;
 }
@@ -255,7 +256,32 @@ button:disabled { cursor: default }
     border-radius: 10px;
 }
 
+.wrapper-centered {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.wrapper-full {
+    margin: 15px;
+    padding: 10px;
+    width: calc(100% - 50px);
+    max-width: 100%;
+    height: calc(100% - 50px);
+}
+
 .msg {
+    display: flex;
+    align-items: center;
+    gap: 10px;
     background: #25252540;
     backdrop-filter: blur(10px);
     box-shadow: 1px 1px 10px 5px #00000040;
@@ -266,7 +292,6 @@ button:disabled { cursor: default }
     max-width: calc(100vw - 20px);
     padding: 20px;
     border-radius: 10px;
-    background-attachment: fixed;
 }
 
 div.images > img {
@@ -354,8 +379,17 @@ div.images > img {
 .nav > a.active { background: #2e2e2e }
 nav:hover { cursor: pointer }
 
-.announcement > i { font-size: 0.75rem }
-.announcement > p { margin-left: 10px }
+/*.announcement-collapsed {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+}
+.announcement-collapsed:hover { -webkit-line-clamp: unset }*/
+
+.announcement > summary { line-height: 30px }
+.announcement > summary > i { font-size: 0.75rem }
+.announcement > p { margin-left: 5px }
 
 .splash {
     position: absolute;
@@ -391,3 +425,45 @@ nav:hover { cursor: pointer }
 .font-bold { font-family: MC-Bold }
 .font-italic { font-family: MC-Italic }
 .font-bold-italic { font-family: MC-Bold-Italic }
+
+/* Mazarca Admin GUI section */
+.sidebar {
+    padding: 0px;
+    background: #343434;
+    height: 100%;
+}
+.sidebar-nav > a {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin: 0px;
+    padding: 0px 0px 0px 15px;
+    height: 40px;
+    cursor: pointer;
+    color: #ffffff;
+}
+.sidebar-nav > a:hover {
+    text-shadow: none;
+    background: #2e2e2e;
+}
+.sidebar-nav > a.active { background: #2e2e2e }
+.console {
+    margin: 0px 0px 10px;
+    padding: 10px;
+    width: calc(100% - 20px);
+    height: calc(100% - 60.5px);
+    background: #000000;
+    border-radius: 10px;
+    box-shadow: 1px 1px 10px 5px #00000040;
+    font-family: monospace;
+    font-size: 0.75rem;
+    overflow: hidden;
+}
+select, option {
+    padding: 5px;
+    font-family: MC-Regular;
+    color: #ffffff;
+    background: #303030;
+    border: 2px solid white;
+    border-radius: 5px
+}

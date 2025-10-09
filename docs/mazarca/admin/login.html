@@ -1,0 +1,38 @@
+<!--it's just a demo page! doesn't actually work lol-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="A Minecraft server that supports Eaglercraft 1.8 and 1.12">
+    <link rel="icon" type="image/x-icon" href="../source/icon.png" />
+    <link rel="stylesheet" href="../source/css/stylesheet.css" />
+    <title>Mazarca Admin</title>
+</head>
+<body>
+    <main class="wrapper wrapper-centered" style="max-width: 300px; height: fit-content">
+        <img class="logo" src="../source/cookie.png" height="65px">
+        <h2 class="no-margin">Mazarca Admin</h2>
+        <form>
+            <div>
+                <label for="password-input">Password:</label>
+                <input type="password" id="password-input">
+            </div>
+            <button type="button" class="w-100 primary" id="login-btn" onclick="checkPass()">Log in</button>
+        </form>
+        <small>Version: 0.0.1</small>
+    </main>
+    <script>
+        const passwordInput = document.getElementById("password-input");
+        var success = false;
+        function checkPass() {
+            success = false;
+            if (passwordInput.value) {
+                if (passwordInput.value == "12345") { success = true };
+                message(success ? "Successful login!" : "Failed to login. Wrong password!");
+                setTimeout(() => document.location.pathname = "/rr", 250);
+            };
+        };
+    </script>
+    <script src="../source/js/message.js"></script>
+</body>
+</html>
