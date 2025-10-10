@@ -1,4 +1,3 @@
-<!--it's just a demo page! doesn't actually work lol-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,10 +12,7 @@
         <img class="logo" src="../source/cookie.png" height="65px">
         <h2 class="no-margin">Mazarca Admin</h2>
         <form>
-            <div>
-                <label for="password-input">Password:</label>
-                <input type="password" id="password-input">
-            </div>
+            <input type="password" id="password-input" placeholder="Enter password">
             <button type="button" class="w-100 primary" id="login-btn" onclick="checkPass()">Log in</button>
         </form>
         <small>Version: 0.0.1</small>
@@ -28,12 +24,10 @@
             success = false;
             if (passwordInput.value) {
                 if (passwordInput.value == "12345") { success = true };
-                message(success ? "Successful login!" : "Failed to login. Wrong password!");
-                document.location.pathname = "/rr";
+                message(success ? "Successful login!" : "Failed to login. Wrong password?");
             };
         };
     </script>
     <script src="../source/js/message.js"></script>
 </body>
-
 </html>
