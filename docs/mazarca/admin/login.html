@@ -25,6 +25,7 @@
             if (passwordInput.value) {
                 if (passwordInput.value == "12345") { success = true };
                 message(success ? "Successful login!" : "Failed to login. Wrong password?");
+                if (success) { setTimeout(() => document.location.pathname = "/mazarca/admin/console.html", 250) };
             };
         };
     </script>
