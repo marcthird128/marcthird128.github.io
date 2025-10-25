@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Mazarca SMP</title>
     <link rel="icon" type="image/x-icon" href="source/icon.png" />
     <link rel="stylesheet" href="source/css/stylesheet.css" />
+    <title>Mazarca | Recipes</title>
 </head>
 <body>
     <main class="wrapper">
@@ -14,48 +14,194 @@
         </div>
         <section>
             <h3 style="margin-top: 0px">Mace and Wind charges</h3>
-            <div class="crafting">
-                <img class="recipe-img" src="source/crafting-grid-mace.png" width="100%">
-                <div>
-                    <b>Mace</b>
-                    <p>Just your regular Minecraft 1.21 mace.</p>
+            <div class="recipes">
+                <div class="mcui crafting-ui">
+                    <div class="crafting-grid">
+                        <div class="slot-row">
+                            <div class="item-slot" onmouseover="showTooltip(event)" onmouseout="hideTooltip(event)">
+                                <img src="https://minecraft.wiki/images/Invicon_Block_of_Diamond.png" height="32px" width="32px">
+                                <div class="item-nameplate"><p class="item-name">Block of Diamond</p></div>
+                            </div>
+                            <div class="item-slot" onmouseover="showTooltip(event)" onmouseout="hideTooltip(event)">
+                                <img src="https://minecraft.wiki/images/Invicon_Block_of_Diamond.png" height="32px" width="32px">
+                                <div class="item-nameplate"><p class="item-name">Block of Diamond</p></div>
+                            </div>
+                            <div class="item-slot" onmouseover="showTooltip(event)" onmouseout="hideTooltip(event)">
+                                <img src="https://minecraft.wiki/images/Invicon_Block_of_Diamond.png" height="32px" width="32px">
+                                <div class="item-nameplate"><p class="item-name">Block of Diamond</p></div>
+                            </div>
+                        </div>
+                        <div class="slot-row">
+                            <div class="item-slot"></div>
+                            <div class="item-slot" onmouseover="showTooltip(event)" onmouseout="hideTooltip(event)">
+                                <img src="https://minecraft.wiki/images/Invicon_Blaze_Rod.png" height="32px" width="32px">
+                                <div class="item-nameplate"><p class="item-name">Blaze Rod</p></div>
+                            </div>
+                            <div class="item-slot"></div>
+                        </div>
+                        <div class="slot-row">
+                            <div class="item-slot"></div>
+                            <div class="item-slot" onmouseover="showTooltip(event)" onmouseout="hideTooltip(event)">
+                                <img src="https://minecraft.wiki/images/Invicon_Blaze_Rod.png" height="32px" width="32px">
+                                <div class="item-nameplate"><p class="item-name">Blaze Rod</p></div>
+                            </div>
+                            <div class="item-slot"></div>
+                        </div>
+                    </div>
+                    <div class="crafting-arrow"><br></div>
+                    <div class="item-slot item-slot-large" onmouseover="showTooltip(event)" onmouseout="hideTooltip(event)">
+                        <img src="https://minecraft.wiki/images/Invicon_Diamond_Axe.png" height="32px" width="32px">
+                        <div class="item-nameplate"><p class="item-name">Mace</p></div>
+                    </div>
                 </div>
-            </div>
-            <div class="crafting">
-                <img class="recipe-img" src="source/crafting-grid-wind-charge.png" width="100%">
-                <div>
-                    <b>Wind Charge</b>
-                    <p>Right click to launch yourself in the air!</p>
+                <div class="mcui crafting-ui">
+                    <div class="crafting-grid">
+                        <div class="slot-row">
+                            <div class="item-slot"></div>
+                            <div class="item-slot"></div>
+                            <div class="item-slot"></div>
+                        </div>
+                        <div class="slot-row">
+                            <div class="item-slot"></div>
+                            <div class="item-slot"></div>
+                            <div class="item-slot"></div>
+                        </div>
+                        <div class="slot-row">
+                            <div class="item-slot"></div>
+                            <div class="item-slot" onmouseover="showTooltip(event)" onmouseout="hideTooltip(event)">
+                                <img src="https://minecraft.wiki/images/Invicon_Blaze_Rod.png" height="32px" width="32px">
+                                <div class="item-nameplate"><p class="item-name">Blaze Rod</p></div>
+                            </div>
+                            <div class="item-slot" onmouseover="showTooltip(event)" onmouseout="hideTooltip(event)">
+                                <img src="https://minecraft.wiki/images/Invicon_Emerald.png" height="32px" width="32px">
+                                <div class="item-nameplate"><p class="item-name">Emerald</p></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="crafting-arrow"><br></div>
+                    <div class="item-slot item-slot-large" onmouseover="showTooltip(event)" onmouseout="hideTooltip(event)">
+                        <img src="https://minecraft.wiki/images/Invicon_String.png" height="32px" width="32px">
+                        <div class="item-nameplate"><p class="item-name">Wind Charge</p></div>
+                    </div>
                 </div>
             </div>
         </section>
         <section>
             <h3 style="margin-top: 0px">Redstone Armor & Tools</h3>
-            <div class="crafting">
-                <img class="recipe-img" src="source/crafting-grid-redstone-sword.png" width="100%">
-                <div>
-                    <b>Redstone Sword</b>
-                    <p><small>placeholder</small></p>
+            <div class="recipes">
+                <div class="mcui crafting-ui">
+                    <div class="slot-grid">
+                        <div class="slot-row">
+                            <div class="item-slot"></div>
+                            <div class="item-slot" onmouseover="showTooltip(event)" onmouseout="hideTooltip(event)">
+                                <img src="https://minecraft.wiki/images/Invicon_Block_of_Redstone.png" height="32px" width="32px">
+                                <div class="item-nameplate"><p class="item-name">Block of Redstone</p></div>
+                            </div>
+                            <div class="item-slot"></div>
+                        </div>
+                        <div class="slot-row">
+                            <div class="item-slot"></div>
+                            <div class="item-slot" onmouseover="showTooltip(event)" onmouseout="hideTooltip(event)">
+                                <img src="https://minecraft.wiki/images/Invicon_Block_of_Redstone.png" height="32px" width="32px">
+                                <div class="item-nameplate"><p class="item-name">Block of Redstone</p></div>
+                            </div>
+                            <div class="item-slot"></div>
+                        </div>
+                        <div class="slot-row">
+                            <div class="item-slot"></div>
+                            <div class="item-slot" onmouseover="showTooltip(event)" onmouseout="hideTooltip(event)">
+                                <img src="https://minecraft.wiki/images/Invicon_Stick.png" height="32px" width="32px">
+                                <div class="item-nameplate"><p class="item-name">Stick</p></div>
+                            </div>
+                            <div class="item-slot"></div>
+                        </div>
+                    </div>
+                    <div class="crafting-arrow"><br></div>
+                    <div class="item-slot item-slot-large" onmouseover="showTooltip(event)" onmouseout="hideTooltip(event)">
+                        <img src="https://minecraft.wiki/images/Enchanted_Golden_Sword.gif" height="32px" width="32px">
+                        <div class="item-nameplate">
+                            <p class="item-name">Redstone Sword</p>
+                            <p class="item-enchants">Sharpness II<br>Knockback II</p>
+                            <b style="color: #FF5555">Redstone Gear</b>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="crafting">
-                <img class="recipe-img" src="source/crafting-grid-redstone-axe.png" width="100%">
-                <div>
-                    <b>Redstone Axe</b>
-                    <p><small>placeholder</small></p>
+                <div class="mcui crafting-ui">
+                    <div class="slot-grid">
+                        <div class="slot-row">
+                            <div class="item-slot"></div>
+                            <div class="item-slot" onmouseover="showTooltip(event)" onmouseout="hideTooltip(event)">
+                                <img src="https://minecraft.wiki/images/Invicon_Block_of_Redstone.png" height="32px" width="32px">
+                                <div class="item-nameplate"><p class="item-name">Block of Redstone</p></div>
+                            </div>
+                            <div class="item-slot" onmouseover="showTooltip(event)" onmouseout="hideTooltip(event)">
+                                <img src="https://minecraft.wiki/images/Invicon_Block_of_Redstone.png" height="32px" width="32px">
+                                <div class="item-nameplate"><p class="item-name">Block of Redstone</p></div>
+                            </div>
+                        </div>
+                        <div class="slot-row">
+                            <div class="item-slot"></div>
+                            <div class="item-slot" onmouseover="showTooltip(event)" onmouseout="hideTooltip(event)">
+                                <img src="https://minecraft.wiki/images/Invicon_Stick.png" height="32px" width="32px">
+                                <div class="item-nameplate"><p class="item-name">Stick</p></div>
+                            </div>
+                            <div class="item-slot" onmouseover="showTooltip(event)" onmouseout="hideTooltip(event)">
+                                <img src="https://minecraft.wiki/images/Invicon_Block_of_Redstone.png" height="32px" width="32px">
+                                <div class="item-nameplate"><p class="item-name">Block of Redstone</p></div>
+                            </div>
+                        </div>
+                        <div class="slot-row">
+                            <div class="item-slot"></div>
+                            <div class="item-slot" onmouseover="showTooltip(event)" onmouseout="hideTooltip(event)">
+                                <img src="https://minecraft.wiki/images/Invicon_Stick.png" height="32px" width="32px">
+                                <div class="item-nameplate"><p class="item-name">Stick</p></div>
+                            </div>
+                            <div class="item-slot"></div>
+                        </div>
+                    </div>
+                    <div class="crafting-arrow"><br></div>
+                    <div class="item-slot item-slot-large" onmouseover="showTooltip(event)" onmouseout="hideTooltip(event)">
+                        <img src="https://minecraft.wiki/images/Enchanted_Golden_Axe.gif" height="32px" width="32px">
+                        <div class="item-nameplate">
+                            <p class="item-name">Redstone Axe</p>
+                            <p class="item-enchants">Sharpness II</p>
+                            <b style="color: #FF5555">Redstone Gear</b>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="crafting">
-                <img class="recipe-img" src="source/crafting-grid-redstone-chestplate.png" width="100%">
                 <div>
                     <b>Redstone Armor</b>
-                    <p><small>placeholder</small></p>
+                    <p>Crafted using Redstone Blocks, same as any other armor type. Gives the player some movement features</p>
                 </div>
             </div>
         </section>
-        <p class="text-center">not yet finished!</p>
+        <p class="text-center">More will be added soon!</p>
     </main>
     <script src="source/js/header.js"></script>
     <script src="source/js/navigation.js"></script>
+    <script>
+        function showTooltip(e) {
+            const slot = e.currentTarget
+            const tooltip = slot.querySelector('.item-nameplate');
+            if (tooltip) {
+                const rect = slot.getBoundingClientRect();
+                tooltip.style.display = "flex";
+                var t, l;
+                p = window.getComputedStyle(slot, null).getPropertyValue('padding');
+                p = p.substring(0, p.length-2);
+                slot.addEventListener("mousemove", (ev) => {
+                    t = Math.floor(ev.clientY - rect.y - 40 - p) * 7/8;
+                    l = Math.floor(ev.clientX - rect.x + 20 - p) * 7/8;
+                    tooltip.style.top = t + "px";
+                    tooltip.style.left = l + "px";
+                });
+            };
+        };
+
+        function hideTooltip(e) {
+            const tooltip = e.currentTarget.querySelector('.item-nameplate');
+            if (tooltip) { tooltip.style.display = "none" };
+        };
+    </script>
 </body>
 </html>

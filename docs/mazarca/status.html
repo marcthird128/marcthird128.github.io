@@ -2,22 +2,23 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Mazarca SMP</title>
     <link rel="icon" type="image/x-icon" href="source/icon.png" />
     <link rel="stylesheet" href="source/css/stylesheet.css" />
+    <title>Mazarca | Status</title>
 </head>
 <body>
     <main class="wrapper">
-        <div class="d-flex items-center gap-10px no-wrap" style="padding: 10px 0px; font-size: 2rem">
-            <p>Mazarca Server</p>
+        <div class="d-flex items-center gap-10px no-wrap" style="padding: 0px; height: 40px">
+            <p>Minigames</p>
             <hr size="2px" color="gray" class="flex-grow-1">
-            <button type="button" style="display: none" id="report-offline" onclick="window.open('https://reddit.com/r/MazarcaSMP/submit?type=TEXT&title=Server is down right now!', '_blank')">Report</button>
-            <p class="no-margin font-bold" style="color: gray" id="mazarca-status">...</p>
+            <button type="button" class="secondary" style="display: none" id="pi-report-offline" onclick="window.open('https://reddit.com/r/MazarcaSMP/submit?type=TEXT&title=Server is down right now!', '_blank')">Report</button>
+            <p class="no-margin font-bold" style="color: gray" id="pi-status">...</p>
         </div>
-        <div class="d-flex items-center gap-10px no-wrap" style="padding: 10px 0px; font-size: 2rem">
-            <p>Eaglercraft.com</p>
+        <div class="d-flex items-center gap-10px no-wrap" style="padding: 0px; height: 40px">
+            <p>SMP, Anarchy, RandomDrops</p>
             <hr size="2px" color="gray" class="flex-grow-1">
-            <p class="no-margin font-bold" style="color: gray" id="eagler-status">...</p>
+            <button type="button" class="secondary" style="display: none" id="oldlaptop-report-offline" onclick="window.open('https://reddit.com/r/MazarcaSMP/submit?type=TEXT&title=Server is down right now!', '_blank')">Report</button>
+            <p class="no-margin font-bold" style="color: gray" id="oldlaptop-status">...</p>
         </div>
         <p class="text-center" id="timer"></p>
         <noscript>

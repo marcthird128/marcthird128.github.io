@@ -439,11 +439,13 @@ nav:hover { cursor: pointer }
 
 section { margin: 20px 0px }
 
-.crafting {
+.recipes {
     margin: 5px 0px 15px;
     display: grid;
-    grid-template-columns: 30% 70%;
-    gap: 15px;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    justify-items: center;
+    text-align: left;
 }
 
 .recipe-img {
@@ -451,4 +453,99 @@ section { margin: 20px 0px }
     border: none;
     border-radius: 15px;
     box-shadow: 5px 5px 10px #00000040;
+}
+
+.item-slot {
+    position: relative;
+    display: inline-block;
+    background: #8B8B8B no-repeat center center / 32px 32px;
+    border: 2px solid;
+    border-color: #373737 #FFF #FFF #373737;
+    width: 32px;
+    height: 32px;
+    font-size: 16px;
+    line-height: 1;
+    text-align: left;
+    vertical-align: bottom;
+    image-rendering: pixelated;
+}
+
+.item-slot:hover .item-nameplate {
+    display: block;
+}
+
+.item-slot::before, .item-slot::after {
+    content: "";
+    position: absolute;
+    background-color: #8B8B8B;
+    height: 2px;
+    width: 2px;
+    pointer-events: none;
+}
+
+.item-slot::before {
+    bottom: -2px;
+    left: -2px
+}
+
+.item-slot::after {
+    top: -2px;
+    right: -2px
+}
+
+.item-slot-large { padding: 8px }
+
+.item-nameplate {
+    position: relative;
+    display: none;
+    flex-direction: column;
+    gap: 16px;
+    padding: 6px 8px;
+    background: #1e0f1e;
+    outline: 2px solid #2d0a63;
+    outline-offset: -4.5px;
+    width: fit-content;
+    white-space: nowrap;
+    z-index: 10;
+}
+
+.item-nameplate > p.item-name { text-shadow: 1.5px 1.5px 0px #3e3e3e }
+.item-nameplate > p.item-enchants { color: #AAAAAA }
+
+.mcui {
+    display: inline-block;
+    position: relative;
+    background-color: #C6C6C6;
+    border: 2px solid;
+    border-color: #DBDBDB #5B5B5B #5B5B5B #DBDBDB;
+    padding: 6px;
+    text-align: left;
+    white-space: nowrap;
+    vertical-align: bottom
+}
+
+.crafting-ui {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    width: fit-content;
+}
+
+.slot-grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0px;
+}
+
+.slot-row {
+    display: flex;
+    align-items: center;
+}
+
+.crafting-arrow {
+    display: inline-block;
+    background: url(https://minecraft.wiki/images/Grid_layout_Arrow_%28small%29.png?a4894) no-repeat;
+    min-width: 32px;
+    height: 26px;
 }
