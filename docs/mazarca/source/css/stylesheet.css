@@ -390,15 +390,15 @@ div.images > img {
 .nav > a.active { background: #2e2e2e }
 nav:hover { cursor: pointer }
 
-/*.announcement-collapsed {
+/* .announcement-collapsed {
     overflow: hidden;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 1;
 }
-.announcement-collapsed:hover { -webkit-line-clamp: unset }*/
+.announcement-collapsed:hover { -webkit-line-clamp: unset } */
 
-.announcement > summary { line-height: 30px }
+/* .announcement > summary { line-height: 30px } */
 .announcement > summary > i { font-size: 0.75rem }
 .announcement > p { margin-left: 5px }
 
