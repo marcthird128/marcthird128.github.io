@@ -13,7 +13,7 @@ function getPing(host, output) {
     setInterval(async () => {
         let online = await (async () => {
             let cache_preventer = btoa(Date.now() + "_" + Math.random());
-            let url = "http://" + host + ".maza64.xyz" + "?" + cache_preventer;
+            let url = "https://" + host + ".maza64.xyz" + "?" + cache_preventer;
             try {
                 const response = await fetch(url);
                 if (response.status === 401 || (response.status >= 200 && response.status < 300)) { return true }
