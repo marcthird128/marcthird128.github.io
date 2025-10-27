@@ -437,10 +437,10 @@ nav:hover { cursor: pointer }
 .font-italic { font-family: MC-Italic }
 .font-bold-italic { font-family: MC-Bold-Italic }
 
-section { margin: 20px 0px }
+section { margin: 20px 0px 0px }
 
 .recipes {
-    margin: 5px 0px 15px;
+    margin: 5px 0px 0px;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 10px;
