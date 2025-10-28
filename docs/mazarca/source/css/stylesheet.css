@@ -62,12 +62,12 @@ p { margin: 0px }
 
 i {
     font-family: MC-Italic;
-    font-weight: normal;
+    font-style: normal;
 }
 
 b, strong, em {
     font-family: MC-Bold;
-    font-weight: normal;
+    font-style: normal;
 }
 
 a {
@@ -132,6 +132,9 @@ details { font-family: MC-Regular }
 details > summary { font-family: MC-Regular }
 
 header {
+    position: sticky;
+    top: 0px;
+    z-index: 1000;
     padding: 10px 20px;
     background: #25252540;
     backdrop-filter: blur(10px);
@@ -359,7 +362,7 @@ div.images > img {
 
 .nav {
     display: none;
-    position: absolute;
+    position: fixed;
     top: 50px;
     left: 20px;
     padding: 0px;
@@ -369,6 +372,7 @@ div.images > img {
     font-size: 1rem;
     width: 175px;
     overflow: hidden;
+    z-index: 1001;
 }
 
 .nav > a {
@@ -390,15 +394,15 @@ div.images > img {
 .nav > a.active { background: #2e2e2e }
 nav:hover { cursor: pointer }
 
-/* .announcement-collapsed {
+/*.announcement-collapsed {
     overflow: hidden;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 1;
 }
-.announcement-collapsed:hover { -webkit-line-clamp: unset } */
+.announcement-collapsed:hover { -webkit-line-clamp: unset }*/
 
-/* .announcement > summary { line-height: 30px } */
+/*.announcement > summary { line-height: 30px }*/
 .announcement > summary > i { font-size: 0.75rem }
 .announcement > p { margin-left: 5px }
 

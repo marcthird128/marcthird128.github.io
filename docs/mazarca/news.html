@@ -80,12 +80,17 @@
                 <p>There are now maces and wind charges in Anarchy!! Go check 'em out!</p>
             </details>
             <hr size="2px">
-            <details open class="announcement">
-                <summary><i>October 7, 2025</i><span style="color: gray"> - latest</span></summary>
+            <details class="announcement">
+                <summary><i>October 26, 2025</i></summary>
                 <p>
                     Many custom items were added!<br>
                     Check the new <a href="recipes.html">Recipes</a> page to see how they're crafted
                 </p>
+            </details>
+            <hr size="2px">
+            <details class="announcement">
+                <summary><i>October 28, 2025</i></summary>
+                <p>Server is currently down! Will be up after some time, please wait.</p>
             </details>
             <!--Template
             <hr size="2px">
@@ -102,5 +107,13 @@
     <script src="source/js/navigation.js"></script>
     <script src="source/js/selection.js"></script>
     <script src="source/js/message.js"></script>
+    <script>
+        // add the "latest" label to the last announcement and make it open by default
+        const all = document.querySelectorAll("details.announcement");
+        const latest = all[all.length-1];
+        latest.open = true;
+        let summary = latest.querySelector("summary");
+        summary.innerHTML = summary.innerHTML + '<span style="color: #FF5555"> - latest</span>';
+    </script>
 </body>
 </html>
