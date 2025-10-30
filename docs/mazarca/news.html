@@ -7,113 +7,28 @@
     <title>Mazarca | News</title>
 </head>
 <body>
+    <noscript>
+        <header>
+            Website won't function properly without JavaScript enabled in your browser!
+            <small class="font-regular"><a href="https://enable-javascript.com" target="_blank">How to enable JavaScript</a></small>
+        </header>
+    </noscript>
     <main class="wrapper">
         <h3 class="text-center">Announcements</h3>
         <div id="news-container" style="display: flex; flex-direction: column-reverse">
-            <details class="announcement">
-                <summary><i>July 13, 2025</i></summary>
-                <p>Mazarca is back up! Join now: <code class="ip" onclick="select(this)">ws://30.ip.gl.ply.gg:50343</code>.</p>
-            </details>
-            <hr size="2px">
-            <details class="announcement">
-                <summary><i>August 12, 2025</i></summary>
-                <p>Major site update! Here is what's new:</p>
-                <ul>
-                    <li>Enhanced look and style</li>
-                    <li>Added a gallery of in-game world screenshots</li>
-                    <li>Added Announcements page for important news on the server</li>
-                    <li>Added Navigation bar for all the new stuff</li>
-                </ul>
-            </details>
-            <hr size="2px">
-            <details class="announcement">
-                <summary><i>August 16, 2025</i></summary>
-                <p>Added new plugins:</p>
-                <ul>
-                    <li>LuckPerms & Vault</li>
-                    <li>EssentialsXChat</li>
-                    <li>TAB</li>
-                </ul>
-                <p>Server now has rank system, as well as better chat and tablist formatting</p>
-            </details>
-            <hr size="2px">
-            <details class="announcement">
-                <summary><i>August 20, 2025</i></summary>
-                <p>IP list on the Homepage has been updated!</p>
-            </details>
-            <hr>
-            <details class="announcement">
-                <summary><i>August 21, 2025</i></summary>
-                <p>Added a quick Slimefun "Get Started" guide.</p>
-            </details>
-            <hr size="2px">
-            <details class="announcement">
-                <summary><i>August 25, 2025</i></summary>
-                <p>
-                    Big server update! Added lobby server with a cool parkour course. <br>
-                    Also, now there's a brand-new superflat server with RandomDrops plugin - test your luck!
-                </p>
-            </details>
-            <hr size="2px">
-            <details class="announcement">
-                <summary><i>September 2, 2025</i></summary>
-                <p>
-                    Added a status page for the server and <a href="https://eaglercraft.com">eaglercraft.com</a> website
-                </p>
-            </details>
-            <hr size="2px">
-            <details class="announcement">
-                <summary><i>September 6, 2025</i></summary>
-                <p>Moved site navigation into a dropdown menu with icons</p>
-            </details>
-            <hr size="2px">
-            <details class="announcement">
-                <summary><i>September 30, 2025</i></summary>
-                <p>
-                    Server update: New lobby and new server - Minigames!<br>
-                    Site update: added info about new servers (see Homepage)
-                </p>
-            </details>
-            <hr size="2px">
-            <details class="announcement">
-                <summary><i>October 7, 2025</i></summary>
-                <p>There are now maces and wind charges in Anarchy!! Go check 'em out!</p>
-            </details>
-            <hr size="2px">
-            <details class="announcement">
-                <summary><i>October 26, 2025</i></summary>
-                <p>
-                    Many custom items were added!<br>
-                    Check the new <a href="recipes.html">Recipes</a> page to see how they're crafted
-                </p>
-            </details>
-            <hr size="2px">
-            <details class="announcement">
-                <summary><i>October 28, 2025</i></summary>
-                <p>Server is currently down! Will be up after some time, please wait.</p>
-            </details>
-            <!--Template
-            <hr size="2px">
-            <details class="announcement">
-                <summary><i>Date</i></summary>
-                <p>
-                    Contents
-                </p>
-            </details>
-            -->
+            <!-- Announcements go in source/data/news.json -->
         </div>
+        <noscript>
+            <p class="text-center">
+                Can't load announcements, because JavaScript is disabled in your browser!<br>
+                <small class="font-regular"><a href="https://enable-javascript.com" target="_blank">How to enable JavaScript</a></small>
+            </p>
+        </noscript>
     </main>
     <script src="source/js/header.js"></script>
     <script src="source/js/navigation.js"></script>
     <script src="source/js/selection.js"></script>
     <script src="source/js/message.js"></script>
-    <script>
-        // add the "latest" label to the last announcement and make it open by default
-        const all = document.querySelectorAll("details.announcement");
-        const latest = all[all.length-1];
-        latest.open = true;
-        let summary = latest.querySelector("summary");
-        summary.innerHTML = summary.innerHTML + '<span style="color: #FF5555"> - latest</span>';
-    </script>
+    <script src="source/js/news.js"></script>
 </body>
 </html>

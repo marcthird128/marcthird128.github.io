@@ -404,7 +404,7 @@ nav:hover { cursor: pointer }
 
 /*.announcement > summary { line-height: 30px }*/
 .announcement > summary > i { font-size: 0.75rem }
-.announcement > p { margin-left: 5px }
+.announcement > div { margin-left: 5px }
 
 .splash {
     position: absolute;
