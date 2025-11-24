@@ -189,7 +189,7 @@ textarea {
     resize: vertical;
 }
 
-form {
+.form {
     width: 90%;
     margin: 5px 0px;
     display: flex;
@@ -198,7 +198,7 @@ form {
     gap: 10px;
 }
 
-form > div { width: 100% }
+.form > div { width: 100% }
 
 button {
     margin: 0px;
