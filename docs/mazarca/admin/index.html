@@ -44,6 +44,9 @@
             </select>
         </form>
     </main>
+    <div id="shutter">
+        <h1 class="text-center">You shall not pass!</h1>
+    </div>
     <script>
         const con = document.getElementById("console");
         const cmd = document.getElementById("command-prompt");
@@ -57,12 +60,16 @@
             let host = srv.options[srv.selectedIndex].dataset.host;
             let window = srv.options[srv.selectedIndex].dataset.window;
             try {
-                await fetch(`https://${host}.maza64.xyz/console?window=${window}`, {
+                let res = await fetch(`https://${host}.maza64.xyz/console?window=${window}`, {
                     method: "GET",
                     headers: {
                         Authorization: `${password}`
                     }
-                }).then(obj => obj.text()).then(res => con.innerText = res);
+                });
+                if (res.status == 401) {
+                    document.getElementById("shutter").style.display = "flex";
+                };
+                con.innerText = await res.text();
                 con.scrollTop = con.scrollHeight;
             } catch (err) {
                 alert(err);
@@ -78,12 +85,16 @@
             console.log(`Executing command '${command}' in server '${srv.value}' (${host}, ${window})`);
             cmd.value = "";
             try {
-                await fetch(`https://${host}.maza64.xyz/console?window=${window}&command=${command}`, {
+                let res = await fetch(`https://${host}.maza64.xyz/console?window=${window}&command=${command}`, {
                     method: "GET",
                     headers: {
                         Authorization: `${password}`
                     }
-                }).then(obj => obj.text()).then(res => con.innerText = res);
+                });
+                if (res.status == 401) {
+                    document.getElementById("shutter").style.display = "flex";
+                };
+                con.innerText = await res.text();
                 con.scrollTop = con.scrollHeight;
             } catch (err) {
                 alert(err);
