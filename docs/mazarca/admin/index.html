@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="A Minecraft server that supports Eaglercraft 1.8 and 1.12">
+    <link rel="icon" type="image/x-icon" href="../source/icon.png" />
+    <link rel="stylesheet" href="../source/css/main.css" />
+    <link rel="stylesheet" href="../source/css/admin.css" />
+    <title>Mazarca Admin</title>
+    <style>
+        html { height: 100% }
+        body {
+            display: grid;
+            grid-template-columns: 250px auto;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <div style="display: flex; align-items: center; justify-content: center; gap: 10px; padding: 15px">
+            <img class="logo" src="../source/cookie.png" height="30px">
+            <h3 class="no-margin">Mazarca Admin</h3>
+        </div>
+        <div class="sidebar-nav">
+            <a class="active">Server console</a>
+        </div>
+        <div style="flex-grow: 1"></div>
+        <small class="text-center" style="padding: 5px;">Version: 0.0.1</small>
+    </div>
+    <main class="wrapper wrapper-full">
+        <div class="console">
+            <pre id="console"></pre>
+        </div>
+        <form class="under-console" onsubmit="sendCommand(event)">
+            <label for="command-prompt" style="font-family: MC-Regular">></label>
+            <input type="text" id="command-prompt">
+            <select id="server-select">
+                <option data-host="raspberrypi" data-window="2">Lobby</option>
+                <option data-host="raspberrypi" data-window="3">Minigames</option>
+                <option disabled data-host="oldpc" data-window="">SMP</option>
+                <option disabled data-host="oldpc" data-window="">Anarchy</option>
+                <option disabled data-host="oldpc" data-window="">Random Drops</option>
+            </select>
+        </form>
+    </main>
+    <script>
+        const con = document.getElementById("console");
+        const cmd = document.getElementById("command-prompt");
+        const srv = document.getElementById("server-select");
+        const password = btoa(prompt("Password?"));
+        console.log(password);
+
+        // Get console history
+        async function loadHistory() {
+            console.log(`Loading console history for ${srv.value}`);
+            let host = srv.options[srv.selectedIndex].dataset.host;
+            let window = srv.options[srv.selectedIndex].dataset.window;
+            try {
+                await fetch(`https://${host}.maza64.xyz/console?window=${window}`, {
+                    method: "GET",
+                    headers: {
+                        Authorization: `${password}`
+                    }
+                }).then(obj => obj.text()).then(res => con.innerText = res);
+                con.scrollTop = con.scrollHeight;
+            } catch (err) {
+                alert(err);
+            };
+        };
+
+        // Send a new command
+        async function sendCommand(e) {
+            e.preventDefault();
+            let host = srv.options[srv.selectedIndex].dataset.host;
+            let window = srv.options[srv.selectedIndex].dataset.window;
+            let command = cmd.value;
+            console.log(`Executing command '${command}' in server '${srv.value}' (${host}, ${window})`);
+            cmd.value = "";
+            try {
+                await fetch(`https://${host}.maza64.xyz/console?window=${window}&command=${command}`, {
+                    method: "GET",
+                    headers: {
+                        Authorization: `${password}`
+                    }
+                }).then(obj => obj.text()).then(res => con.innerText = res);
+                con.scrollTop = con.scrollHeight;
+            } catch (err) {
+                alert(err);
+            };
+        };
+
+        loadHistory();
+
+        // Reload history when selected server has been changed
+        srv.addEventListener("change", () => {
+            loadHistory();
+        });
+    </script>
+</body>
+</html>
