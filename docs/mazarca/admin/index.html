@@ -11,7 +11,7 @@
         html { height: 100% }
         body {
             display: grid;
-            grid-template-columns: 250px auto;
+            grid-template-columns: 245px auto;
             height: 100%;
         }
     </style>
@@ -23,10 +23,11 @@
             <h3 class="no-margin">Mazarca Admin</h3>
         </div>
         <div class="sidebar-nav">
-            <a class="active">Server console</a>
+            <a class="active">Console</a>
+            <a href="files.html">Files</a>
         </div>
         <div style="flex-grow: 1"></div>
-        <small class="text-center" style="padding: 5px;">Version: 0.0.1</small>
+        <small class="text-center" style="padding: 5px;">Version: 0.0.2</small>
     </div>
     <main class="wrapper wrapper-full">
         <div class="console">
@@ -35,6 +36,7 @@
         <form class="under-console" onsubmit="sendCommand(event)">
             <label for="command-prompt" style="font-family: MC-Regular">></label>
             <input type="text" id="command-prompt">
+            <button type="submit" class="primary" id="send-btn">Send</button>
             <select id="server-select">
                 <option data-host="raspberrypi" data-window="2">Lobby</option>
                 <option data-host="raspberrypi" data-window="3">Minigames</option>
@@ -50,6 +52,7 @@
     <script>
         const con = document.getElementById("console");
         const cmd = document.getElementById("command-prompt");
+        const btn = document.getElementById("send-btn");
         const srv = document.getElementById("server-select");
         const password = btoa(prompt("Password?"));
         console.log(password);
@@ -69,7 +72,8 @@
                 if (res.status == 401) {
                     document.getElementById("shutter").style.display = "flex";
                 };
-                con.innerText = await res.text();
+                const t = await res.text();
+                con.innerText = t.trim();
                 con.scrollTop = con.scrollHeight;
             } catch (err) {
                 alert(err);
@@ -82,22 +86,24 @@
             let host = srv.options[srv.selectedIndex].dataset.host;
             let window = srv.options[srv.selectedIndex].dataset.window;
             let command = cmd.value;
-            console.log(`Executing command '${command}' in server '${srv.value}' (${host}, ${window})`);
-            cmd.value = "";
-            try {
-                let res = await fetch(`https://${host}.maza64.xyz/console?window=${window}&command=${command}`, {
-                    method: "GET",
-                    headers: {
-                        Authorization: `${password}`
-                    }
-                });
-                if (res.status == 401) {
-                    document.getElementById("shutter").style.display = "flex";
+            if (command) {
+                btn.disabled = true;
+                console.log(`Executing command '${command}' in server '${srv.value}' (${host}, ${window})`);
+                cmd.value = "";
+                try {
+                    let res = await fetch(`https://${host}.maza64.xyz/console?window=${window}&command=${command}`, {
+                        method: "GET",
+                        headers: {
+                            Authorization: `${password}`
+                        }
+                    });
+                    const t = await res.text();
+                    con.innerText = t.trim();
+                    con.scrollTop = con.scrollHeight;
+                } catch (err) {
+                    alert(err);
                 };
-                con.innerText = await res.text();
-                con.scrollTop = con.scrollHeight;
-            } catch (err) {
-                alert(err);
+                btn.disabled = false;
             };
         };
 
