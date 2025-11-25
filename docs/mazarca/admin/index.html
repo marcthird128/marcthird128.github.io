@@ -46,15 +46,12 @@
             </select>
         </form>
     </main>
-    <div id="shutter">
-        <h1 class="text-center">You shall not pass!</h1>
-    </div>
     <script>
         const con = document.getElementById("console");
         const cmd = document.getElementById("command-prompt");
         const btn = document.getElementById("send-btn");
         const srv = document.getElementById("server-select");
-        const password = btoa(prompt("Password?"));
+        const password = btoa(prompt("Password? Also, updated UI is coming..."));
         console.log(password);
 
         // Get console history
@@ -69,9 +66,6 @@
                         Authorization: `${password}`
                     }
                 });
-                if (res.status == 401) {
-                    document.getElementById("shutter").style.display = "flex";
-                };
                 const t = await res.text();
                 con.innerText = t.trim();
                 con.scrollTop = con.scrollHeight;

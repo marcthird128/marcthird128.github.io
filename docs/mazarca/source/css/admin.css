@@ -93,14 +93,3 @@ main {
     flex-direction: column;
     min-width: 0px;
 }
-
-#shutter {
-    margin: 0px;
-    padding: 10px;
-    display: none;
-    flex-direction: column;
-    position: absolute;
-    width: calc(100% - 20px);
-    height: calc(100% - 20px);
-    background: #323232;
-}
