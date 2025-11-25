@@ -8,27 +8,16 @@
     <link rel="stylesheet" href="../source/css/admin.css" />
     <title>Mazarca Admin</title>
     <style>
-        html { height: 100% }
-        body {
-            display: grid;
-            grid-template-columns: 245px auto;
+        html {
             height: 100%;
+        }
+
+        body {
+            height: calc(100% - 10px);
         }
     </style>
 </head>
 <body>
-    <div class="sidebar">
-        <div style="display: flex; align-items: center; justify-content: center; gap: 10px; padding: 15px">
-            <img class="logo" src="../source/cookie.png" height="30px">
-            <h3 class="no-margin">Mazarca Admin</h3>
-        </div>
-        <div class="sidebar-nav">
-            <a class="active">Console</a>
-            <a href="files.html">Files</a>
-        </div>
-        <div style="flex-grow: 1"></div>
-        <small class="text-center" style="padding: 5px;">Version: 0.0.2</small>
-    </div>
     <main class="wrapper wrapper-full">
         <div class="console">
             <pre id="console"></pre>
@@ -51,7 +40,7 @@
         const cmd = document.getElementById("command-prompt");
         const btn = document.getElementById("send-btn");
         const srv = document.getElementById("server-select");
-        const password = btoa(prompt("Password? Also, updated UI is coming..."));
+        const password = btoa(prompt("Password?"));
         console.log(password);
 
         // Get console history
@@ -67,8 +56,13 @@
                     }
                 });
                 const t = await res.text();
+                const previousScrollHeight = con.scrollHeight;
+                const previousScrollTop = con.scrollTop;
+                const maxScroll = previousScrollHeight - con.clientHeight;
                 con.innerText = t.trim();
-                con.scrollTop = con.scrollHeight;
+                if (maxScroll - previousScrollTop < 50) {
+                    con.scrollTop = con.scrollHeight;
+                };
             } catch (err) {
                 alert(err);
             };
@@ -81,7 +75,9 @@
             let window = srv.options[srv.selectedIndex].dataset.window;
             let command = cmd.value;
             if (command) {
+                cmd.disabled = true;
                 btn.disabled = true;
+                srv.disabled = true;
                 console.log(`Executing command '${command}' in server '${srv.value}' (${host}, ${window})`);
                 cmd.value = "";
                 try {
@@ -97,11 +93,21 @@
                 } catch (err) {
                     alert(err);
                 };
+                cmd.disabled = false;
                 btn.disabled = false;
+                srv.disabled = false;
             };
         };
 
+        cmd.disabled = true;
+        btn.disabled = true;
+        srv.disabled = true;
         loadHistory();
+        con.scrollTop = con.scrollHeight;
+        cmd.disabled = false;
+        btn.disabled = false;
+        srv.disabled = false;
+        setInterval(loadHistory, 5000);
 
         // Reload history when selected server has been changed
         srv.addEventListener("change", () => {
