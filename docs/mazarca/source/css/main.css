@@ -286,13 +286,14 @@ button:disabled:hover { background-color: #3e3e3e }
 }
 
 .wrapper-full {
+    position: absolute;
     display: flex;
     flex-direction: column;
     margin: 10px;
-    padding: 0px;
-    width: calc(100% - 20px);
-    max-width: calc(100% - 20px);
-    height: calc(100% - 10px);
+    padding: 15px;
+    max-width: unset;
+    width: calc(100% - 50px);
+    height: calc(100% - 50px);
     border: 1px solid #55555560;
 }
 

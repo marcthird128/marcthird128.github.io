@@ -77,19 +77,32 @@ select, option {
     border-radius: 5px;
 }
 
+select {
+    background: #00000000;
+}
+
 pre {
     margin: 0px;
     width: 100%;
 }
 
-body {
+.playerlist {
     margin: 0px;
-    min-width: fit-content;
+    font-size: 20px;
 }
 
-main {
-    overflow-x: hidden;
+.playerlist > .playerlist-row {
     display: flex;
-    flex-direction: column;
-    min-width: 0px;
+    align-items: center;
+    gap: 10px;
+    padding: 5px;
 }
+
+.playername, .kick, .ban {
+    width: fit-content;
+}
+
+.kick { background: #ffaa00 }
+.kick:hover { background: #7f5605 }
+.ban { background: #ff0000 }
+.ban:hover { background: #7c0505 }

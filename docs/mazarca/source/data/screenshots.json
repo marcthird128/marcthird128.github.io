@@ -20,6 +20,11 @@
             "name": "4.webp",
             "server": "SMP",
             "desc": "Spawn area"
+        },
+        {
+            "name": "5.webp",
+            "server": "SMP",
+            "desc": "The Space Station"
         }
     ]
 }

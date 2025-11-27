@@ -15,27 +15,33 @@
     </noscript>
     <main class="wrapper">
         <div class="d-flex items-center gap-10px no-wrap" style="padding: 0px; height: 40px">
-            <p>Minigames</p>
+            <p>Lobby, Minigames</p>
             <hr size="2px" color="gray" class="flex-grow-1">
-            <button type="button" class="secondary" style="display: none" id="pi-report-offline" onclick="window.open('https://reddit.com/r/MazarcaSMP/submit?type=TEXT&title=Server is down right now!', '_blank')">Report</button>
-            <p class="no-margin font-bold" style="color: gray" id="pi-status">...</p>
+            <button type="button" class="secondary" style="display: none" id="raspberrypi-report-offline" onclick="window.open('https://reddit.com/r/MazarcaSMP/submit?type=TEXT&title=Server is down right now!', '_blank')">Report</button>
+            <p class="no-margin font-bold" style="color: gray" id="raspberrypi-status">...</p>
         </div>
         <div class="d-flex items-center gap-10px no-wrap" style="padding: 0px; height: 40px">
-            <p>SMP, Anarchy, RandomDrops</p>
+            <p>Anarchy</p>
             <hr size="2px" color="gray" class="flex-grow-1">
             <button type="button" class="secondary" style="display: none" id="oldlaptop-report-offline" onclick="window.open('https://reddit.com/r/MazarcaSMP/submit?type=TEXT&title=Server is down right now!', '_blank')">Report</button>
             <p class="no-margin font-bold" style="color: gray" id="oldlaptop-status">...</p>
         </div>
-        <p class="text-center" id="timer">Status page is currently not working. Fix soon</p>
-<!--        <noscript>-->
-<!--            <p class="text-center">-->
-<!--                Can't check status, because JavaScript is disabled in your browser!<br>-->
-<!--                <small class="font-regular"><a href="https://enable-javascript.com" target="_blank">How to enable JavaScript</a></small>-->
-<!--            </p>-->
-<!--        </noscript>-->
+        <div class="d-flex items-center gap-10px no-wrap" style="padding: 0px; height: 40px">
+            <p>SMP</p>
+            <hr size="2px" color="gray" class="flex-grow-1">
+            <button type="button" class="secondary" style="display: none" id="oldpc-report-offline" onclick="window.open('https://reddit.com/r/MazarcaSMP/submit?type=TEXT&title=Server is down right now!', '_blank')">Report</button>
+            <p class="no-margin font-bold" style="color: gray" id="oldpc-status">...</p>
+        </div>
+        <p class="text-center" id="timer"></p>
+        <noscript>
+            <p class="text-center">
+                Can't check status, because JavaScript is disabled in your browser!<br>
+                <small class="font-regular"><a href="https://enable-javascript.com" target="_blank">How to enable JavaScript</a></small>
+            </p>
+        </noscript>
     </main>
     <script src="source/js/header.js"></script>
     <script src="source/js/navigation.js"></script>
-<!--    <script src="source/js/status.js"></script>-->
+    <script src="source/js/status.js"></script>
 </body>
 </html>

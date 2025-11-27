@@ -13,12 +13,16 @@ function getPing(host, output) {
     setInterval(async () => {
         let online = await (async () => {
             let cache_preventer = btoa(Date.now() + "_" + Math.random());
-            let url = "https://" + host + ".maza64.xyz" + "?" + cache_preventer;
+            let url = `https://${host}.maza64.xyz?${cache_preventer}`;
             try {
                 const response = await fetch(url);
-                if (response.status === 401 || (response.status >= 200 && response.status < 300)) { return true }
+                if (response.status === 401 || (response.status >= 200 && response.status < 300)) {
+                    return true;
+                };
                 return false;
-            } catch (error) { return false }
+            } catch (error) {
+                return false;
+            };
         })();
         var newDate = new Date();
         currentTime = newDate.timeNow();
@@ -39,5 +43,6 @@ function getPing(host, output) {
     }, 3000);
 };
 
-getPing("pi", document.getElementById("pi-status"));
+getPing("raspberrypi", document.getElementById("raspberrypi-status"));
 getPing("oldlaptop", document.getElementById("oldlaptop-status"));
+getPing("oldpc", document.getElementById("oldpc-status"));
