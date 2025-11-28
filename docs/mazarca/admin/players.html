@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="A Minecraft server that supports Eaglercraft 1.8 and 1.12">
+    <link rel="icon" type="image/x-icon" href="../source/icon.png" />
+    <link rel="stylesheet" href="../source/css/main.css" />
+    <link rel="stylesheet" href="../source/css/admin.css" />
+    <title>Mazarca | Admin</title>
+    <style>
+        html {
+            height: 100%;
+        }
+
+        body {
+            height: calc(100% - 40px);
+        }
+    </style>
+    <script src="../source/js/auth.js"></script>
+</head>
+<body>
+    <main class="wrapper wrapper-full">
+        <div style="margin-bottom: 15px; display: flex; align-items: center; justify-content: center; gap: 20px;">
+<!--            <a class="page-link" style="margin-right: auto" href="index.html">Back to console</a>-->
+            <h1 class="text-center no-margin">Playerlist</h1>
+            <select id="server-select">
+                <option data-host="raspberrypi" data-window="2">Lobby</option>
+                <option data-host="raspberrypi" data-window="3">Minigames</option>
+                <option data-host="oldpc" data-window="0">SMP</option>
+                <option data-host="oldlaptop" data-window="0">Anarchy</option>
+                <option disabled data-host="" data-window="">Random Drops</option>
+            </select>
+        </div>
+        <p class="text-center" id="total">Fetching data, please wait...</p>
+        <div id="players" class="playerlist"></div>
+    </main>
+    <script>
+        const playersTotal = document.getElementById("total");
+        const playersContainer = document.getElementById("players");
+        const srv = document.getElementById("server-select");
+
+        async function loadPlayerList() {
+            let host = srv.options[srv.selectedIndex].dataset.host;
+            let window = srv.options[srv.selectedIndex].dataset.window;
+            const url = `https://${host}.maza64.xyz/playerlist?window=${window}`;
+            try {
+                const res = await authenticatedFetch(url);
+                if (!res) return;
+                const playerList = await res.json();
+                playersTotal.innerText = `${playerList.total} players online in ${srv.value}`;
+                playersContainer.innerHTML = "";
+                if (playerList.groups) {
+                    const allPlayers = [].concat(...Object.values(playerList.groups));
+                    allPlayers.forEach((player) => {
+                        let row = document.createElement("div");
+                        row.className = "playerlist-row";
+                        row.innerHTML = `
+                            <p class="playername">${player}</p>
+                            <hr size="2px" color="gray" class="flex-grow-1">
+                            <button class="primary kick" onclick="kickPlayer('${host}', '${window}', '${player}')">Kick</button>
+                            <button class="primary ban" onclick="banPlayer('${host}', '${window}', '${player}')">Ban!</button>
+                        `;
+                        playersContainer.appendChild(row);
+                    });
+                };
+            } catch (err) {
+                alert(err);
+            };
+        };
+
+        async function kickPlayer(host, window, player) {
+            if (!confirm(`Kick ${player}?`)) return;
+            const url = `https://${host}.maza64.xyz/console?window=${window}&command=kick ${player}`;
+            await authenticatedFetch(url);
+            alert(`${player} kicked!`);
+            loadPlayerList();
+        };
+
+        async function banPlayer(host, window, player) {
+            const reason = prompt(`Ban ${player}? You must specify the reason below.`);
+            if (!reason) return;
+            const url = `https://${host}.maza64.xyz/console?window=${window}&command=ban ${player} ${reason}`;
+            await authenticatedFetch(url);
+            alert(`${player} banned for ${reason}!`);
+            loadPlayerList();
+        };
+
+        // Initialize
+        srv.addEventListener("change", () => {
+            playersTotal.innerText = "Fetching data, please wait...";
+            loadPlayerList();
+        });
+        loadPlayerList();
+        setInterval(loadPlayerList, 5000);
+    </script>
+</body>
+</html>

@@ -6,19 +6,18 @@
     <link rel="icon" type="image/x-icon" href="../source/icon.png" />
     <link rel="stylesheet" href="../source/css/main.css" />
     <link rel="stylesheet" href="../source/css/admin.css" />
-    <title>Mazarca Admin</title>
+    <title>Mazarca | Admin</title>
     <style>
-        html {
+        html, body {
+            margin: 0px;
+            padding: 0px;
             height: 100%;
         }
-
-        body {
-            height: calc(100% - 10px);
-        }
     </style>
+    <script src="../source/js/auth.js"></script>
 </head>
 <body>
-    <main class="wrapper wrapper-full">
+    <main class="wrapper wrapper-full" style="padding: 0px; width: calc(100% - 20px); height: calc(100% - 20px);">
         <div class="console">
             <pre id="console"></pre>
         </div>
@@ -40,21 +39,14 @@
         const cmd = document.getElementById("command-prompt");
         const btn = document.getElementById("send-btn");
         const srv = document.getElementById("server-select");
-        const password = btoa(prompt("Password?"));
-        console.log(password);
 
-        // Get console history
         async function loadHistory() {
-            console.log(`Loading console history for ${srv.value}`);
             let host = srv.options[srv.selectedIndex].dataset.host;
             let window = srv.options[srv.selectedIndex].dataset.window;
+            const url = `https://${host}.maza64.xyz/console?window=${window}`;
             try {
-                let res = await fetch(`https://${host}.maza64.xyz/console?window=${window}`, {
-                    method: "GET",
-                    headers: {
-                        Authorization: `${password}`
-                    }
-                });
+                const res = await authenticatedFetch(url);
+                if (!res) return;
                 const t = await res.text();
                 const previousScrollHeight = con.scrollHeight;
                 const previousScrollTop = con.scrollTop;
@@ -64,55 +56,49 @@
                     con.scrollTop = con.scrollHeight;
                 };
             } catch (err) {
-                alert(err);
+                console.error(err);
             };
         };
 
-        // Send a new command
         async function sendCommand(e) {
             e.preventDefault();
             let host = srv.options[srv.selectedIndex].dataset.host;
             let window = srv.options[srv.selectedIndex].dataset.window;
             let command = cmd.value;
-            if (command) {
-                cmd.disabled = true;
-                btn.disabled = true;
-                srv.disabled = true;
-                console.log(`Executing command '${command}' in server '${srv.value}' (${host}, ${window})`);
-                cmd.value = "";
-                try {
-                    let res = await fetch(`https://${host}.maza64.xyz/console?window=${window}&command=${command}`, {
-                        method: "GET",
-                        headers: {
-                            Authorization: `${password}`
-                        }
-                    });
-                    const t = await res.text();
-                    con.innerText = t.trim();
-                    con.scrollTop = con.scrollHeight;
-                } catch (err) {
-                    alert(err);
-                };
+            if (!command) return;
+            cmd.disabled = true;
+            btn.disabled = true;
+            srv.disabled = true;
+            cmd.value = "";
+            const url = `https://${host}.maza64.xyz/console?window=${window}&command=${encodeURIComponent(command)}`;
+            try {
+                const res = await authenticatedFetch(url);
+                if (!res) return;
+                const t = await res.text();
+                con.innerText = t.trim();
+                con.scrollTop = con.scrollHeight;
+            } catch (err) {
+                console.error(err);
+            } finally {
                 cmd.disabled = false;
                 btn.disabled = false;
                 srv.disabled = false;
             };
         };
 
+        // Initialize
         cmd.disabled = true;
         btn.disabled = true;
         srv.disabled = true;
-        loadHistory();
+        loadHistory().finally(() => {
+            cmd.disabled = false;
+            btn.disabled = false;
+            srv.disabled = false;
+        });
         con.scrollTop = con.scrollHeight;
-        cmd.disabled = false;
-        btn.disabled = false;
-        srv.disabled = false;
         setInterval(loadHistory, 5000);
 
-        // Reload history when selected server has been changed
-        srv.addEventListener("change", () => {
-            loadHistory();
-        });
+        srv.addEventListener("change", loadHistory);
     </script>
 </body>
 </html>

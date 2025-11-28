@@ -401,6 +401,17 @@ div.images > img {
 .nav > a.active { background: #2e2e2e }
 nav:hover { cursor: pointer }
 
+a.page-link {
+    color: #ffffff;
+    cursor: pointer;
+}
+
+a.page-link:hover {
+    text-decoration: underline;
+    color: gray;
+    text-shadow: none;
+}
+
 /*.announcement-collapsed {
     overflow: hidden;
     display: -webkit-box;
