@@ -61,7 +61,7 @@
     font-size: 11px;
 }
 
-.under-console {
+.footer {
     padding: 10px;
     display: flex;
     align-items: center;
@@ -106,3 +106,16 @@ pre {
 .kick:hover { background: #7f5605 }
 .ban { background: #ff0000 }
 .ban:hover { background: #7c0505 }
+
+#nav-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 0px;
+}
+
+#nav-btn img, #nav-btn svg {
+    display: block;
+    margin: 0 auto;
+}

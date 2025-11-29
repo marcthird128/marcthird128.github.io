@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="A Minecraft server that supports Eaglercraft 1.8 and 1.12">
+    <link rel="icon" type="image/x-icon" href="../source/icon.png" />
+    <link rel="stylesheet" href="../source/css/main.css" />
+    <link rel="stylesheet" href="../source/css/admin.css" />
+    <title>Mazarca Admin | Console</title>
+    <style>
+        html, body {
+            margin: 0px;
+            padding: 0px;
+            height: 100%;
+        }
+    </style>
+    <script src="../source/js/auth.js"></script>
+</head>
+<body>
+    <main class="wrapper wrapper-full" style="padding: 0px; width: calc(100% - 20px); height: calc(100% - 20px);">
+        <div class="console">
+            <pre id="console"></pre>
+        </div>
+        <form class="footer" onsubmit="sendCommand(event)">
+            <div id="nav-btn" title="Manage online players">
+                <a href="players.html">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 16 16">
+                        <g fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5">
+                            <circle cx="5" cy="9" r="2.25"/>
+                            <circle cx="11" cy="4" r="2.25"/>
+                            <path d="M7.75 9.25c0-1 .75-3 3.25-3s3.25 2 3.25 3m-12.5 5c0-1 .75-3 3.25-3s3.25 2 3.25 3"/>
+                        </g>
+                    </svg>
+                </a>
+            </div>
+            <label for="command-prompt" style="font-family: MC-Regular">></label>
+            <input type="text" id="command-prompt">
+            <button type="submit" class="primary" id="send-btn">Send</button>
+            <select id="server-select">
+                <option data-host="raspberrypi" data-window="2">Lobby</option>
+                <option data-host="raspberrypi" data-window="3">Minigames</option>
+                <option data-host="oldpc" data-window="0">SMP</option>
+                <option data-host="oldlaptop" data-window="0">Anarchy</option>
+                <option disabled data-host="" data-window="">Random Drops</option>
+            </select>
+        </form>
+    </main>
+    <script>
+        const con = document.getElementById("console");
+        const cmd = document.getElementById("command-prompt");
+        const btn = document.getElementById("send-btn");
+        const srv = document.getElementById("server-select");
+
+        async function loadHistory() {
+            let host = srv.options[srv.selectedIndex].dataset.host;
+            let window = srv.options[srv.selectedIndex].dataset.window;
+            const url = `https://${host}.maza64.xyz/console?window=${window}`;
+            try {
+                const res = await authenticatedFetch(url);
+                if (!res) return;
+                const t = await res.text();
+                const previousScrollHeight = con.scrollHeight;
+                const previousScrollTop = con.scrollTop;
+                const maxScroll = previousScrollHeight - con.clientHeight;
+                con.innerText = t.trim();
+                if (maxScroll - previousScrollTop < 50) {
+                    con.scrollTop = con.scrollHeight;
+                };
+            } catch (err) {
+                console.error(err);
+            };
+        };
+
+        async function sendCommand(e) {
+            e.preventDefault();
+            let host = srv.options[srv.selectedIndex].dataset.host;
+            let window = srv.options[srv.selectedIndex].dataset.window;
+            let command = cmd.value;
+            if (!command) return;
+            cmd.disabled = true;
+            btn.disabled = true;
+            srv.disabled = true;
+            cmd.value = "";
+            const url = `https://${host}.maza64.xyz/console?window=${window}&command=${encodeURIComponent(command)}`;
+            try {
+                const res = await authenticatedFetch(url);
+                if (!res) return;
+                const t = await res.text();
+                con.innerText = t.trim();
+                con.scrollTop = con.scrollHeight;
+            } catch (err) {
+                console.error(err);
+            } finally {
+                cmd.disabled = false;
+                btn.disabled = false;
+                srv.disabled = false;
+            };
+        };
+
+        // Initialize
+        cmd.disabled = true;
+        btn.disabled = true;
+        srv.disabled = true;
+        loadHistory().finally(() => {
+            cmd.disabled = false;
+            btn.disabled = false;
+            srv.disabled = false;
+        });
+        con.scrollTop = con.scrollHeight;
+        setInterval(loadHistory, 5000);
+
+        srv.addEventListener("change", loadHistory);
+    </script>
+</body>
+</html>

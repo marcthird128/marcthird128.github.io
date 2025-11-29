@@ -1,4 +1,4 @@
-// Auth logic
+// auth logic
 function getAuthPassword() {
     let password = sessionStorage.getItem('adminPassword');
     if (!password) {

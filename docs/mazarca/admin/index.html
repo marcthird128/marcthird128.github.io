@@ -1,104 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="description" content="A Minecraft server that supports Eaglercraft 1.8 and 1.12">
-    <link rel="icon" type="image/x-icon" href="../source/icon.png" />
-    <link rel="stylesheet" href="../source/css/main.css" />
-    <link rel="stylesheet" href="../source/css/admin.css" />
-    <title>Mazarca | Admin</title>
+    <meta charset="utf-8">
     <style>
-        html, body {
-            margin: 0px;
-            padding: 0px;
-            height: 100%;
+        html {
+            font-family: Arial, sans-serif;
+        }
+
+        .spinner {
+            margin: 0px auto;
+            position: relative;
+            width: 51px;
+            height: 51px;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #000000;
+            border-radius: 50%;
+            animation: spin 0.8s infinite linear;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
     </style>
-    <script src="../source/js/auth.js"></script>
+    <title>Redirecting...</title>
 </head>
 <body>
-    <main class="wrapper wrapper-full" style="padding: 0px; width: calc(100% - 20px); height: calc(100% - 20px);">
-        <div class="console">
-            <pre id="console"></pre>
-        </div>
-        <form class="under-console" onsubmit="sendCommand(event)">
-            <label for="command-prompt" style="font-family: MC-Regular">></label>
-            <input type="text" id="command-prompt">
-            <button type="submit" class="primary" id="send-btn">Send</button>
-            <select id="server-select">
-                <option data-host="raspberrypi" data-window="2">Lobby</option>
-                <option data-host="raspberrypi" data-window="3">Minigames</option>
-                <option data-host="oldpc" data-window="0">SMP</option>
-                <option data-host="oldlaptop" data-window="0">Anarchy</option>
-                <option disabled data-host="" data-window="">Random Drops</option>
-            </select>
-        </form>
-    </main>
-    <script>
-        const con = document.getElementById("console");
-        const cmd = document.getElementById("command-prompt");
-        const btn = document.getElementById("send-btn");
-        const srv = document.getElementById("server-select");
-
-        async function loadHistory() {
-            let host = srv.options[srv.selectedIndex].dataset.host;
-            let window = srv.options[srv.selectedIndex].dataset.window;
-            const url = `https://${host}.maza64.xyz/console?window=${window}`;
-            try {
-                const res = await authenticatedFetch(url);
-                if (!res) return;
-                const t = await res.text();
-                const previousScrollHeight = con.scrollHeight;
-                const previousScrollTop = con.scrollTop;
-                const maxScroll = previousScrollHeight - con.clientHeight;
-                con.innerText = t.trim();
-                if (maxScroll - previousScrollTop < 50) {
-                    con.scrollTop = con.scrollHeight;
-                };
-            } catch (err) {
-                console.error(err);
-            };
-        };
-
-        async function sendCommand(e) {
-            e.preventDefault();
-            let host = srv.options[srv.selectedIndex].dataset.host;
-            let window = srv.options[srv.selectedIndex].dataset.window;
-            let command = cmd.value;
-            if (!command) return;
-            cmd.disabled = true;
-            btn.disabled = true;
-            srv.disabled = true;
-            cmd.value = "";
-            const url = `https://${host}.maza64.xyz/console?window=${window}&command=${encodeURIComponent(command)}`;
-            try {
-                const res = await authenticatedFetch(url);
-                if (!res) return;
-                const t = await res.text();
-                con.innerText = t.trim();
-                con.scrollTop = con.scrollHeight;
-            } catch (err) {
-                console.error(err);
-            } finally {
-                cmd.disabled = false;
-                btn.disabled = false;
-                srv.disabled = false;
-            };
-        };
-
-        // Initialize
-        cmd.disabled = true;
-        btn.disabled = true;
-        srv.disabled = true;
-        loadHistory().finally(() => {
-            cmd.disabled = false;
-            btn.disabled = false;
-            srv.disabled = false;
-        });
-        con.scrollTop = con.scrollHeight;
-        setInterval(loadHistory, 5000);
-
-        srv.addEventListener("change", loadHistory);
-    </script>
+    <h1 style="text-align: center">Loading... Please wait</h1>
+    <div class="spinner"></div>
+    <script> document.location.pathname = "mazarca/admin/console.html" </script>
 </body>
 </html>
