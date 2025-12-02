@@ -37,6 +37,7 @@
             <input type="text" id="command-prompt">
             <button type="submit" class="primary" id="send-btn">Send</button>
             <select id="server-select">
+                <option data-host="raspberrypi" data-window="1">Auth</option>
                 <option data-host="raspberrypi" data-window="2">Lobby</option>
                 <option data-host="raspberrypi" data-window="3">Minigames</option>
                 <option data-host="oldpc" data-window="0">SMP</option>
@@ -112,4 +113,5 @@
         srv.addEventListener("change", loadHistory);
     </script>
 </body>
+
 </html>
