@@ -8,39 +8,69 @@
     <link rel="stylesheet" href="../source/css/admin.css" />
     <title>Mazarca Admin | Playerlist</title>
     <style>
-        html {
+        html, body {
             height: 100%;
+            margin: 0;
+            padding: 0;
         }
 
         body {
-            height: calc(100% - 40px);
+            display: flex;
+            flex-direction: column;
+        }
+
+        main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+
+        #files {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            margin: 0 auto;
+            width: 30%;
+            min-width: 150px;
+        }
+
+        #nav-btn {
+            margin-top: auto; /* Pushes the button to the bottom */
+            padding: 0px;
+            width: 100%;
+            height: fit-content;
+            display: flex;
+            justify-content: flex-start;
         }
     </style>
     <script src="../source/js/auth.js"></script>
 </head>
 <body>
     <main class="wrapper wrapper-full">
-        <div style="display: flex; align-items: center; justify-content: space-between; gap: 20px; margin-bottom: 15px;">
-            <div id="nav-btn" title="Go back to console">
-                <a href="console.html">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                        <path fill="#ffffff" d="M16 18a1 1 0 1 0 0-2zm-8-2a1 1 0 1 0 0 2zm.707-8.707a1 1 0 1 0-1.414 1.414zM11 11l.707.707a1 1 0 0 0 0-1.414zm-3.707 2.293a1 1 0 1 0 1.414 1.414zM7 4h10V2H7zm13 3v10h2V7zm-3 13H7v2h10zM4 17V7H2v10zm3 3a3 3 0 0 1-3-3H2a5 5 0 0 0 5 5zm13-3a3 3 0 0 1-3 3v2a5 5 0 0 0 5-5zM17 4a3 3 0 0 1 3 3h2a5 5 0 0 0-5-5zM7 2a5 5 0 0 0-5 5h2a3 3 0 0 1 3-3zm9 14H8v2h8zM7.293 8.707l3 3l1.414-1.414l-3-3zm3 1.586l-3 3l1.414 1.414l3-3z"/>
-                    </svg>
-                </a>
-            </div>
-            <div style="flex-grow: 1; display: flex; align-items: center; justify-content: center; gap: 20px;">
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 20px; width: 100%;">
+            <div style="flex-grow: 1; display: flex; align-items: center; justify-content: center; gap: 20px; width: 100%;">
                 <h1 class="text-center no-margin">Playerlist</h1>
                 <select id="server-select">
-                    <option data-host="raspberrypi" data-window="2">Lobby</option>
+                    <option data-host="raspberrypi" data-window="2" selected>Lobby</option>
                     <option data-host="raspberrypi" data-window="3">Minigames</option>
                     <option data-host="oldpc" data-window="0">SMP</option>
                     <option data-host="oldlaptop" data-window="0">Anarchy</option>
-                    <option disabled data-host="" data-window="">Random Drops</option>
+                    <option data-host="" data-window="" disabled>Random Drops</option>
                 </select>
             </div>
+            <p class="text-center" id="total">Fetching data, please wait...</p>
+            <div id="players" class="playerlist"></div>
         </div>
-        <p class="text-center" id="total">Fetching data, please wait...</p>
-        <div id="players" class="playerlist"></div>
+        <div id="nav-btn">
+            <a href="console.html" title="Console">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                    <path fill="#ffffff" d="M16 18a1 1 0 1 0 0-2zm-8-2a1 1 0 1 0 0 2zm.707-8.707a1 1 0 1 0-1.414 1.414zM11 11l.707.707a1 1 0 0 0 0-1.414zm-3.707 2.293a1 1 0 1 0 1.414 1.414zM7 4h10V2H7zm13 3v10h2V7zm-3 13H7v2h10zM4 17V7H2v10zm3 3a3 3 0 0 1-3-3H2a5 5 0 0 0 5 5zm13-3a3 3 0 0 1-3 3v2a5 5 0 0 0 5-5zM17 4a3 3 0 0 1 3 3h2a5 5 0 0 0-5-5zM7 2a5 5 0 0 0-5 5h2a3 3 0 0 1 3-3zm9 14H8v2h8zM7.293 8.707l3 3l1.414-1.414l-3-3zm3 1.586l-3 3l1.414 1.414l3-3z"/>
+                </svg>
+            </a>
+        </div>
     </main>
     <script>
         const playersTotal = document.getElementById("total");
@@ -102,5 +132,4 @@
         setInterval(loadPlayerList, 5000);
     </script>
 </body>
-
 </html>

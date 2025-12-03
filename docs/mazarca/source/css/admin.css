@@ -107,15 +107,45 @@ pre {
 .ban { background: #ff0000 }
 .ban:hover { background: #7c0505 }
 
-#nav-btn {
+.nav-btn {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 100%;
     padding: 0px;
+    margin-top: auto;
+    width: 100%;
+    height: fit-content;
+    justify-content: flex-start;
 }
 
-#nav-btn img, #nav-btn svg {
+.nav-btn img, .nav-btn svg {
     display: block;
     margin: 0 auto;
+}
+
+.file-item {
+    padding: 0px 5px;
+    display: flex;
+    align-items: center;
+    line-height: 35px;
+    width: 100%;
+    justify-content: flex-start;
+    cursor: pointer;
+}
+
+.file-item:not(:last-child) {
+    border-bottom: 1px solid gray;
+}
+
+.loading-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: #00000000;
+    cursor: wait;
+    z-index: 9999;
+    display: none;
+}
+
+.loading-overlay.active {
+    display: block;
 }
