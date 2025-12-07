@@ -34,8 +34,13 @@
             align-items: center;
             justify-content: flex-start;
             margin: 0 auto;
-            width: 30%;
+            width: 50%;
             min-width: 150px;
+            height: 60vh;
+            overflow-x: hidden;
+            overflow-y: scroll;
+            scrollbar-width: thin;
+            scrollbar-color: #252525 #00000000;
         }
 
         .nav-btn {
@@ -62,43 +67,56 @@
             </div>
             <div class="text-center" id="files">Fetching data, please wait...</div>
         </div>
-        <div class="nav-btn">
+        <form class="nav-btn footer" onsubmit="jumpTo(event)">
             <a href="console.html" title="Console">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                     <path fill="#ffffff" d="M16 18a1 1 0 1 0 0-2zm-8-2a1 1 0 1 0 0 2zm.707-8.707a1 1 0 1 0-1.414 1.414zM11 11l.707.707a1 1 0 0 0 0-1.414zm-3.707 2.293a1 1 0 1 0 1.414 1.414zM7 4h10V2H7zm13 3v10h2V7zm-3 13H7v2h10zM4 17V7H2v10zm3 3a3 3 0 0 1-3-3H2a5 5 0 0 0 5 5zm13-3a3 3 0 0 1-3 3v2a5 5 0 0 0 5-5zM17 4a3 3 0 0 1 3 3h2a5 5 0 0 0-5-5zM7 2a5 5 0 0 0-5 5h2a3 3 0 0 1 3-3zm9 14H8v2h8zM7.293 8.707l3 3l1.414-1.414l-3-3zm3 1.586l-3 3l1.414 1.414l3-3z"/>
                 </svg>
             </a>
-        </div>
+            <div style="cursor: pointer" title="Previous folder" onclick="backward()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                    <path fill="#ffffff" d="M16 6a1 1 0 0 0-1.6-.8l-8 6a1 1 0 0 0 0 1.6l8 6A1 1 0 0 0 16 18z"/>
+                </svg>
+            </div>
+            <input type="text" id="path-input" placeholder="Enter path...">
+            <button class="primary" type="submit" id="go-btn">Go</button>
+        </form>
     </main>
     <div class="loading-overlay" id="loading-overlay"></div>
     <script>
         const knownText = ["txt", "yml", "yaml", "json", "bat"];
         const filesContainer = document.getElementById("files");
         const hst = document.getElementById("host-select");
+        const path = document.getElementById("path-input");
+        const go = document.getElementById("go-btn");
         const overlay = document.getElementById("loading-overlay");
         let currentPath = "";
 
         async function loadFiles() {
             overlay.classList.add("active");
+            path.disabled = true;
+            go.disabled = true;
             let host = hst.options[hst.selectedIndex].dataset.host;
             const url = `https://${host}.maza64.xyz/${currentPath}`;
-            console.log(url);
             try {
                 const res = await authenticatedFetch(url);
                 if (!res) return;
                 const fileName = currentPath.split("/").at(-1);
                 const ext = fileName?.split(".").at(-1)?.toLowerCase();
                 if (ext && knownText.includes(ext)) {
-                    window.location.href = `viewer.html?host=${host}&file=/${encodeURIComponent(currentPath)}`;
-                    filesContainer.innerHTML = "<p>Redirecting to file view page...</p>";
+                    currentPath = currentPath.split("/").slice(0, -1).join("/");
+                    if (confirm("This is a text file. Open it in editor?")) {
+                        window.location.href = `viewer.html?host=${host}&file=${encodeURIComponent(currentPath+"/"+fileName)}`;
+                    };
                     return;
                 };
                 const fileList = await res.json();
+                path.value = currentPath;
                 filesContainer.innerHTML = "";
                 if (fileList) {
                     fileList.forEach((item) => {
                         filesContainer.innerHTML += `
-                            <div class='file-item' onclick="changePath('${item}')">${item}</div>
+                            <div class="file-item" onclick="forward('${item}')">${item}</div>
                         `;
                     });
                 };
@@ -106,13 +124,25 @@
                 filesContainer.innerHTML = `<p>Error: ${err.message}</p>`;
                 console.error(err);
             } finally {
-                // Hide overlay
                 overlay.classList.remove("active");
+                path.disabled = false;
+                go.disabled = false;
             };
         };
 
-        function changePath(to) {
+        function forward(to) {
             currentPath = currentPath ? `${currentPath}/${to}` : to;
+            loadFiles();
+        };
+
+        function backward() {
+            currentPath = currentPath ? currentPath.split("/").slice(0, -1).join("/") : "";
+            loadFiles();
+        };
+
+        function jumpTo(e) {
+            e.preventDefault();
+            currentPath = path.value;
             loadFiles();
         };
 

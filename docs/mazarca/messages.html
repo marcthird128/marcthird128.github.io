@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="A Minecraft server that supports Eaglercraft 1.8 and 1.12">
+    <link rel="icon" type="image/x-icon" href="source/icon.png" />
+    <link rel="stylesheet" href="source/css/main.css" />
+    <style>
+        code { font-size:1rem }
+    </style>
+    <title>Mazarca | Home</title>
+</head>
+<body>
+    <noscript>
+        <header>
+            Website won't function properly without JavaScript enabled in your browser!
+            <small class="font-regular"><a href="https://enable-javascript.com" target="_blank">How to enable JavaScript</a></small>
+        </header>
+    </noscript>
+    <main class="wrapper">
+        <div class="text-center">
+            <h2 class="text-center">Send a message</h2>
+            <p>You can send your suggestion or ask a question here</p>
+        </div>
+        <form class="form" onsubmit="sendMessage(event)">
+            <textarea style="min-height: 15rem;" id="message-content"  maxlength="250" placeholder="Enter your message..."></textarea>
+            <div class="buttons">
+                <button type="submit" class="primary" id="submit-btn">Submit</button>
+            </div>
+        </form>
+    </main>
+    <script src="source/js/header.js"></script>
+    <script src="source/js/navigation.js"></script>
+    <script>
+        const msg = document.getElementById("message-content");
+        const btn = document.getElementById("submit-btn");
+
+        async function sendMessage(e) {
+            e.preventDefault();
+            msg.disabled = true;
+            btn.disabled = true;
+            const content = msg.value;
+            console.log(content);
+            msg.value = "";
+            let res = await fetch("https://raspberrypi.maza64.xyz/message", {
+                method: "POST",
+                body: `${content}`
+            });
+            if (res.ok) {
+                alert("Your message has been delivered!");
+            } else if (res.status == 429) {
+                alert("You're too fast! Please wait some time before sending another one.");
+            } else {
+                alert("Something went wrong while processing your message...");
+            };
+            setTimeout(() => {
+                msg.disabled = false;
+                btn.disabled = false;
+            }, 3000);
+        };
+    </script>
+</body>
+</html>

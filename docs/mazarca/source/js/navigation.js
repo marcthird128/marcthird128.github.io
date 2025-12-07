@@ -1,8 +1,8 @@
 // site navigation
 
 // generate dropdown menu
-const pagesFilenames = ["index", "gallery", "news", "status", "slimefun", "recipes"];
-const pagesNames = ["Home", "Gallery", "News", "Status", "SF Help", "Recipes"];
+const pagesFilenames = ["index", "gallery", "news", "status", "messages", "slimefun", "recipes"];
+const pagesNames = ["Home", "Gallery", "News", "Status", "Message", "SF Help", "Recipes"];
 let navMenu = "";
 let currentLink = "";
 for (let i = 0; i < pagesFilenames.length; i++) {
