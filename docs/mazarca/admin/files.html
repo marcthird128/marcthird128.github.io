@@ -101,12 +101,13 @@
             try {
                 const res = await authenticatedFetch(url);
                 if (!res) return;
-                const fileName = currentPath.split("/").at(-1);
+                const fileName = currentPath?.split("/").at(-1);
                 const ext = fileName?.split(".").at(-1)?.toLowerCase();
+                console.log(currentPath, fileName, ext);
                 if (ext && knownText.includes(ext)) {
                     currentPath = currentPath.split("/").slice(0, -1).join("/");
                     if (confirm("This is a text file. Open it in editor?")) {
-                        window.location.href = `viewer.html?host=${host}&file=${encodeURIComponent(currentPath+"/"+fileName)}`;
+                        window.location.href = `viewer.html?host=${host}&file=${encodeURIComponent(currentPath ? currentPath+"/"+fileName : fileName)}`;
                     };
                     return;
                 };
@@ -116,7 +117,10 @@
                 if (fileList) {
                     fileList.forEach((item) => {
                         filesContainer.innerHTML += `
-                            <div class="file-item" onclick="forward('${item}')">${item}</div>
+                            <div class="file-item">
+                                <div onclick="forward('${item}')">${item}</div>
+                                <div class="delete-btn" onclick="deleteFile('${item}')">Delete</div>
+                            </div>
                         `;
                     });
                 };
@@ -145,6 +149,19 @@
             e.preventDefault();
             currentPath = path.value;
             loadFiles();
+        };
+
+        async function deleteFile(f) {
+            if (confirm(`Are you sure? File ${currentPath+f} will be permanently deleted!`)) {
+                let host = hst.options[hst.selectedIndex].dataset.host;
+                let res = await authenticatedFetch(`https://${host}.maza64.xyz/${currentPath+f}`, { method: "DELETE" });
+                if (res.ok) {
+                    alert(`File ${currentPath+f} deleted successfully!`);
+                } else {
+                    alert("Something went wrong while deleting that file...");
+                };
+                loadFiles();
+            };
         };
 
         // Initialize

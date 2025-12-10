@@ -124,17 +124,43 @@ pre {
 }
 
 .file-item {
-    padding: 0px 5px;
+    padding: 0px;
     display: flex;
     align-items: center;
     line-height: 35px;
     width: 100%;
-    justify-content: flex-start;
+    justify-content: space-between;
     cursor: pointer;
+}
+
+.file-item * {
+    padding: 0px 5px;
 }
 
 .file-item:not(:last-child) {
     border-bottom: 1px solid gray;
+}
+
+.file-item:hover {
+    background: #303030;
+}
+
+.delete-btn {
+    display: none;
+    align-items: center;
+    margin: 0px 5px;
+    border-radius: 5px;
+    background: #ff0000;
+    width: fit-content;
+    height: calc(100% - 10px);
+}
+
+.delete-btn:hover {
+    background: #7c0505;
+}
+
+.file-item:hover .delete-btn {
+    display: flex;
 }
 
 .loading-overlay {
