@@ -84,7 +84,7 @@
     </main>
     <div class="loading-overlay" id="loading-overlay"></div>
     <script>
-        const knownText = ["txt", "yml", "yaml", "json", "bat"];
+        const knownText = ["txt", "yml", "yaml", "json", "bat", "sh"];
         const filesContainer = document.getElementById("files");
         const hst = document.getElementById("host-select");
         const path = document.getElementById("path-input");
@@ -128,6 +128,7 @@
                 path.disabled = false;
                 go.disabled = false;
             };
+            filesContainer.scrollTop = "0";
         };
 
         function forward(to) {

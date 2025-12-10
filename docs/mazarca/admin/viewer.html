@@ -48,7 +48,7 @@
         </div>
     </main>
     <script>
-        const knownText = ["txt", "yml", "yaml", "json", "bat"];
+        const knownText = ["txt", "yml", "yaml", "json", "bat", "sh"];
         const fileContent = document.getElementById("content");
         const filePathName = document.getElementById("pathname");
         const saveBtn = document.getElementById("save-btn");
@@ -67,8 +67,8 @@
                 const fileName = file.split("/").at(-1);
                 const ext = fileName?.split(".").at(-1)?.toLowerCase();
                 if (ext && knownText.includes(ext)) {
-                    filePathName.value = `[${host}] ${file}`;
-                    let res = await authenticatedFetch(`https://${host}.maza64.xyz${file}`);
+                    filePathName.value = `[${host}] /${file}`;
+                    let res = await authenticatedFetch(`https://${host}.maza64.xyz/${file}`);
                     let textContent = await res.text();
                     fileContent.value = textContent;
                 } else {
@@ -82,14 +82,14 @@
         async function saveTextFile(e) {
             e.preventDefault();
             saveBtn.disabled = true;
-            filePathName.value = `[${host}] ${file} (saving)`;
-            let res = await authenticatedFetch(`https://${host}.maza64.xyz${file}`, {
+            filePathName.value = `[${host}] /${file} (saving)`;
+            let res = await authenticatedFetch(`https://${host}.maza64.xyz/${file}`, {
                 method: "PUT",
                 body: `${fileContent.value}`
             });
             if (res.ok) {
-                filePathName.value = `[${host}] ${file} (saved)`;
-                setTimeout(() => { filePathName.value = `[${host}] ${file}` }, 500);
+                filePathName.value = `[${host}] /${file} (saved)`;
+                setTimeout(() => { filePathName.value = `[${host}] /${file}` }, 500);
             } else {
                 alert("Failed to save. Please try again");
             };
