@@ -187,8 +187,8 @@
         });
 
         async function deleteFile(f) {
-            if (confirm(`Are you sure? File ${currentPath+f} will be permanently deleted!`)) {
-                let res = await authenticatedFetch(`https://${host}.maza64.xyz/${currentPath+f}`, {
+            if (confirm(`Are you sure? File ${currentPath?currentPath+"/"+f:f} will be permanently deleted!`)) {
+                let res = await authenticatedFetch(`https://${host}.maza64.xyz/${currentPath?currentPath+"/"+f:f}`, {
                     method: "DELETE"
                 });
                 if (res.ok) {
@@ -209,4 +209,5 @@
         loadFiles();
     </script>
 </body>
+
 </html>
