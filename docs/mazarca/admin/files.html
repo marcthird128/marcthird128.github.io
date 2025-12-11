@@ -51,6 +51,18 @@
             display: flex;
             justify-content: flex-start;
         }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        .custom-file-upload {
+            cursor: pointer;
+        }
+
+        .custom-file-upload:hover {
+            text-decoration: underline;
+        }
     </style>
     <script src="../source/js/auth.js"></script>
 </head>
@@ -79,7 +91,11 @@
                 </svg>
             </div>
             <input type="text" id="path-input" placeholder="Enter path...">
-            <button class="primary" type="submit" id="go-btn">Go</button>
+            <button class="secondary" type="submit" id="go-btn">Go</button>
+            <div>
+                <label for="file-upload" class="custom-file-upload" id="file-upload-label">Upload</label>
+                <input type="file" id="file-upload">
+            </div>
         </form>
     </main>
     <div class="loading-overlay" id="loading-overlay"></div>
@@ -89,21 +105,21 @@
         const hst = document.getElementById("host-select");
         const path = document.getElementById("path-input");
         const go = document.getElementById("go-btn");
+        const upload = document.getElementById("file-upload");
         const overlay = document.getElementById("loading-overlay");
         let currentPath = "";
+        let host = hst.options[hst.selectedIndex].dataset.host;
 
         async function loadFiles() {
             overlay.classList.add("active");
             path.disabled = true;
             go.disabled = true;
-            let host = hst.options[hst.selectedIndex].dataset.host;
             const url = `https://${host}.maza64.xyz/${currentPath}`;
             try {
                 const res = await authenticatedFetch(url);
                 if (!res) return;
                 const fileName = currentPath?.split("/").at(-1);
                 const ext = fileName?.split(".").at(-1)?.toLowerCase();
-                console.log(currentPath, fileName, ext);
                 if (ext && knownText.includes(ext)) {
                     currentPath = currentPath.split("/").slice(0, -1).join("/");
                     if (confirm("This is a text file. Open it in editor?")) {
@@ -151,10 +167,30 @@
             loadFiles();
         };
 
+        upload.addEventListener("change", async (event) => {
+            const selectedFile = event.target.files[0];
+            if (selectedFile) {
+                if (confirm(`Upload ${selectedFile.name} to ${currentPath?currentPath:"/"}?`)) {
+                    const newFileName = prompt("New file name? Leave empty to keep the original one.");
+                    let res = await authenticatedFetch(`https://${host}.maza64.xyz/${(currentPath?currentPath+"/":"")+(newFileName?newFileName:selectedFile.name)}`, {
+                        method: "PUT",
+                        body: selectedFile
+                    });
+                    if (res.ok) {
+                        alert("File uploaded successfully!");
+                    } else {
+                        alert("Something went wrong while uploading that file...");
+                    };
+                };
+            };
+            loadFiles();
+        });
+
         async function deleteFile(f) {
             if (confirm(`Are you sure? File ${currentPath+f} will be permanently deleted!`)) {
-                let host = hst.options[hst.selectedIndex].dataset.host;
-                let res = await authenticatedFetch(`https://${host}.maza64.xyz/${currentPath+f}`, { method: "DELETE" });
+                let res = await authenticatedFetch(`https://${host}.maza64.xyz/${currentPath+f}`, {
+                    method: "DELETE"
+                });
                 if (res.ok) {
                     alert(`File ${currentPath+f} deleted successfully!`);
                 } else {
