@@ -192,7 +192,7 @@
                     method: "DELETE"
                 });
                 if (res.ok) {
-                    alert(`File ${currentPath+f} deleted successfully!`);
+                    alert(`File ${currentPath?currentPath+"/"+f:f} deleted successfully!`);
                 } else {
                     alert("Something went wrong while deleting that file...");
                 };
@@ -211,3 +211,4 @@
 </body>
 
 </html>
+
