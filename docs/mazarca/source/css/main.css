@@ -178,6 +178,7 @@ textarea:disabled,
 textarea:disabled:hover {
     background-color: #3b3b3b;
     outline: none;
+    cursor: not-allowed;
 }
 
 input:focus, textarea:focus {
@@ -217,8 +218,15 @@ button {
 .secondary { background-color: #3e3e3e }
 .secondary:hover { background-color: #383838 }
 
-button:disabled { cursor: default; background-color: #3e3e3e; color: gray }
-button:disabled:hover { background-color: #3e3e3e }
+button:disabled {
+    cursor: not-allowed;
+    background-color: #3e3e3e;
+    color: gray;
+}
+
+button:disabled:hover {
+    background-color: #3e3e3e;
+}
 
 .buttons {
     display: flex;
@@ -528,4 +536,39 @@ section { margin: 20px 0px 0px }
     background: url(https://minecraft.wiki/images/Grid_layout_Arrow_%28small%29.png?a4894) no-repeat;
     min-width: 32px;
     height: 26px;
+}
+
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.checkbox-container input {
+    appearance: none;
+    -webkit-appearance: none;
+    opacity: 0;
+    display: none;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.checkmark {
+    display: flex;
+    height: 10px;
+    width: 10px;
+    background-color: gray;
+    border: 1px solid darkgray;
+    border-radius: 4px;
+}
+
+.checkbox-container:hover input ~ div .checkmark {
+    background-color: darkgray;
+    border-color: gray;
+}
+
+.checkbox-container input:checked ~ div .checkmark {
+    background-color: orange;
+    border-color: darkorange;
 }

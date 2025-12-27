@@ -50,6 +50,11 @@
             </p>
         </noscript>
 
+        <div style="display: flex; align-items: center; gap: 10px; margin: 10px 0px 5px;">
+            <h3 style="margin: 0px;">Players online:</h3>
+            <p id="player-count" style="font-size: 20px; margin: 0px;">-</p>
+        </div>
+
         <div class="text-center" style="margin-top: 10px">
             <a href="https://maza64.xyz/bounce" style="margin: 0px 10px; font-size: 12px; text-decoration: underline">Bounce game</a>
             <a href="https://maza64.xyz/flappy" style="margin: 0px 10px; font-size: 12px; text-decoration: underline">Flappy game</a>
@@ -62,5 +67,25 @@
     <script src="source/js/selection.js"></script>
     <script src="source/js/message.js"></script>
     <script src="source/js/snow.js"></script>
+    <script>
+        const playerCount = document.getElementById("player-count");
+        const ws = new WebSocket("wss://eagler.maza64.xyz");
+        ws.onopen = () => {
+            console.log("Connected to the server");
+            ws.send("Accept: MOTD");
+        };
+        ws.onmessage = (event) => {
+            let data = JSON.parse(event.data);
+            console.log("Received:", data);
+            playerCount.innerText = data.data.online;
+            ws.close();
+        };
+        ws.onerror = (error) => {
+            console.error("WebSocket error:", error);
+        };
+        ws.onclose = () => {
+            console.log("Connection closed");
+        };
+    </script>
 </body>
 </html>
