@@ -31,7 +31,7 @@ async function authenticatedFetch(url, options = {}) {
         };
         return res;
     } catch (err) {
-        alert("Network error: " + err.message);
+        console.error("Network error: " + err.message);
         throw err;
     };
 };

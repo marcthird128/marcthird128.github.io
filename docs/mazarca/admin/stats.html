@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../source/css/stats.css">
+    <title>Stats</title>
+    <script src="../source/js/auth.js"></script>
+</head>
+<body>
+    <main>
+        <div>
+            <header>
+                <h2>Raspberry Pi</h2>
+                <hr size="1px">
+            </header>
+            <div class="stats" id="raspberrypi">
+                <p><b>Hostname:</b> <span id="raspberrypi-hostname"></span></p>
+                <p><b>Platform:</b> <span id="raspberrypi-platform"></span></p>
+                <p><b>Architecture:</b> <span id="raspberrypi-arch"></span></p>
+                <p><b>OS Version:</b> <span id="raspberrypi-os-version"></span></p>
+                <p><b>Uptime:</b> <span id="raspberrypi-uptime"></span></p>
+                <p><b>CPU:</b> <span id="raspberrypi-cpu"></span></p>
+                <p><b>CPU Speed:</b> <span id="raspberrypi-cpu-speed"></span></p>
+                <p><b>CPU Load:</b> <span id="raspberrypi-cpu-load"></span></p>
+                <p><b>Total Memory:</b> <span id="raspberrypi-total-mem"></span></p>
+                <p><b>Used Memory:</b> <span id="raspberrypi-used-mem"></span></p>
+                <p><b>Free Memory:</b> <span id="raspberrypi-free-mem"></span></p>
+                <p><b>Temp Directory:</b> <span id="raspberrypi-tempdir"></span></p>
+                <p><b>NodeJS Version:</b> <span id="raspberrypi-node-version"></span></p>
+                <p><b>Server Time:</b> <span id="raspberrypi-time"></span></p>
+                <p><b>Listener Port:</b> <span id="raspberrypi-port"></span></p>
+            </div>
+        </div>
+        <div>
+            <header>
+                <h2>Old Laptop</h2>
+                <hr size="1px">
+            </header>
+            <div class="stats" id="oldlaptop">
+                <p><b>Hostname:</b> <span id="oldlaptop-hostname"></span></p>
+                <p><b>Platform:</b> <span id="oldlaptop-platform"></span></p>
+                <p><b>Architecture:</b> <span id="oldlaptop-arch"></span></p>
+                <p><b>OS Version:</b> <span id="oldlaptop-os-version"></span></p>
+                <p><b>Uptime:</b> <span id="oldlaptop-uptime"></span></p>
+                <p><b>CPU:</b> <span id="oldlaptop-cpu"></span></p>
+                <p><b>CPU Speed:</b> <span id="oldlaptop-cpu-speed"></span></p>
+                <p><b>CPU Load:</b> <span id="oldlaptop-cpu-load"></span></p>
+                <p><b>Total Memory:</b> <span id="oldlaptop-total-mem"></span></p>
+                <p><b>Used Memory:</b> <span id="oldlaptop-used-mem"></span></p>
+                <p><b>Free Memory:</b> <span id="oldlaptop-free-mem"></span></p>
+                <p><b>Temp Directory:</b> <span id="oldlaptop-tempdir"></span></p>
+                <p><b>NodeJS Version:</b> <span id="oldlaptop-node-version"></span></p>
+                <p><b>Server Time:</b> <span id="oldlaptop-time"></span></p>
+                <p><b>Listener Port:</b> <span id="oldlaptop-port"></span></p>
+            </div>
+        </div>
+        <div>
+            <header>
+                <h2>Old PC</h2>
+                <hr size="1px">
+            </header>
+            <div class="stats" id="oldpc">
+                <p><b>Hostname:</b> <span id="oldpc-hostname"></span></p>
+                <p><b>Platform:</b> <span id="oldpc-platform"></span></p>
+                <p><b>Architecture:</b> <span id="oldpc-arch"></span></p>
+                <p><b>OS Version:</b> <span id="oldpc-os-version"></span></p>
+                <p><b>Uptime:</b> <span id="oldpc-uptime"></span></p>
+                <p><b>CPU:</b> <span id="oldpc-cpu"></span></p>
+                <p><b>CPU Speed:</b> <span id="oldpc-cpu-speed"></span></p>
+                <p><b>CPU Load:</b> <span id="oldpc-cpu-load"></span></p>
+                <p><b>Total Memory:</b> <span id="oldpc-total-mem"></span></p>
+                <p><b>Used Memory:</b> <span id="oldpc-used-mem"></span></p>
+                <p><b>Free Memory:</b> <span id="oldpc-free-mem"></span></p>
+                <p><b>Temp Directory:</b> <span id="oldpc-tempdir"></span></p>
+                <p><b>NodeJS Version:</b> <span id="oldpc-node-version"></span></p>
+                <p><b>Server Time:</b> <span id="oldpc-time"></span></p>
+                <p><b>Listener Port:</b> <span id="oldpc-port"></span></p>
+            </div>
+        </div>
+    </main>
+    <script>
+        async function getStats(host) {
+            const statsContainer = document.getElementById(host);
+            try {
+                let res = await authenticatedFetch(`https://${host}.maza64.xyz/info`);
+                let stats = await res.json();
+                document.getElementById(`${host}-hostname`).innerText = stats.hostname;
+                document.getElementById(`${host}-platform`).innerText = stats.platform;
+                document.getElementById(`${host}-arch`).innerText = stats.arch;
+                document.getElementById(`${host}-os-version`).innerText = stats.osVersion;
+                document.getElementById(`${host}-uptime`).innerText = `${stats.uptimeHours} hours (${stats.uptimeSeconds} s)`;
+                document.getElementById(`${host}-cpu`).innerText = `${stats.cpu.model} (${stats.cpu.cores} cores)`;
+                document.getElementById(`${host}-cpu-speed`).innerText = `${stats.cpu.speed} MHz`;
+                document.getElementById(`${host}-cpu-load`).innerText = `${stats.cpu.load1m}, ${stats.cpu.load5m}, ${stats.cpu.load15m}`;
+                document.getElementById(`${host}-total-mem`).innerText = `${(stats.memory.total / (8*1024*1024)).toFixed(2)} MB`;
+                document.getElementById(`${host}-used-mem`).innerText = `${(stats.memory.used / (8*1024*1024)).toFixed(2)} MB (${stats.memory.usagePercent} %)`;
+                document.getElementById(`${host}-free-mem`).innerText = `${(stats.memory.free / (8*1024*1024)).toFixed(2)} MB`;
+                document.getElementById(`${host}-tempdir`).innerText = stats.tempDir;
+                document.getElementById(`${host}-node-version`).innerText = stats.nodeVersion;
+                document.getElementById(`${host}-time`).innerText = `${stats.serverTime}`;
+                document.getElementById(`${host}-port`).innerText = stats.port;
+            } catch (err) {
+                console.error(`Failed to load stats for '${host}'! ${err}`);
+                statsContainer.innerHTML = `<p class="text-center">Not available.</p>`;
+            };
+        };
+
+        getStats("raspberrypi");
+        getStats("oldlaptop");
+        getStats("oldpc");
+    </script>
+</body>
+</html>
