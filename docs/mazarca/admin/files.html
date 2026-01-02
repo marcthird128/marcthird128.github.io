@@ -145,7 +145,7 @@
                                 document.body.appendChild(a);
                                 await a.click();
                                 document.body.removeChild(a);
-                                setTimeout(() => URL.revokeObjectURL(blobUrl), 100);
+                                setTimeout(() => URL.revokeObjectURL(blobUrl), 10000);
                             } catch (err) {
                                 alert("Download failed: " + err.message);
                                 console.error(err);
