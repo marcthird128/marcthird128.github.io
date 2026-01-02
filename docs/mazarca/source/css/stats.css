@@ -17,9 +17,6 @@ main {
     width: calc(100% - 60px);
     min-width: 0px;
     height: calc(100% - 60px);
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
     border: 1px solid gray;
     border-radius: 3px;
     box-shadow: 2px 2px 5px #00000020;
@@ -27,6 +24,12 @@ main {
 }
 
 main > div {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+main > div > div {
     min-width: 0;
     display: flex;
     flex-direction: column;

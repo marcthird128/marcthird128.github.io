@@ -48,7 +48,7 @@
         </div>
     </main>
     <script>
-        const knownText = ["txt", "yml", "yaml", "json", "bat", "sh"];
+        const knownText = ["txt", "yml", "yaml", "json", "bat", "sh", "properties"];
         const fileContent = document.getElementById("content");
         const filePathName = document.getElementById("pathname");
         const saveBtn = document.getElementById("save-btn");
@@ -65,7 +65,7 @@
         async function loadTextFile() {
             try {
                 const fileName = file.split("/").at(-1);
-                const ext = fileName?.split(".").at(-1)?.toLowerCase();
+                const ext = fileName.includes(".") ? fileName.split(".").at(-1)?.toLowerCase() : null;
                 if (ext && knownText.includes(ext)) {
                     filePathName.value = `[${host}] ${file}`;
                     let res = await authenticatedFetch(`https://${host}.maza64.xyz/${file}`);
