@@ -43,15 +43,17 @@
             const content = msg.value;
             console.log(content);
             msg.value = "";
-            let res = await fetch("https://raspberrypi.maza64.xyz/message", {
-                method: "POST",
-                body: `${content}`
-            });
-            if (res.ok) {
-                alert("Your message has been delivered!");
-            } else if (res.status == 429) {
-                alert("You're too fast! Please wait some time before sending another one.");
-            } else {
+            try {
+                let res = await fetch("https://raspberrypi.maza64.xyz/message", {
+                    method: "POST",
+                    body: `${content}`
+                });
+                if (res.ok) {
+                    alert("Your message has been delivered!");
+                } else if (res.status == 429) {
+                    alert("You're too fast! Please wait some time before sending another one.");
+                };
+            } catch {
                 alert("Something went wrong while processing your message...");
             };
             setTimeout(() => {
