@@ -1,18 +1,10 @@
 [
-  {
-    "address": "wss://eagler.maza64.xyz",
-    "desc": "recommended"
-  },
-  {
-    "address": "ws://30.ip.gl.ply.gg:50343",
-    "desc": "if first one doesn't work"
-  },
-  {
-    "address": "30.ip.gl.ply.gg:50636",
-    "desc": "for Java MC #1"
-  },
-  {
-    "address": "147.185.221.30:50636",
-    "desc": "for Java MC #2"
-  }
+    {
+        "address": "wss://mc.maza64.xyz",
+        "desc": "for Java MC"
+    },
+    {
+        "address": "ws:// eagler.maza64.xyz",
+        "desc": "for Eaglercraft"
+    }
 ]
