@@ -4,7 +4,8 @@
         "desc": "for Java MC"
     },
     {
-        "address": "wss://eagler.maza64.xyz",
+        "address": "eagler.maza64.xyz",
         "desc": "for Eaglercraft"
     }
+
 ]
