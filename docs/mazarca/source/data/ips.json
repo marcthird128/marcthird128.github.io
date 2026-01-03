@@ -1,10 +1,10 @@
 [
     {
-        "address": "wss://mc.maza64.xyz",
+        "address": "mc.maza64.xyz",
         "desc": "for Java MC"
     },
     {
-        "address": "ws:// eagler.maza64.xyz",
+        "address": "wss://eagler.maza64.xyz",
         "desc": "for Eaglercraft"
     }
 ]
