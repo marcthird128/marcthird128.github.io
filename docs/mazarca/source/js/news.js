@@ -1,10 +1,10 @@
-// fetches from a .yml file and parses Markdown content using marked.js
+// Fetches from a .yml file and parses Markdown content using marked.js
 
 const newsContainer = document.getElementById("news-container");
 fetch("source/data/news.yml")
 .then(res => res.text())
 .then(data => {
-    const parsed = jsyaml.loadAll(data);
+    const parsed = jsyaml.loadAll(data.trim().replace(/^(---\n)+|(\n---)+$/g, ""));
     for (let i = 0; i < parsed.length-1; i++) {
         const a = parsed[i];
         let details = document.createElement("details");
@@ -40,7 +40,7 @@ fetch("source/data/news.yml")
 function formatDate(dateStr) {
     const [day, month, year] = dateStr.split('-').map(Number);
     const date = new Date(year, month - 1, day);
-    if (isNaN(date)) { console.warn(`Invalid date: ${dateStr}. Expected DD-MM-YYYY format`) };
+    if (isNaN(date)) { console.warn(`Invalid date: ${dateStr}. Expected DD-MM-YYYY format.`) };
     return date.toLocaleDateString("en-US", {
         year: "numeric",
         month: "long",

@@ -33,16 +33,16 @@ fetch("source/data/news.yml")
         const now = new Date();
         const diffTime = Math.abs(now - latestDate);
         const daysAgo = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+        console.log("Latest announcement was", daysAgo, "days ago.")
         if (daysAgo > 10) {
-            console.log("Latest announcement was", daysAgo, "days ago.")
             return;
         };
         let latestContainer = document.createElement("div");
         latestContainer.className = "latest-announcement";
         latestContainer.innerHTML = `
-            <div style="display: flex; align-items: center; justify-content: space-between">
-                <h3 style="margin: 0px; width: fit-content;">Latest news:</h3>
-                <span id="close-latest" style="font-size: 24px; cursor: pointer">&times;</span>
+            <div class="latest-header">
+                <h3>Latest news:</h3>
+                <span id="latest-close">&times;</span>
             </div>
             <small>
                 ${date.toLocaleDateString("en-US", {
@@ -51,10 +51,10 @@ fetch("source/data/news.yml")
                     day: "numeric"
                 })}
             </small>
-            <div style="margin-left: 5px;">${marked.parse(latest.content)}</div>
+            <div class="latest-content">${marked.parse(latest.content)}</div>
         `;
         document.body.append(latestContainer);
-        const closeBtn = document.getElementById("close-latest");
+        const closeBtn = document.getElementById("latest-close");
         closeBtn.addEventListener("click", () => {
             latestContainer.remove();
             sessionStorage.setItem("isLatestClosed", "true");

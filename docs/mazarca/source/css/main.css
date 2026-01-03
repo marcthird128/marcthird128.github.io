@@ -432,6 +432,7 @@ a.page-link:hover {
 /*.announcement > summary { line-height: 30px }*/
 .announcement > summary > i { font-size: 0.75rem }
 .announcement > div { margin-left: 5px }
+.announcement img { max-width: 350px; }
 
 .splash {
     position: absolute;
@@ -588,3 +589,30 @@ section { margin: 20px 0px 0px }
     width: 300px;
     height: fit-content;
 }
+
+.latest-announcement > div.latest-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.latest-announcement > div.latest-header > h3 {
+    margin: 0px;
+    width: fit-content;
+}
+
+.latest-announcement > div.latest-header > span#latest-close {
+    font-size: 24px;
+    cursor: pointer;
+    line-height: 1rem;
+    margin-bottom: auto;
+}
+
+.latest-announcement > div.latest-content {
+   margin-left: 5px;
+}
+
+.latest-announcement img {
+    width: 100%;
+}
+
