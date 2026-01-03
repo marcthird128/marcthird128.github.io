@@ -92,3 +92,11 @@ id: 16
 date: 23-12-2025
 content: |
     It's back up!
+---
+id: 17
+date: 03-01-2026
+content: |
+    _Happy New Year!_
+    
+    Everything should be back up now.\
+    [Send a message](messages.html) if it went down!

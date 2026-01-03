@@ -40,6 +40,7 @@ html, body {
     background-image: url("../background.png");
     background-position: top center;
     color: #FFFFFF;
+    scrollbar-width: none;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -571,4 +572,19 @@ section { margin: 20px 0px 0px }
 .checkbox-container input:checked ~ div .checkmark {
     background-color: orange;
     border-color: darkorange;
+}
+
+.latest-announcement {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    margin: 10px;
+    padding: 10px;
+    background: #25252540;
+    backdrop-filter: blur(10px);
+    box-shadow: 1px 1px 10px 5px #00000040;
+    border-radius: 10px;
+    border: 1px solid #55555560;
+    width: 300px;
+    height: fit-content;
 }

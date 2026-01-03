@@ -72,10 +72,10 @@
             <div style="display: flex; align-items: center; justify-content: center; gap: 20px; width: 100%;">
                 <h1 class="text-center no-margin">Files</h1>
                 <select id="host-select">
-                    <option data-host="raspberrypi" selected>Raspberry Pi</option>
-                    <option data-host="newlaptop" disabled>New Laptop</option>
-                    <option data-host="marcomen" disabled>Gaming PC</option>
-                    <option data-host="oldpc" disabled>Old PC</option>
+                    <option data-host="raspberrypi">Raspberry Pi</option>
+                    <option data-host="newlaptop">New Laptop</option>
+                    <option data-host="marcomen">Gaming PC</option>
+                    <option data-host="oldpc">Old PC</option>
                 </select>
             </div>
             <div class="text-center" id="files">Fetching data, please wait...</div>
@@ -110,6 +110,10 @@
         const overlay = document.getElementById("loading-overlay");
         let currentPath = "";
         let host = hst.options[hst.selectedIndex].dataset.host;
+        hst.addEventListener("change", () => {
+            host = hst.options[hst.selectedIndex].dataset.host;
+            loadFiles();
+        });
 
         async function loadFiles() {
             overlay.classList.add("active");
