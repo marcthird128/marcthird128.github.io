@@ -45,7 +45,7 @@ fetch("source/data/news.yml")
                 <span id="latest-close">&times;</span>
             </div>
             <small>
-                ${date.toLocaleDateString("en-US", {
+                ${latestDate.toLocaleDateString("en-US", {
                     year: "numeric",
                     month: "long",
                     day: "numeric"
