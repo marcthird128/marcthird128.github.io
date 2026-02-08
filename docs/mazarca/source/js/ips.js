@@ -15,6 +15,7 @@ function display(ips) {
             const ipAddress = document.createElement("code");
             const ipDesc = document.createElement("small");
             ipAddress.setAttribute("onclick", "select(this)");
+            ipAddress.className = "rainbow-shadow";
             ipAddress.innerText = Object(ips[i]).address;
             ipDesc.innerText = Object(ips[i]).desc;
             addressContainer.appendChild(ipAddress);

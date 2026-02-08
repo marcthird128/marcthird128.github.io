@@ -1,0 +1,23 @@
+/* Rainbow text shadow effect */
+.rainbow-shadow {
+    position: relative;
+    display: inline-block;
+    transition: all 0.3s ease;
+}
+.rainbow-shadow:hover {
+    color: #ffffff;
+    text-shadow:
+        0 0 5px #ff0000,
+        0 0 5px #ff7700,
+        0 0 5px #ffff00,
+        0 0 5px #00ff00,
+        0 0 5px #00ffff,
+        0 0 5px #0000ff,
+        0 0 5px #8b00ff,
+        0 0 5px #ff00ff;
+    animation: hueShift 2s linear infinite;
+}
+@keyframes hueShift {
+    0% { filter: hue-rotate(0deg); }
+    100% { filter: hue-rotate(360deg); }
+}
