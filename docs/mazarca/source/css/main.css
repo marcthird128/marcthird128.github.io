@@ -480,28 +480,6 @@ section { margin: 20px 0px 0px }
     text-align: left;
 }
 
-.item-slot {
-    position: relative;
-    background: #8B8B8B no-repeat center center / 32px 32px;
-    border: 2px solid;
-    border-color: #373737 #FFF #FFF #373737;
-    width: 32px;
-    height: 32px;
-    image-rendering: pixelated;
-}
-
-.item-slot::before, .item-slot::after {
-    content: "";
-    position: absolute;
-    background-color: #8B8B8B;
-    height: 2px;
-    width: 2px;
-    pointer-events: none;
-}
-
-.item-slot::before {  bottom: -2px; left: -2px }
-.item-slot::after { top: -2px; right: -2px }
-
 .mcui {
     position: relative;
     background-color: #C6C6C6;

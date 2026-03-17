@@ -21,25 +21,46 @@
     <main class="wrapper">
         <h3>About</h3>
         <div class="indented">
-            <p>Mazarca is a cracked Minecraft server that supports Eaglercraft <a href="https://client.eaglercraft.dev/1.8/" target="_blank">1.8</a> and <a href="https://client.eaglercraft.dev/1.12/" target="_blank">1.12</a>.</p>
-            <p>Currently available servers:</p>
-            <details class="semi-indented">
-                <summary>SMP</summary>
-                A semi-vanilla survival with land claims and cool new items using <a href="https://github.com/Slimefun/Slimefun4/wiki">Slimefun</a>!<br>
-                Seed: <a href="https://www.chunkbase.com/apps/seed-map#seed=839629186379115867&platform=java_1_12&dimension=overworld">839629186379115867</a> <- click to open seedmap
-            </details>
-            <details class="semi-indented">
-                <summary>Anarchy</summary>
-                Complete chaos!!
-            </details>
-            <details class="semi-indented">
-                <summary>Random drops anarchy</summary>
-                Complete chaos but block drops are randomized!
-            </details>
-            <details class="semi-indented">
-                <summary>Minigames <span style="color: #828282">(beta)</span></summary>
-                Minigames for fun!
-            </details>
+            <p>Mazarca is a Minecraft server that supports Eaglercraft <a href="https://client.eaglercraft.dev/1.8/" target="_blank">1.8</a> and <a href="https://client.eaglercraft.dev/1.12/" target="_blank">1.12</a>.</p>
+            <div style="display: flex; justify-content: center; gap: 20px; margin: 15px 0px;">
+                <button class="secondary" style="width: calc((100% - 60px) / 4);" id="smp">
+                    SMP
+                    <popup-content for="smp">
+                        <h2>SMP</h2>
+                        <p>A semi-vanilla survival with land claims and cool new items using <a href="https://github.com/Slimefun/Slimefun4/wiki">Slimefun</a>!</p>
+                        <p>Seedmap: <a href="https://www.chunkbase.com/apps/seed-map#seed=839629186379115867&platform=java_1_12&dimension=overworld" target="_blank">839629186379115867</a></p>
+                    </popup-content>
+                </button>
+                <button class="secondary" style="width: calc((100% - 60px) / 4);" id="anarchy">
+                    Anarchy
+                    <popup-content for="anarchy">
+                        <h2>Anarchy</h2>
+                        <p>Complete chaos!!</p>
+                        <p>Seriously, nothing more...</p>
+                    </popup-content>
+                </button>
+                <button class="secondary" style="width: calc((100% - 60px) / 4);" id="randomdrops">
+                    Random Drops
+                    <popup-content for="randomdrops">
+                        <h2>Random Drops</h2>
+                        <p>Complete chaos but block drops are randomized!</p>
+                    </popup-content>
+                </button>
+                <button class="secondary" style="width: calc((100% - 60px) / 4);" id="minigames">
+                    Minigames
+                    <popup-content for="minigames">
+                        <h2>Minigames</h2>
+                        <p>Minigames for fun!</p>
+                        <p>We have:</p>
+                        <ul>
+                            <li>PvP</li>
+                            <li>Mace PvP</li>
+                            <li>Boat Racing</li>
+                            <li>Rocket Spleef</li>
+                        </ul>
+                    </popup-content>
+                </button>
+            </div>
         </div>
 
         <h3 id="ip-heading">IP Address</h3>
@@ -64,6 +85,7 @@
     </main>
     <script src="source/js/header.js"></script>
     <script src="source/js/navigation.js"></script>
+    <script src="source/js/CustomPopup.js"></script>
     <script src="source/js/ips.js"></script>
     <script src="source/js/selection.js"></script>
     <script src="source/js/message.js"></script>

@@ -1,0 +1,31 @@
+div.popup-shutter {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: #00000075;
+    z-index: 9999;
+    display: none;
+}
+
+div.popup-container {
+    height: fit-content;
+    width: 320px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: #25252540;
+    backdrop-filter: blur(10px);
+    box-shadow: 1px 1px 10px 5px #00000040;
+    border-radius: 10px;
+    border: 1px solid #55555560;
+    text-align: justify;
+}
