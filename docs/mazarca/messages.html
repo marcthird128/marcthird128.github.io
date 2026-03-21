@@ -21,11 +21,12 @@
         <div class="text-center">
             <h2 class="text-center">Send a message</h2>
             <p>You can send your suggestion or ask a question here</p>
+			<small>Temporarily disabled</small>
         </div>
-        <form class="form" onsubmit="sendMessage(event)" autocomplete="off">
-            <textarea style="min-height: 15rem;" id="message-content" required minlength="25" maxlength="250" placeholder="Enter your message..."></textarea>
+        <form class="form" onsubmit="sendMessage(event)">
+            <textarea disabled style="min-height: 15rem;" id="message-content"  maxlength="250" placeholder="Enter your message..."></textarea>
             <div class="buttons">
-                <button type="submit" class="primary" id="submit-btn">Submit</button>
+                <button disabled type="submit" class="primary" id="submit-btn">Submit</button>
             </div>
         </form>
     </main>
@@ -44,17 +45,15 @@
             const content = msg.value;
             console.log(content);
             msg.value = "";
-            try {
-                let res = await fetch("https://raspberrypi.maza64.xyz/message", {
-                    method: "POST",
-                    body: `${content}`
-                });
-                if (res.ok) {
-                    alert("Your message has been delivered!");
-                } else if (res.status == 429) {
-                    alert("You're too fast! Please wait some time before sending another one.");
-                };
-            } catch {
+            let res = await fetch("https://raspberrypi.maza64.xyz/message", {
+                method: "POST",
+                body: `${content}`
+            });
+            if (res.ok) {
+                alert("Your message has been delivered!");
+            } else if (res.status == 429) {
+                alert("You're too fast! Please wait some time before sending another one.");
+            } else {
                 alert("Something went wrong while processing your message...");
             };
             setTimeout(() => {
@@ -64,5 +63,4 @@
         };
     </script>
 </body>
-
 </html>
