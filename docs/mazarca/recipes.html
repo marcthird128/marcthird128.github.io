@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="icon" type="image/x-icon" href="source/icon.png" />
-    <link rel="stylesheet" href="source/css/main.css" />
+    <link rel="icon" type="image/x-icon" href="static/icon.png" />
+    <link rel="stylesheet" href="static/css/main.css" />
     <title>Mazarca | Recipes</title>
 </head>
 <body>
@@ -18,206 +18,146 @@
             <h2 style="margin-top: 0px">Crafting Recipes</h2>
             <p>This page contains crafting recipes for custom items.</p>
         </div>
+
         <section>
             <h3 style="margin-top: 0px">Mace and Wind Charges</h3>
             <p>Your regular mace from Minecraft 1.21</p>
             <div class="recipes">
-                <div class="mcui crafting-ui">
-                    <div class="crafting-grid">
-                        <div class="slot-row">
-                            <item-slot item="https://minecraft.wiki/images/Invicon_Block_of_Diamond.png" tooltip="Block of Diamond"></item-slot>
-                            <item-slot item="https://minecraft.wiki/images/Invicon_Block_of_Diamond.png" tooltip="Block of Diamond"></item-slot>
-                            <item-slot item="https://minecraft.wiki/images/Invicon_Block_of_Diamond.png" tooltip="Block of Diamond"></item-slot>
-                        </div>
-                        <div class="slot-row">
-                            <item-slot></item-slot>
-                            <item-slot item="https://minecraft.wiki/images/Invicon_Blaze_Rod.png" tooltip="Blaze Rod"></item-slot>
-                            <item-slot></item-slot>
-                        </div>
-                        <div class="slot-row">
-                            <item-slot></item-slot>
-                            <item-slot item="https://minecraft.wiki/images/Invicon_Blaze_Rod.png" tooltip="Blaze Rod"></item-slot>
-                            <item-slot></item-slot>
-                        </div>
-                    </div>
-                    <div class="crafting-arrow"><br></div>
-                    <item-slot large item="https://minecraft.wiki/images/Invicon_Diamond_Axe.png" tooltip="Mace"></item-slot>
-                </div>
-                <div class="mcui crafting-ui">
-                    <div class="crafting-grid">
-                        <div class="slot-row">
-                            <item-slot></item-slot>
-                            <item-slot></item-slot>
-                            <item-slot></item-slot>
-                        </div>
-                        <div class="slot-row">
-                            <item-slot></item-slot>
-                            <item-slot></item-slot>
-                            <item-slot></item-slot>
-                        </div>
-                        <div class="slot-row">
-                            <item-slot></item-slot>
-                            <item-slot item="https://minecraft.wiki/images/Invicon_Blaze_Rod.png" tooltip="Blaze Rod"></item-slot>
-                            <item-slot item="https://minecraft.wiki/images/Invicon_Emerald.png" tooltip="Emerald"></item-slot>
-                        </div>
-                    </div>
-                    <div class="crafting-arrow"><br></div>
-                    <item-slot large item="https://minecraft.wiki/images/Invicon_String.png" tooltip="Wind Charge"></item-slot>
-                </div>
+                <!-- Mace -->
+                <item-slot-grid>
+                    <item-slot item="https://minecraft.wiki/images/Invicon_Block_of_Diamond.png" tooltip="Block of Diamond"></item-slot>
+                    <item-slot item="https://minecraft.wiki/images/Invicon_Block_of_Diamond.png" tooltip="Block of Diamond"></item-slot>
+                    <item-slot item="https://minecraft.wiki/images/Invicon_Block_of_Diamond.png" tooltip="Block of Diamond"></item-slot>
+                    <item-slot></item-slot>
+                    <item-slot item="https://minecraft.wiki/images/Invicon_Blaze_Rod.png" tooltip="Blaze Rod"></item-slot>
+                    <item-slot></item-slot>
+                    <item-slot></item-slot>
+                    <item-slot item="https://minecraft.wiki/images/Invicon_Blaze_Rod.png" tooltip="Blaze Rod"></item-slot>
+                    <item-slot></item-slot>
+                    <item-slot result item="https://minecraft.wiki/images/Invicon_Diamond_Axe.png" tooltip="Mace"></item-slot>
+                </item-slot-grid>
+                <!-- Wind Charge -->
+                <item-slot-grid>
+                    <item-slot item="https://minecraft.wiki/images/Invicon_Blaze_Rod.png" tooltip="Blaze Rod"></item-slot>
+                    <item-slot item="https://minecraft.wiki/images/Invicon_Emerald.png" tooltip="Emerald"></item-slot>
+                    <item-slot></item-slot>
+                    <item-slot></item-slot>
+                    <item-slot></item-slot>
+                    <item-slot></item-slot>
+                    <item-slot></item-slot>
+                    <item-slot></item-slot>
+                    <item-slot></item-slot>
+                    <item-slot result item="https://minecraft.wiki/images/Invicon_String.png" tooltip="Wind Charge"></item-slot>
+                </item-slot-grid>
             </div>
         </section>
+
         <section>
             <h3 style="margin-top: 0px">Redstone Gear</h3>
             <p>Sword has Sharpness II + Knockback II. Dash forward by right-clicking with it.</p>
             <p>Axe has Sharpness II. Launches you up when you hit something with it.</p>
             <div class="recipes">
-                <div class="mcui crafting-ui">
-                    <div class="slot-grid">
-                        <div class="slot-row">
-                            <item-slot></item-slot>
-                            <item-slot item="https://minecraft.wiki/images/Invicon_Block_of_Redstone.png" tooltip="Block of Redstone"></item-slot>
-                            <item-slot></item-slot>
-                        </div>
-                        <div class="slot-row">
-                            <item-slot></item-slot>
-                            <item-slot item="https://minecraft.wiki/images/Invicon_Block_of_Redstone.png" tooltip="Block of Redstone"></item-slot>
-                            <item-slot></item-slot>
-                        </div>
-                        <div class="slot-row">
-                            <item-slot></item-slot>
-                            <item-slot item="https://minecraft.wiki/images/Invicon_Stick.png" tooltip="Stick"></item-slot>
-                            <item-slot></item-slot>
-                        </div>
-                    </div>
-                    <div class="crafting-arrow"><br></div>
-                    <item-slot large item="https://minecraft.wiki/images/Enchanted_Golden_Sword.gif" tooltip="Redstone Sword"></item-slot>
-                </div>
-                <div class="mcui crafting-ui">
-                    <div class="slot-grid">
-                        <div class="slot-row">
-                            <item-slot></item-slot>
-                            <item-slot item="https://minecraft.wiki/images/Invicon_Block_of_Redstone.png" tooltip="Block of Redstone"></item-slot>
-                            <item-slot item="https://minecraft.wiki/images/Invicon_Block_of_Redstone.png" tooltip="Block of Redstone"></item-slot>
-                        </div>
-                        <div class="slot-row">
-                            <item-slot></item-slot>
-                            <item-slot item="https://minecraft.wiki/images/Invicon_Stick.png" tooltip="Stick"></item-slot>
-                            <item-slot item="https://minecraft.wiki/images/Invicon_Block_of_Redstone.png" tooltip="Block of Redstone"></item-slot>
-                        </div>
-                        <div class="slot-row">
-                            <item-slot></item-slot>
-                            <item-slot item="https://minecraft.wiki/images/Invicon_Stick.png" tooltip="Stick"></item-slot>
-                            <item-slot></item-slot>
-                        </div>
-                    </div>
-                    <div class="crafting-arrow"><br></div>
-                    <item-slot large item="https://minecraft.wiki/images/Enchanted_Golden_Axe.gif" tooltip="Redstone Axe"></item-slot>
-                </div>
+                <!-- Redstone Sword -->
+                <item-slot-grid>
+                    <item-slot></item-slot>
+                    <item-slot item="https://minecraft.wiki/images/Invicon_Block_of_Redstone.png" tooltip="Block of Redstone"></item-slot>
+                    <item-slot></item-slot>
+                    <item-slot></item-slot>
+                    <item-slot item="https://minecraft.wiki/images/Invicon_Block_of_Redstone.png" tooltip="Block of Redstone"></item-slot>
+                    <item-slot></item-slot>
+                    <item-slot></item-slot>
+                    <item-slot item="https://minecraft.wiki/images/Invicon_Stick.png" tooltip="Stick"></item-slot>
+                    <item-slot></item-slot>
+                    <item-slot result item="https://minecraft.wiki/images/Enchanted_Golden_Sword.gif" tooltip="Redstone Sword"></item-slot>
+                </item-slot-grid>
+                <!-- Redstone Axe -->
+                <item-slot-grid>
+                    <item-slot></item-slot>
+                    <item-slot item="https://minecraft.wiki/images/Invicon_Block_of_Redstone.png" tooltip="Block of Redstone"></item-slot>
+                    <item-slot item="https://minecraft.wiki/images/Invicon_Block_of_Redstone.png" tooltip="Block of Redstone"></item-slot>
+                    <item-slot></item-slot>
+                    <item-slot item="https://minecraft.wiki/images/Invicon_Stick.png" tooltip="Stick"></item-slot>
+                    <item-slot item="https://minecraft.wiki/images/Invicon_Block_of_Redstone.png" tooltip="Block of Redstone"></item-slot>
+                    <item-slot></item-slot>
+                    <item-slot item="https://minecraft.wiki/images/Invicon_Stick.png" tooltip="Stick"></item-slot>
+                    <item-slot></item-slot>
+                    <item-slot result large item="https://minecraft.wiki/images/Enchanted_Golden_Axe.gif" tooltip="Redstone Axe"></item-slot>
+                </item-slot-grid>
                 <p><b>Redstone Armor</b> is crafted using <b>Redstone Blocks</b>, same layout as any other armor type. Gives the player movement features.</p>
             </div>
         </section>
+
         <section>
             <h3 style="margin-top: 0px">Steel Gear</h3>
             <div class="recipes">
-                <div class="mcui crafting-ui">
-                    <div class="slot-grid">
-                        <div class="slot-row">
-                            <item-slot></item-slot>
-                            <item-slot item="https://minecraft.wiki/images/Invicon_Block_of_Iron.png" tooltip="Block of Iron"></item-slot>
-                            <item-slot></item-slot>
-                        </div>
-                        <div class="slot-row">
-                            <item-slot></item-slot>
-                            <item-slot item="https://minecraft.wiki/images/Invicon_Block_of_Iron.png" tooltip="Block of Iron"></item-slot>
-                            <item-slot></item-slot>
-                        </div>
-                        <div class="slot-row">
-                            <item-slot></item-slot>
-                            <item-slot item="https://minecraft.wiki/images/Invicon_Iron_Ingot.png" tooltip="Iron Ingot"></item-slot>
-                            <item-slot></item-slot>
-                        </div>
-                    </div>
-                    <div class="crafting-arrow"><br></div>
-                    <item-slot large item="https://minecraft.wiki/images/Enchanted_Iron_Sword.gif" tooltip="Steel Sword"></item-slot>
-                </div>
-                <div class="mcui crafting-ui">
-                    <div class="slot-grid">
-                        <div class="slot-row">
-                            <item-slot></item-slot>
-                            <item-slot item="https://minecraft.wiki/images/Invicon_Block_of_Iron.png" tooltip="Block of Iron"></item-slot>
-                            <item-slot item="https://minecraft.wiki/images/Invicon_Block_of_Iron.png" tooltip="Block of Iron"></item-slot>
-                        </div>
-                        <div class="slot-row">
-                            <item-slot></item-slot>
-                            <item-slot item="https://minecraft.wiki/images/Invicon_Iron_Ingot.png" tooltip="Iron Ingot"></item-slot>
-                            <item-slot item="https://minecraft.wiki/images/Invicon_Block_of_Iron.png" tooltip="Block of Iron"></item-slot>
-                        </div>
-                        <div class="slot-row">
-                            <item-slot></item-slot>
-                            <item-slot item="https://minecraft.wiki/images/Invicon_Iron_Ingot.png" tooltip="Iron Ingot"></item-slot>
-                            <item-slot></item-slot>
-                        </div>
-                    </div>
-                    <div class="crafting-arrow"><br></div>
-                    <item-slot large item="https://minecraft.wiki/images/Enchanted_Iron_Axe.gif" tooltip="Steel Axe"></item-slot>
-                </div>
+                <!-- Steel Sword -->
+                <item-slot-grid>
+                    <item-slot></item-slot>
+                    <item-slot item="https://minecraft.wiki/images/Invicon_Block_of_Iron.png" tooltip="Block of Iron"></item-slot>
+                    <item-slot></item-slot>
+                    <item-slot></item-slot>
+                    <item-slot item="https://minecraft.wiki/images/Invicon_Block_of_Iron.png" tooltip="Block of Iron"></item-slot>
+                    <item-slot></item-slot>
+                    <item-slot></item-slot>
+                    <item-slot item="https://minecraft.wiki/images/Invicon_Iron_Ingot.png" tooltip="Iron Ingot"></item-slot>
+                    <item-slot></item-slot>
+                    <item-slot result large item="https://minecraft.wiki/images/Enchanted_Iron_Sword.gif" tooltip="Steel Sword"></item-slot>
+                </item-slot-grid>
+                <!-- Steel Axe -->
+                <item-slot-grid>
+                    <item-slot></item-slot>
+                    <item-slot item="https://minecraft.wiki/images/Invicon_Block_of_Iron.png" tooltip="Block of Iron"></item-slot>
+                    <item-slot item="https://minecraft.wiki/images/Invicon_Block_of_Iron.png" tooltip="Block of Iron"></item-slot>
+                    <item-slot></item-slot>
+                    <item-slot item="https://minecraft.wiki/images/Invicon_Iron_Ingot.png" tooltip="Iron Ingot"></item-slot>
+                    <item-slot item="https://minecraft.wiki/images/Invicon_Block_of_Iron.png" tooltip="Block of Iron"></item-slot>
+                    <item-slot></item-slot>
+                    <item-slot item="https://minecraft.wiki/images/Invicon_Iron_Ingot.png" tooltip="Iron Ingot"></item-slot>
+                    <item-slot></item-slot>
+                    <item-slot result large item="https://minecraft.wiki/images/Enchanted_Iron_Axe.gif" tooltip="Steel Axe"></item-slot>
+                </item-slot-grid>
                 <p><b>Steel Armor</b> is crafted using <b>Iron Blocks</b>, same layout as any other armor type. Just a high-enchanted iron armor.</p>
             </div>
         </section>
+
         <section>
             <h3 style="margin-top: 0px">Emerald Gear</h3>
             <p>Applies debuffs to enemies when used.</p>
             <div class="recipes">
-                <div class="mcui crafting-ui">
-                    <div class="slot-grid">
-                        <div class="slot-row">
-                            <item-slot></item-slot>
-                            <item-slot item="https://minecraft.wiki/images/Invicon_Block_of_Emerald.png" tooltip="Block of Emerald"></item-slot>
-                            <item-slot></item-slot>
-                        </div>
-                        <div class="slot-row">
-                            <item-slot></item-slot>
-                            <item-slot item="https://minecraft.wiki/images/Invicon_Block_of_Emerald.png" tooltip="Block of Emerald"></item-slot>
-                            <item-slot></item-slot>
-                        </div>
-                        <div class="slot-row">
-                            <item-slot></item-slot>
-                            <item-slot item="https://minecraft.wiki/images/Invicon_Iron_Ingot.png" tooltip="Iron Ingot"></item-slot>
-                            <item-slot></item-slot>
-                        </div>
-                    </div>
-                    <div class="crafting-arrow"><br></div>
-                    <item-slot large item="https://minecraft.wiki/images/Enchanted_Diamond_Sword.gif" tooltip="Emerald Sword"></item-slot>
-                </div>
-                <div class="mcui crafting-ui">
-                    <div class="slot-grid">
-                        <div class="slot-row">
-                            <item-slot></item-slot>
-                            <item-slot item="https://minecraft.wiki/images/Invicon_Block_of_Emerald.png" tooltip="Block of Emerald"></item-slot>
-                            <item-slot item="https://minecraft.wiki/images/Invicon_Block_of_Emerald.png" tooltip="Block of Emerald"></item-slot>
-                        </div>
-                        <div class="slot-row">
-                            <item-slot></item-slot>
-                            <item-slot item="https://minecraft.wiki/images/Invicon_Iron_Ingot.png" tooltip="Iron Ingot"></item-slot>
-                            <item-slot item="https://minecraft.wiki/images/Invicon_Block_of_Emerald.png" tooltip="Block of Emerald"></item-slot>
-                        </div>
-                        <div class="slot-row">
-                            <item-slot></item-slot>
-                            <item-slot item="https://minecraft.wiki/images/Invicon_Iron_Ingot.png" tooltip="Iron Ingot"></item-slot>
-                            <item-slot></item-slot>
-                        </div>
-                    </div>
-                    <div class="crafting-arrow"><br></div>
-                    <item-slot large item="https://minecraft.wiki/images/Enchanted_Diamond_Axe.gif" tooltip="Emerald Axe"></item-slot>
-                </div>
-                <p><b>Emerand Armor</b> is crafted using <b>Emerald Blocks</b>, same layout as any other armor type. High-enchanted diamond armor.</p>
+                <!-- Emerald Sword -->
+                <item-slot-grid>
+                    <item-slot></item-slot>
+                    <item-slot item="https://minecraft.wiki/images/Invicon_Block_of_Emerald.png" tooltip="Block of Emerald"></item-slot>
+                    <item-slot></item-slot>
+                    <item-slot></item-slot>
+                    <item-slot item="https://minecraft.wiki/images/Invicon_Block_of_Emerald.png" tooltip="Block of Emerald"></item-slot>
+                    <item-slot></item-slot>
+                    <item-slot></item-slot>
+                    <item-slot item="https://minecraft.wiki/images/Invicon_Iron_Ingot.png" tooltip="Iron Ingot"></item-slot>
+                    <item-slot></item-slot>
+                    <item-slot result large item="https://minecraft.wiki/images/Enchanted_Diamond_Sword.gif" tooltip="Emerald Sword"></item-slot>
+                </item-slot-grid>
+                <!-- Emerald Axe -->
+                <item-slot-grid>
+                    <item-slot></item-slot>
+                    <item-slot item="https://minecraft.wiki/images/Invicon_Block_of_Emerald.png" tooltip="Block of Emerald"></item-slot>
+                    <item-slot item="https://minecraft.wiki/images/Invicon_Block_of_Emerald.png" tooltip="Block of Emerald"></item-slot>
+                    <item-slot></item-slot>
+                    <item-slot item="https://minecraft.wiki/images/Invicon_Iron_Ingot.png" tooltip="Iron Ingot"></item-slot>
+                    <item-slot item="https://minecraft.wiki/images/Invicon_Block_of_Emerald.png" tooltip="Block of Emerald"></item-slot>
+                    <item-slot></item-slot>
+                    <item-slot item="https://minecraft.wiki/images/Invicon_Iron_Ingot.png" tooltip="Iron Ingot"></item-slot>
+                    <item-slot></item-slot>
+                    <item-slot result large item="https://minecraft.wiki/images/Enchanted_Diamond_Axe.gif" tooltip="Emerald Axe"></item-slot>
+                </item-slot-grid>
+                <p><b>Emerald Armor</b> is crafted using <b>Emerald Blocks</b>, same layout as any other armor type. High-enchanted diamond armor.</p>
             </div>
         </section>
     </main>
-    <script src="source/js/header.js"></script>
-    <script src="source/js/navigation.js"></script>
+    <script src="static/js/header.js"></script>
+    <script src="static/js/navigation.js"></script>
     <script src="https://rumyantsev168.github.io/static/js/ItemSlot.js"></script>
-    <script src="source/js/snow.js"></script>
-    <script src="source/js/latest.js"></script>
+    <script src="static/js/snow.js"></script>
+    <script src="static/js/latest.js"></script>
 </body>
 </html>
