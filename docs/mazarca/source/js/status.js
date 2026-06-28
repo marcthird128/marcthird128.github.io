@@ -1,3 +1,4 @@
+// This is legacy code now lol
 const timer = document.getElementById("timer");
 timer.innerText = "Fetching data... Please wait";
 

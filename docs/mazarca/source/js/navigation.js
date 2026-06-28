@@ -1,25 +1,28 @@
-// site navigation
-
-// generate dropdown menu
-const pagesFilenames = ["index", "gallery", "news", "messages", "slimefun", "recipes"];
-const pagesNames = ["Home", "Gallery", "News", "Message", "SF Help", "Recipes"];
-let navMenu = "";
-let currentLink = "";
-for (let i = 0; i < pagesFilenames.length; i++) {
-    if (pagesFilenames[i]+".html" == document.location.pathname.split("/").at(-1)) {
-        currentLink = `<a class="active"><img src="source/${pagesFilenames[i]}.png" width="20px">${pagesNames[i]}</a>`;
-    } else {
-        currentLink = `<a href="${pagesFilenames[i]}.html"><img src="source/${pagesFilenames[i]}.png" width="20px">${pagesNames[i]}</a>`;
-    }
-    navMenu = navMenu + currentLink;
-}
+// Generate dropdown menu
+const links = [
+    { href: "index.html", name: "Home" },
+    { href: "gallery.html", name: "Gallery" },
+    { href: "news.html", name: "News" },
+    { href: "messages.html", name: "Message" },
+    { href: "slimefun.html", name: "SF Help" },
+    { href: "recipes.html", name: "Recipes" }
+];
 const divNav = document.createElement("div");
 divNav.className = "nav";
-divNav.innerHTML = navMenu;
-document.getElementsByTagName("main")[0].after(divNav);
+links.forEach(link => {
+    const navLink = document.createElement("a");
+    navLink.href = link.href;
+    navLink.innerHTML = `<img src="source/icons/${link.href.split(".")[0]}.png" width="20">${link.name}`;
+    const pageName = `${location.pathname.split("/").at(-1)}`;
+    if (pageName == link.href || pageName == "") {
+        navLink.className = "active";
+    }
+    divNav.appendChild(navLink);
+});
+document.body.appendChild(divNav);
 console.log("Dropdown menu generated successfully!")
 
-// navigation logic
+// Set menu show/hide logic
 const navBtn = document.getElementById("nav-btn");
 navBtn.addEventListener("mouseover", () => divNav.style.display = "block");
 divNav.addEventListener("mouseover", () => divNav.style.display = "block");

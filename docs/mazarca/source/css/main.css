@@ -1,42 +1,38 @@
 @font-face {
-    font-family: "MC-Regular";
-    src: url("../font/MinecraftRegular.otf");
+    font-family: "Minecraft";
+    font-weight: normal;
+    font-style: normal;
+    src: url("https://rumyantsev168.github.io/static/font/MinecraftRegular.otf");
 }
-
 @font-face {
-    font-family: "MC-Bold";
-    src: url("../font/MinecraftBold.otf");
+    font-family: "Minecraft";
+    font-weight: bold;
+    font-style: normal;
+    src: url("https://rumyantsev168.github.io/static/font/MinecraftBold.otf");
 }
-
 @font-face {
-    font-family: "MC-Italic";
-    src: url("../font/MinecraftItalic.otf");
+    font-family: "Minecraft";
+    font-weight: normal;
+    font-style: italic;
+    src: url("https://rumyantsev168.github.io/static/font/MinecraftItalic.otf");
 }
-
 @font-face {
-    font-family: "MC-Bold-Italic";
-    src: url("../font/MinecraftBoldItalic.otf");
-}
-
-@media (max-device-width:768px) {
-    html, body { zoom: 115% !important }
-    table { zoom: 125% !important }
-    .header { zoom: 150% !important }
-    .msg { zoom: 200% !important }
+    font-family: "Minecraft";
+    font-weight: bold;
+    font-style: italic;
+    src: url("https://rumyantsev168.github.io/static/font/MinecraftBoldItalic.otf");
 }
 
 @keyframes splash {
-    from { font-size: 13px }
+    0% { font-size: 13px }
     50% { font-size: 14px }
-    to { font-size: 13px }
+    100% { font-size: 13px }
 }
 
 html, body {
-    zoom: 110%;
     margin: 0px;
-    font-family: MC-Regular, MC-Bold, MC-Italic, MC-Bold-Italic;
-    font-size: 1rem;
-    background-size: 120%;
+    font-family: Minecraft;
+    font-size: 18px;
     background-image: url("../background.png");
     background-position: top center;
     color: #FFFFFF;
@@ -45,8 +41,7 @@ html, body {
 
 h1, h2, h3, h4, h5, h6 {
     margin: 10px 0px 5px;
-    font-family: MC-Bold;
-    font-weight: normal;
+    font-family: Minecraft;
     text-shadow: 0px 0px 10px #FFFFFF60;
 }
 
@@ -59,16 +54,8 @@ main > h6:first-of-type {
     margin-top: 0px;
 }
 
-p { margin: 0px }
-
-i {
-    font-family: MC-Italic;
-    font-style: normal;
-}
-
-b, strong, em {
-    font-family: MC-Bold;
-    font-style: normal;
+p {
+    margin: 0px;
 }
 
 a {
@@ -77,7 +64,9 @@ a {
     text-shadow: none
 }
 
-a:hover { text-shadow: 0px 0px 5px }
+a:hover {
+    text-shadow: 0px 0px 5px
+}
 
 blockquote {
     margin: 10px;
@@ -87,6 +76,7 @@ blockquote {
 }
 
 code {
+    font-family: monospace;
     font-size: 0.85rem;
     background: #444;
     padding: 2px 6px;
@@ -110,7 +100,9 @@ ol {
     padding-left: 20px;
 }
 
-table { margin: 0px 0px 0px 21px }
+table {
+    margin: 0px 0px 0px 21px;
+}
 
 td {
     padding: 2px;
@@ -118,19 +110,27 @@ td {
 }
 
 label {
+    font-family: Minecraft;
+    font-style: italic;
     font-size: 14px;
-    font-family: MC-Italic;
-    color: #828282
+    color: #828282;
 }
 
 small {
-    font-size: 12px;
-    font-family: MC-Italic;
-    color: #828282
+    font-family: Minecraft;
+    font-style: italic;
+    font-size: 14px;
+    color: #828282;
 }
 
-details { font-family: MC-Regular }
-details > summary { font-family: MC-Regular }
+details {
+    font-family: Minecraft;
+    font-style: italic;
+}
+details > summary {
+    font-family: Minecraft;
+    font-style: italic;
+}
 
 header {
     position: sticky;
@@ -146,12 +146,13 @@ header {
     border-bottom: 1px solid #55555560;
 }
 
-header > div { margin: 0px }
+header > div {
+    margin: 0px;
+}
 
 hr {
-    size: 2px;
+    height: 2px;
     width: 100%;
-    color: white;
 }
 
 input, textarea {
@@ -159,7 +160,7 @@ input, textarea {
     padding: 5px;
     width: calc(100% - 10px);
     resize: none;
-    font-family: MC-Regular;
+    font-family: Minecraft;
     font-size: 0.95rem;
     color: #DADADA;
     background-color: #3E3E3E;
@@ -188,6 +189,7 @@ input:focus, textarea:focus {
 }
 
 textarea {
+    padding: 10px;
     min-height: 5rem;
     resize: vertical;
 }
@@ -201,23 +203,36 @@ textarea {
     gap: 10px;
 }
 
-.form > div { width: 100% }
+.form > div {
+    width: 100%;
+}
 
 button {
     margin: 0px;
     padding: 7px 8px 5px 8px;
     border: none;
     border-radius: 10px;
-    font-family: MC-Regular;
+    font-family: Minecraft;
     font-size: 0.95rem;
     color: #FFFFFF;
     cursor: pointer;
 }
 
-.primary { background-color: #d9833e }
-.primary:hover { background-color: #734118 }
-.secondary { background-color: #3e3e3e }
-.secondary:hover { background-color: #383838 }
+button.primary {
+    background-color: #d9833e;
+}
+
+button.primary:hover {
+    background-color: #734118;
+}
+
+button.secondary {
+    background-color: #3e3e3e;
+}
+
+button.secondary:hover {
+    background-color: #383838;
+}
 
 button:disabled {
     cursor: not-allowed;
@@ -231,8 +246,7 @@ button:disabled:hover {
 
 .buttons {
     display: flex;
-    flex-direction: row-reverse;
-    align-items: right;
+    justify-content: flex-end;
     gap: 10px;
 }
 
@@ -243,19 +257,32 @@ button:disabled:hover {
 
 .title-text {
     font-size: 35px;
-    font-family: MC-Bold;
+    font-family: Minecraft;
+    font-style: bold;
     color: #FFFFFF;
     text-shadow: none;
 }
 
-.discord-social, .reddit-social { border-radius: 5px }
+.discord-social,
+.reddit-social {
+    border-radius: 5px;
+}
 
-.discord-social:hover { box-shadow: 0px 0px 10px 5px #5662F640 }
+.discord-social:hover {
+    box-shadow: 0px 0px 10px 5px #5662F640;
+}
 
-.reddit-social:hover { box-shadow: 0px 0px 10px 5px #FF450040 }
+.reddit-social:hover {
+    box-shadow: 0px 0px 10px 5px #FF450040;
+}
 
-.indented { margin: 0px 0px 0px 25px }
-.semi-indented { margin: 0px 0px 0px 10px }
+.indented {
+    margin: 0px 0px 0px 25px;
+}
+
+.semi-indented {
+    margin: 0px 0px 0px 10px;
+}
 
 .screenshots-link {
     cursor: pointer;
@@ -268,12 +295,12 @@ button:disabled:hover {
 }
 
 .wrapper {
+    position: relative;
     width: calc(100% - 80px);
     max-width: 700px;
     margin: 60px auto;
     padding: 20px;
-    background: #25252540;
-    backdrop-filter: blur(10px);
+    background: #25252560;
     box-shadow: 1px 1px 10px 5px #00000040;
     border-radius: 10px;
     border: 1px solid #55555560;
@@ -329,7 +356,9 @@ div.images > img {
     box-shadow: 2px 2px 5px #00000040;
 }
 
-.indented { margin: 0px 0px 0px 25px }
+.indented {
+    margin: 0px 0px 0px 25px;
+}
 
 .back-to-main {
     cursor: pointer;
@@ -361,7 +390,9 @@ div.images > img {
     width: 100%;
 }
 
-.image-container > img { cursor: pointer }
+.image-container > img {
+    cursor: pointer
+}
 
 .image-footer {
     position: absolute;
@@ -407,8 +438,13 @@ div.images > img {
     background: #2e2e2e;
 }
 
-.nav > a.active { background: #2e2e2e }
-nav:hover { cursor: pointer }
+.nav > a.active {
+    background: #2e2e2e
+}
+
+nav:hover {
+    cursor: pointer;
+}
 
 a.page-link {
     color: #ffffff;
@@ -421,18 +457,17 @@ a.page-link:hover {
     text-shadow: none;
 }
 
-/*.announcement-collapsed {
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 1;
+.announcement > summary > i {
+    font-size: 0.75rem;
 }
-.announcement-collapsed:hover { -webkit-line-clamp: unset }*/
 
-/*.announcement > summary { line-height: 30px }*/
-.announcement > summary > i { font-size: 0.75rem }
-.announcement > div { margin-left: 5px }
-.announcement img { max-width: 350px; }
+.announcement > div {
+    margin-left: 5px;
+}
+
+.announcement img {
+    max-width: 350px;
+}
 
 .splash {
     position: absolute;
@@ -449,6 +484,7 @@ a.page-link:hover {
     animation-timing-function: ease-out;
 }
 
+/* idk why we have these, thought it might be useful */
 .no-margin { margin: 0px }
 .no-padding { padding: 0px }
 .w-100 { width: 100% }
@@ -469,7 +505,9 @@ a.page-link:hover {
 .font-italic { font-family: MC-Italic }
 .font-bold-italic { font-family: MC-Bold-Italic }
 
-section { margin: 20px 0px 0px }
+section {
+    margin: 20px 0px 0px;
+}
 
 .recipes {
     margin: 5px 0px 0px;
@@ -479,44 +517,6 @@ section { margin: 20px 0px 0px }
     justify-items: center;
     text-align: left;
 }
-
-/*.mcui {
-    position: relative;
-    background-color: #C6C6C6;
-    border: 2px solid;
-    border-color: #DBDBDB #5B5B5B #5B5B5B #DBDBDB;
-    padding: 6px;
-    text-align: left;
-    white-space: nowrap;
-    vertical-align: bottom;
-    height: fit-content;
-}
-
-.crafting-ui {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    width: fit-content;
-}
-
-.slot-grid {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0px;
-}
-
-.slot-row {
-    display: flex;
-    align-items: center;
-}
-
-.crafting-arrow {
-    display: inline-block;
-    background: url(https://minecraft.wiki/images/Grid_layout_Arrow_%28small%29.png?a4894) no-repeat;
-    min-width: 32px;
-    height: 26px;
-}*/
 
 .checkbox-container {
     display: flex;
@@ -555,8 +555,7 @@ section { margin: 20px 0px 0px }
 }
 
 .checkbox-container input ~ div .checkmark::after {
-    font-style: regular;
-    font-family: MC-Regular;
+    font-family: Minecraft;
     color: #ffffff;
     width: 100%;
     line-height: 100%;

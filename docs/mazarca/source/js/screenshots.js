@@ -1,4 +1,4 @@
-// will only display screenshots that are added to source/data/screenshots.js!
+// will only display screenshots that are added to source/data/screenshots.json!
 
 fetch("source/data/screenshots.json")
 .then(obj => obj.text())
